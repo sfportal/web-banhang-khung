@@ -1,0 +1,4 @@
+sku,name,subtitle,line,kind,price,compare_price,wholesale_price,cost,stock,image,short_desc,benefits,badges,weight_g,length_cm,width_cm,height_cm,fragile,sort
+SP-001,Sản phẩm mẫu A,Hộp 500g,Dòng chính,main,159000,,110000,60000,100,sp-mau.svg,Mô tả ngắn 1–2 câu cho sản phẩm A.,"Lợi ích 1; Lợi ích 2; Lợi ích 3",Bán chạy,600,15,10,10,Không,1
+SP-002,Sản phẩm mẫu B,Chai 250ml,Dòng chính,main,89000,99000,60000,30000,200,sp-mau.svg,Mô tả ngắn cho sản phẩm B.,"Lợi ích 1; Lợi ích 2",Mới,350,6,6,18,Có,2
+SP-003,Sản phẩm mẫu C,Gói dùng thử,Dùng thử,trial,39000,,,15000,300,sp-mau.svg,Cỡ nhỏ để khách mua thử.,Giá dễ thử,Dùng thử,120,12,8,3,Không,3

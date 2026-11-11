@@ -1,0 +1,108 @@
+name: Deploy
+
+# Deploy website của các khách lên Cloudflare Workers.
+# - Gộp vào main: deploy lần lượt mọi khách có deploy.enabled = true. Khách đầu lỗi thì dừng, các khách sau giữ bản cũ.
+# - Chạy tay (Actions → Deploy → Run workflow): chọn một mã khách, hoặc "all".
+# Cổng duyệt: job deploy dùng môi trường "production". Vào Settings → Environments → production → Required reviewers
+# để bắt buộc chủ dự án duyệt trước mỗi lần deploy.
+# Secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID (bắt buộc); ADMIN_PASSWORD_<MAKHACH>, APP_SECRET_<MAKHACH> (không bắt buộc).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      client:
+        description: 'Mã khách cần deploy (thư mục trong clients/), hoặc all'
+        required: true
+        default: all
+
+permissions:
+  contents: write   # tạo tag và bản phát hành
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      clients: ${{ steps.list.outputs.clients }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - id: list
+        env:
+          ONE: ${{ github.event.inputs.client }}
+        run: |
+          if [ -n "$ONE" ] && [ "$ONE" != "all" ]; then
+            node scripts/check-clients.mjs > /dev/null
+            [ -f "clients/$ONE/client.json" ] || { echo "::error::Không có clients/$ONE"; exit 1; }
+            echo "clients=[\"$ONE\"]" >> "$GITHUB_OUTPUT"
+          else
+            echo "clients=$(node scripts/check-clients.mjs --deploy)" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Danh sách sẽ deploy
+        run: |
+          echo "### Sẽ deploy: ${{ steps.list.outputs.clients }}" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: plan
+    if: needs.plan.outputs.clients != '[]'
+    runs-on: ubuntu-latest
+    environment: production
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        client: ${{ fromJson(needs.plan.outputs.clients) }}
+    name: deploy (${{ matrix.client }})
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Kiểm tra cấu hình
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Thiếu secret CLOUDFLARE_API_TOKEN hoặc CLOUDFLARE_ACCOUNT_ID. Xem README mục Triển khai."
+            exit 1
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Deploy ${{ matrix.client }}
+        env:
+          SECRETS_JSON: ${{ toJson(secrets) }}
+        run: |
+          # Đưa ADMIN_PASSWORD_<MAKHACH>, APP_SECRET_<MAKHACH> (nếu có) vào biến môi trường cho script deploy
+          eval "$(node -e "const s=JSON.parse(process.env.SECRETS_JSON);for(const[k,v]of Object.entries(s))if(/^(ADMIN_PASSWORD|APP_SECRET)(_[A-Z0-9_]+)?$/.test(k))console.log('export '+k+'='+JSON.stringify(v))")"
+          node scripts/deploy-client.mjs ${{ matrix.client }}
+      - name: Tóm tắt
+        run: |
+          V=$(node -p "require('./package.json').version")
+          echo "### Đã deploy ${{ matrix.client }} · v$V · bản dựng #${{ github.run_number }} · ${GITHUB_SHA::7}" >> "$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tạo bản phát hành trên GitHub (khi có phiên bản mới)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(node -p "require('./package.json').version")
+          if gh release view "v$V" >/dev/null 2>&1; then
+            echo "v$V đã có bản phát hành"
+          else
+            node scripts/release-notes.mjs "$V" > /tmp/notes.md || echo "- Bản dựng #${{ github.run_number }}" > /tmp/notes.md
+            gh release create "v$V" --target "$GITHUB_SHA" --title "v$V" --notes-file /tmp/notes.md
+          fi

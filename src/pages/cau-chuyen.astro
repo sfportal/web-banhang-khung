@@ -1,0 +1,39 @@
+---
+// Trang câu chuyện thương hiệu chung: nội dung từ client.json (content.story).
+import Store from '../layouts/Store.astro';
+import { JOURNEY } from '../lib/content.js';
+import { BRAND, CONTENT } from '../client.js';
+const S = CONTENT.story || {};
+const title = S.title || `Câu chuyện ${BRAND}`;
+---
+<Store title={`${title} | ${BRAND}`} description={S.lead || `Câu chuyện thương hiệu ${BRAND}.`} active="story" path="/cau-chuyen">
+  <section class="hero" style="padding-bottom:30px">
+    <div class="container" style="min-height:0">
+      <div data-reveal>
+        <div class="eyebrow">Câu chuyện {BRAND}</div>
+        <h1 style="font-size:clamp(2.2rem,5vw,4rem)">{title}</h1>
+        {S.lead && <p class="lead">{S.lead}</p>}
+      </div>
+      {S.image && <div data-reveal="zoom"><img src={S.image} alt={BRAND} style="border-radius:28px;box-shadow:var(--shadow-lg)" loading="lazy" /></div>}
+    </div>
+  </section>
+  {(S.stats || []).length > 0 && (
+    <section class="section"><div class="container stats">
+      {S.stats.map((x, i) => <div class="stat" data-reveal style={`--d:${i * 0.08}s`}><b data-count={x.value} data-suffix={x.suffix || ''}>0</b><span>{x.label}</span></div>)}
+    </div></section>
+  )}
+  {JOURNEY.length > 0 && (
+    <section class="section journey">
+      <div class="container">
+        <div data-reveal style="max-width:760px"><h2 style="color:#fff">{S.journey_title || 'Hành trình sản phẩm'}</h2></div>
+        <div class="steps" id="steps">{JOURNEY.map((j) => <div class="step"><div class="dot">{j.ico}</div><div><h3>{j.title}</h3><p>{j.text}</p></div></div>)}</div>
+      </div>
+    </section>
+  )}
+  <section class="section">
+    <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px">
+      {(S.sections || []).map((x, i) => <div class="panel" data-reveal style={`--d:${i * 0.08}s`}><h3>{x.icon} {x.title}</h3><p class="muted">{x.text}</p></div>)}
+    </div>
+    <div class="container" style="text-align:center;margin-top:40px"><a class="btn sun" href="/san-pham">Khám phá sản phẩm <span class="shine"></span></a></div>
+  </section>
+</Store>

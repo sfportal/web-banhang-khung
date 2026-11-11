@@ -1,0 +1,35 @@
+---
+import { env } from 'cloudflare:workers';
+import Store from '../layouts/Store.astro';
+import { BRAND, CLIENT, CONTENT } from '../client.js';
+import { getSettings } from '../lib/db.js';
+const s = await getSettings(env);
+const free = s.shipping?.free_threshold || 0;
+const aff = s.affiliate || {};
+const pol = CONTENT.policies || {};
+const selfText = { none: 'Đơn đặt bằng số điện thoại của chính cộng tác viên không tính hoa hồng trực tiếp cho người đó; người giới thiệu của họ nhận hoa hồng như đơn khách thường.',
+  legacy: 'Đơn đặt bằng số điện thoại của chính cộng tác viên vẫn được giảm giá mã cộng tác viên và tính hoa hồng như đơn bán.' }[aff.self_purchase]
+  || 'Đơn đặt bằng số điện thoại của chính cộng tác viên được tính hoa hồng trực tiếp và doanh số xét hạng, nhưng không áp dụng thêm giảm giá mã cộng tác viên.';
+---
+<Store title={`Chính sách mua hàng ${BRAND}: giao hàng, đổi trả, thanh toán, bảo mật`} description={`Chính sách giao hàng toàn quốc qua Goship, đổi trả ${pol.return_days || 7} ngày, thanh toán QR hoặc COD và bảo mật thông tin khách hàng của ${BRAND}.`} path="/chinh-sach" settings={s}>
+  <section class="section" style="padding-top:40px"><div class="container prose">
+    <h1 style="font-size:2.4rem">Chính sách mua hàng</h1>
+    <h2 id="giao-hang" style="font-size:1.5rem;margin-top:30px">Giao hàng</h2>
+    <p>{BRAND} giao hàng toàn quốc qua các hãng vận chuyển kết nối với Goship (GHN, GHTK, Viettel Post, J&T, Best Express…). Phí giao hàng được tính tự động ở bước thanh toán theo địa chỉ nhận, khối lượng và kích thước kiện hàng; khách chọn hãng và thời gian giao phù hợp.</p>
+    <p>{pol.shipping_note || 'Hàng dễ vỡ được đóng gói chống sốc, có phụ phí đóng gói nhỏ và ghi chú "hàng dễ vỡ" cho hãng vận chuyển.'}{free ? ` Đơn từ ${free.toLocaleString('vi-VN')}đ được miễn phí giao hàng.` : ''}</p>
+    <h2 id="doi-tra" style="font-size:1.5rem;margin-top:30px">Đổi trả</h2>
+    <p>Đổi mới hoặc hoàn tiền trong {pol.return_days || 7} ngày nếu sản phẩm bị lỗi do sản xuất, hư hỏng khi vận chuyển, sai sản phẩm. Vui lòng quay video khi mở hàng và gửi qua trang <a href="/lien-he?chu-de=doi-tra">Liên hệ</a> kèm mã đơn. {pol.return_note}</p>
+    <h2 id="thanh-toan" style="font-size:1.5rem;margin-top:30px">Thanh toán</h2>
+    <p>Chuyển khoản qua mã VietQR: hệ thống nhận biến động số dư qua SePay và xác nhận đơn tự động. Đơn chưa thanh toán sẽ tự huỷ sau thời gian giữ chỗ để hoàn lại suất Flash Sale cho khách khác. Hoặc trả tiền mặt khi nhận hàng (COD).</p>
+    <h2 id="ctv" style="font-size:1.5rem;margin-top:30px">Chính sách cộng tác viên</h2>
+    <p><b>Đăng ký.</b> Cộng tác viên là cá nhân đủ 18 tuổi, có tài khoản khách hàng {BRAND} bằng số điện thoại và hoàn tất hồ sơ gồm họ tên theo CCCD, ngày sinh, số CCCD, địa chỉ, tài khoản ngân hàng đứng tên mình và mã số thuế cá nhân. {BRAND} có thể yêu cầu xác thực số điện thoại bằng mã OTP qua Zalo hoặc SMS.</p>
+    <p><b>Hoa hồng.</b> Hoa hồng được ghi nhận khi khách mua qua link hoặc mã của cộng tác viên (link có hiệu lực {aff.cookie_days || 30} ngày; khách đã mua sẽ gắn với cộng tác viên cho các đơn sau). Hoa hồng tính trên tiền hàng sau giảm giá, không tính phí giao hàng, gồm hoa hồng trực tiếp và hoa hồng gián tiếp từ đội nhóm theo hạng. Hoa hồng chuyển sang khả dụng sau {aff.hold_days ?? 7} ngày kể từ khi đơn hoàn tất và bị huỷ nếu đơn bị huỷ hoặc hoàn hàng.</p>
+    <p><b>Chi trả và thuế.</b> Rút tối thiểu {(aff.min_withdraw || 0).toLocaleString('vi-VN')}đ, chi trả {aff.payout_days || 'định kỳ'} về tài khoản ngân hàng đứng tên cộng tác viên. {BRAND} khấu trừ và nộp thay thuế thu nhập cá nhân trên hoa hồng theo quy định hiện hành trước khi chi trả, và cung cấp chứng từ khấu trừ khi cộng tác viên yêu cầu.</p>
+    <p><b>Quy tắc bán hàng.</b> Không quảng cáo sản phẩm có tác dụng chữa bệnh hay thay thế thuốc; không tự ý giảm giá dưới giá niêm yết; không spam, không mạo danh {BRAND} hay sử dụng thương hiệu {BRAND} cho trang bán hàng riêng khi chưa được đồng ý.</p>
+    <p><b>Tạm khoá và huỷ hoa hồng.</b> {BRAND} có quyền tạm khoá tài khoản và huỷ hoa hồng phát sinh từ đơn ảo, thông tin hồ sơ sai sự thật hoặc vi phạm các quy tắc trên.</p>
+    <p><b>Cộng tác viên tự mua.</b> {selfText}</p>
+    <p><b>Bảo mật hồ sơ.</b> Số CCCD, mã số thuế và tài khoản ngân hàng chỉ dùng để chi trả hoa hồng và thực hiện nghĩa vụ thuế; không chia sẻ cho bên thứ ba ngoài cơ quan thuế và ngân hàng.</p>
+    <h2 id="bao-mat" style="font-size:1.5rem;margin-top:30px">Bảo mật</h2>
+    <p>Thông tin họ tên, số điện thoại, địa chỉ chỉ dùng để giao hàng, chăm sóc sau bán và chương trình cộng tác viên; không bán hay chia sẻ cho bên thứ ba ngoài hãng vận chuyển và cổng thanh toán. Khách có thể yêu cầu xoá dữ liệu qua trang Liên hệ.</p>
+  </div></section>
+</Store>

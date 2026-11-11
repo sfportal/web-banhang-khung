@@ -1,0 +1,13 @@
+---
+import { env } from 'cloudflare:workers';
+import Store from '../../layouts/Store.astro';
+import { BRAND, CLIENT, CONTENT } from '../../client.js';
+import { all } from '../../lib/db.js';
+const posts = await all(env, 'SELECT slug, title, excerpt, cover, created_at FROM posts WHERE published=1 ORDER BY id DESC');
+---
+<Store title={CONTENT.blog_title || `Tin tức và kiến thức | ${BRAND}`} description={CONTENT.blog_description || `Bài viết, kinh nghiệm và hướng dẫn sử dụng sản phẩm từ ${BRAND}.`} path="/blog">
+  <section class="section" style="padding-top:40px"><div class="container">
+    <div class="eyebrow">Góc dinh dưỡng</div><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Ăn lành, hiểu rõ</h1>
+    <div class="grid" style="margin-top:24px">{posts.map((p, i) => <a class="post-card" href={`/blog/${p.slug}`} data-reveal style={`--d:${i * 0.06}s`}><img src={p.cover || '/assets/img/og.jpg'} alt="" loading="lazy" /><div class="b"><h3>{p.title}</h3><p class="muted" style="font-size:.92rem">{p.excerpt}</p></div></a>)}</div>
+  </div></section>
+</Store>

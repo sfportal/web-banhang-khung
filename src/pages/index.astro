@@ -1,0 +1,194 @@
+---
+// Trang chủ chung cho mọi khách: nội dung lấy từ client.json (content.home) và danh mục sản phẩm.
+// Khách cần bố cục riêng thì đặt file clients/<ma-khach>/overrides/src/pages/index.astro (xem clients/dala).
+import { env } from 'cloudflare:workers';
+import Store from '../layouts/Store.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { loadCatalog } from '../lib/catalog.js';
+import { getSettings } from '../lib/db.js';
+import { PERSONAS, JOURNEY, FAQS } from '../lib/content.js';
+import { BRAND, CLIENT, CONTENT, FEATURES } from '../client.js';
+
+const [cat, s] = await Promise.all([loadCatalog(env), getSettings(env)]);
+const H = CONTENT.home || {};
+const P = Object.fromEntries(cat.products.map((p) => [p.sku, p]));
+const vnd = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+const flashItems = FEATURES.flash_sale ? cat.products.filter((p) => p.flash) : [];
+const combos = cat.products.filter((p) => p.kind === 'combo' || p.kind === 'gift');
+const singles = cat.products.filter((p) => p.kind !== 'combo' && p.kind !== 'gift');
+const featured = (H.featured_skus || []).map((k) => P[k]).filter(Boolean);
+const showcase = (featured.length ? featured : singles).slice(0, 8);
+const heroPacks = showcase.filter((p) => p.image).slice(0, 3);
+const tiers = s.affiliate?.tiers || [];
+const personaMap = Object.fromEntries(PERSONAS.map((x) => [x.id, cat.products.filter((p) => p.personas?.includes(x.id)).slice(0, 3).map((p) => p.sku)]));
+const site = env.SITE_URL || Astro.url.origin;
+const faqLd = FAQS.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQS.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : [];
+const words = String(H.title || CLIENT.brand?.tagline || BRAND).split(/\s+/);
+---
+<Store active="home" settings={s} jsonld={[...faqLd, { '@context': 'https://schema.org', '@type': 'WebSite', name: BRAND, url: site }]}>
+  <section class="hero">
+    <div class="container">
+      <div>
+        {H.eyebrow && <div class="eyebrow fade-up" style="animation-delay:.1s">{H.eyebrow}</div>}
+        <h1>{words.map((w, i) => <Fragment><span class="split-word"><span style={`animation-delay:${0.15 + i * 0.07}s`}>{w}</span></span>{' '}</Fragment>)}</h1>
+        {H.lead && <p class="lead fade-up" style="animation-delay:.8s">{H.lead}</p>}
+        <div class="ctas fade-up" style="animation-delay:.95s">
+          <a href={PERSONAS.length ? '#chon-cho-ban' : '#san-pham'} class="btn sun">{H.cta || 'Xem sản phẩm'} <span class="shine"></span></a>
+          {combos.length > 0 && <a href="/san-pham?loai=combo" class="btn ghost">Xem combo tiết kiệm</a>}
+        </div>
+        {(H.trust || []).length > 0 && (
+          <div class="trust fade-up" style="animation-delay:1.1s">
+            {H.trust.map((t) => <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>{t}</span>)}
+          </div>
+        )}
+      </div>
+      <div class="stage" data-parallax>
+        <div class="rays"></div>
+        <div class="sun"></div>
+        <div class="hill"></div>
+        {H.hero_image
+          ? <div class="pack p1" data-depth="18"><img src={H.hero_image} alt={BRAND} fetchpriority="high" /></div>
+          : heroPacks.map((p, i) => <div class={`pack p${i + 1}`} data-depth={[18, 30, 22][i]}><img src={p.image} alt={`${p.name} ${p.subtitle || ''}`} fetchpriority={i < 2 ? 'high' : 'auto'} /></div>)}
+        {heroPacks[1] && <div class="price-tag">{heroPacks[1].name}<b>{vnd(heroPacks[1].effective_price)}</b></div>}
+      </div>
+    </div>
+  </section>
+
+  {(H.promise || []).length > 0 && (
+    <div class="promise" aria-hidden="true"><div class="track">{[0, 1].map(() => H.promise.map((t) => <span>{t}</span>))}</div></div>
+  )}
+
+  {cat.flash && flashItems.length > 0 && (
+    <section class="section" style="padding-bottom:0">
+      <div class="container">
+        <div class="flash" data-reveal="zoom">
+          <div class="flash-head">
+            <div class="flash-title">
+              <div class="bolt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+              <div><h2>Flash Sale</h2><div style="opacity:.8">{cat.flash.name} · số suất có hạn</div></div>
+            </div>
+            <div><div style="font-size:.8rem;opacity:.8;margin-bottom:6px;text-align:right">Kết thúc sau</div><div class="countdown" data-countdown={cat.flash.ends_at}></div></div>
+          </div>
+          <div class="grid">{flashItems.map((p, i) => <ProductCard p={p} delay={i * 0.06} />)}</div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {PERSONAS.length > 0 && (
+    <section class="section" id="chon-cho-ban">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">Đúng nhu cầu</div><h2>Bạn đang tìm gì cho mình?</h2></div>
+          <p class="lead" style="max-width:42ch">Chọn chân dung gần với bạn nhất, {BRAND} gợi ý ngay sản phẩm phù hợp.</p>
+        </div>
+        <div class="personas" role="tablist" data-reveal>
+          {PERSONAS.map((x, i) => <button class:list={['persona-btn', { on: i === 0 }]} role="tab" data-persona={x.id}><span class="ico">{x.ico}</span>{x.label}</button>)}
+        </div>
+        <div class="persona-panel" id="personaPanel" data-reveal>
+          {PERSONAS.map((x, i) => (
+            <div class="persona-view" data-view={x.id} style={i === 0 ? 'display:contents' : 'display:none'}>
+              <div class="persona-card">
+                <div class="who">{x.who}</div>
+                <div class="quote">“{x.quote}”</div>
+                <div style="font-weight:700;margin-top:10px">Điều bạn cần</div>
+                <ul>{(x.needs || []).map((n) => <li>{n}</li>)}</ul>
+              </div>
+              <div class="persona-products">{personaMap[x.id].map((sku, j) => P[sku] && <ProductCard p={P[sku]} delay={j * 0.05} />)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" id="san-pham">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div><div class="eyebrow">{H.products_eyebrow || 'Sản phẩm'}</div><h2>{H.products_title || `Sản phẩm nổi bật của ${BRAND}`}</h2></div>
+        <a href="/san-pham" class="btn ghost sm">Xem tất cả</a>
+      </div>
+      {showcase.length
+        ? <div class="grid">{showcase.map((p, i) => <ProductCard p={p} delay={i * 0.05} />)}</div>
+        : <p class="muted">Chưa có sản phẩm. Thêm sản phẩm trong trang Quản trị.</p>}
+    </div>
+  </section>
+
+  {combos.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">Combo tiết kiệm</div><h2>Mua theo bộ, lợi hơn mua lẻ</h2></div>
+          <a href="/san-pham?loai=combo" class="btn ghost sm">Xem tất cả</a>
+        </div>
+        <div class="combo-grid">
+          {combos.map((p, i) => (
+            <a href={`/san-pham/${p.slug}`} class="combo-card" data-reveal style={`--d:${i * 0.08}s;text-decoration:none`}>
+              <div class="media">
+                {p.save_pct > 0 && <span class="badge red" style="position:absolute;top:14px;left:14px">Tiết kiệm {vnd((p.ref_price || 0) - p.effective_price)}</span>}
+                <img src={p.image} alt={p.name} loading="lazy" />
+              </div>
+              <div class="body">
+                <h3>{p.name}</h3>
+                <ul class="items">{(p.components || []).map((c) => <li>{c.qty > 1 ? `${c.qty} × ` : ''}{c.name}</li>)}</ul>
+                <p class="muted" style="font-size:.9rem">{p.short_desc}</p>
+                <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+                  <div class:list={['price', { red: !!p.flash }]}>{vnd(p.effective_price)}{p.ref_price && <s>{vnd(p.ref_price)}</s>}</div>
+                  <button class="add" data-add={p.sku} data-img={(p.image || '').replace('.webp', '-sm.webp')} aria-label={`Thêm ${p.name}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {JOURNEY.length > 0 && (
+    <section class="section journey" id="hanh-trinh">
+      <div class="container">
+        <div data-reveal style="max-width:720px">
+          <div class="eyebrow">{H.journey_eyebrow || 'Quy trình'}</div>
+          <h2 style="color:#fff">{H.journey_title || `Hành trình sản phẩm ${BRAND}`}</h2>
+          {H.journey_lead && <p class="lead">{H.journey_lead}</p>}
+        </div>
+        <div class="steps" id="steps">{JOURNEY.map((j) => <div class="step"><div class="dot">{j.ico}</div><div><h3>{j.title}</h3><p>{j.text}</p></div></div>)}</div>
+      </div>
+    </section>
+  )}
+
+  {(H.stats || []).length > 0 && (
+    <section class="section">
+      <div class="container"><div class="stats">
+        {H.stats.map((x, i) => <div class="stat" data-reveal style={`--d:${i * 0.08}s`}><b data-count={x.value} data-suffix={x.suffix || ''} data-dec={x.dec || 0}>0</b><span>{x.label}</span></div>)}
+      </div></div>
+    </section>
+  )}
+
+  {FEATURES.affiliate && tiers.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="ctv-band" data-reveal>
+          <div class="eyebrow" style="color:#4a2a00">Kênh cộng tác viên · Affiliate</div>
+          <h2 style="max-width:20ch">Mỗi người là một cửa hàng {BRAND}</h2>
+          <p style="max-width:56ch;font-size:1.1rem">Đăng ký miễn phí, nhận link và mã riêng. Hoa hồng trên đơn trực tiếp, cộng thêm hoa hồng gián tiếp từ đội nhóm bạn tuyển. Ví hoa hồng rút về ngân hàng định kỳ.</p>
+          <div class="tiers">
+            {tiers.map((t) => <div class="tier"><small>{t.name}</small><b>{t.direct}%</b><small>{t.min_sales ? `Doanh số từ ${(t.min_sales / 1e6).toLocaleString('vi-VN')} triệu/tháng` : 'Ngay khi đăng ký'} · gián tiếp {t.l1}% + {t.l2}%</small></div>)}
+          </div>
+          <div class="levels"><span>① Trực tiếp: khách mua qua link, mã của bạn</span><span>② Gián tiếp 1: đơn của người bạn tuyển</span><span>③ Gián tiếp 2: đơn của người họ tuyển</span></div>
+          <div style="margin-top:24px;position:relative;z-index:1"><a href="/ctv" class="btn">Đăng ký cộng tác viên <span class="shine"></span></a></div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {FAQS.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:30px" data-reveal><div class="eyebrow">Hỏi nhanh, đáp gọn</div><h2>Câu hỏi thường gặp</h2></div>
+        <div class="faq">{FAQS.map(([q, a], i) => <details data-reveal style={`--d:${i * 0.04}s`} open={i === 0}><summary>{q}</summary><p>{a}</p></details>)}</div>
+      </div>
+    </section>
+  )}
+  <script is:inline slot="scripts" set:html={`window.PERSONA_MAP=${JSON.stringify(personaMap)}`}></script>
+</Store>

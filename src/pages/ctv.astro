@@ -1,0 +1,178 @@
+---
+import { env } from 'cloudflare:workers';
+import Store from '../layouts/Store.astro';
+import { BRAND, CLIENT, CONTENT } from '../client.js';
+import { getSettings } from '../lib/db.js';
+const s = await getSettings(env);
+const aff = s.affiliate || {};
+const selfText = { none: 'Đơn đặt bằng số điện thoại của chính cộng tác viên không tính hoa hồng trực tiếp cho người đó; người giới thiệu của họ nhận hoa hồng như đơn khách thường.',
+  legacy: 'Đơn đặt bằng số điện thoại của chính cộng tác viên vẫn được giảm giá mã cộng tác viên và tính hoa hồng như đơn bán.' }[aff.self_purchase]
+  || 'Đơn đặt bằng số điện thoại của chính cộng tác viên được tính hoa hồng trực tiếp và doanh số xét hạng, nhưng không áp dụng thêm giảm giá mã cộng tác viên.';
+const tiers = [...(aff.tiers || [])].sort((a, b) => a.min_sales - b.min_sales);
+const mil = (n) => (n >= 1e6 ? (n / 1e6).toLocaleString('vi-VN') + ' triệu' : n.toLocaleString('vi-VN') + 'đ');
+const ref = (Astro.url.searchParams.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+---
+<Store title={`Cộng tác viên ${BRAND} · Hoa hồng 3 tầng, rút tiền định kỳ`} description={`Đăng ký cộng tác viên ${BRAND} miễn phí: link giới thiệu riêng, hoa hồng trực tiếp, hoa hồng gián tiếp 2 tầng, ví hoa hồng rút về ngân hàng định kỳ.`} path="/ctv" active="ctv" settings={s}>
+  <div class="container ctv-page">
+    <!-- Khách: giới thiệu + đăng ký -->
+    <section id="guest" hidden>
+      <div class="ctv-hero">
+        <div>
+          <span class="eyebrow">Cộng tác viên · Đại lý</span>
+          <h1>Chia sẻ <span class="serif">nắng cao nguyên</span>, nhận hoa hồng mỗi đơn</h1>
+          <p class="lead">Không vốn, không ôm hàng. {BRAND} giao hàng, thu tiền, chăm sóc khách. Bạn chỉ cần chia sẻ link hoặc mã giới thiệu riêng.</p>
+          <div class="ctv-steps">
+            <div><b>1</b>Tạo tài khoản bằng số điện thoại, điền hồ sơ, có ngay link và mã</div>
+            <div><b>2</b>Khách mua qua link hoặc nhập mã, được giảm {aff.buyer_discount_pct || 5}%</div>
+            <div><b>3</b>Hoa hồng vào ví, rút về ngân hàng ngày {aff.payout_days || 'định kỳ'}</div>
+          </div>
+        </div>
+        <div class="panel auth" id="auth"><p class="muted">Đang tải…</p></div>
+      </div>
+
+      <!-- Hồ sơ đăng ký CTV (đã đăng nhập tài khoản khách) -->
+      <form class="panel aff-apply" id="apply" hidden novalidate>
+        <span id="dang-ky"></span>
+        <h2>Hồ sơ đăng ký cộng tác viên</h2>
+        <p class="muted">Thông tin dùng để chi trả hoa hồng và khấu trừ thuế thu nhập cá nhân theo quy định. {BRAND} bảo mật và không chia sẻ cho bên thứ ba.</p>
+        <div class="sec">Thông tin cá nhân</div>
+        <div class="row2">
+          <div class="field"><label for="fName">Họ và tên (như trên CCCD)</label><input id="fName" autocomplete="name" required /></div>
+          <div class="field"><label for="fBirth">Ngày sinh</label><input id="fBirth" type="date" required /></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="fId">Số CCCD</label><input id="fId" inputmode="numeric" maxlength="12" required placeholder="12 chữ số" /></div>
+          <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" /></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="fAddr">Địa chỉ liên hệ</label><input id="fAddr" autocomplete="street-address" required /></div>
+          <div class="field"><label for="fProv">Tỉnh / thành</label><input id="fProv" autocomplete="address-level1" required /></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="fNote">Bạn bán qua kênh nào?</label><input id="fNote" placeholder="VD: Facebook, nhóm mẹ bỉm, TikTok, cửa hàng" /></div>
+          <div class="field"><label for="fRef">Mã người giới thiệu <span class="muted">(nếu có)</span></label><input id="fRef" value={ref} style="text-transform:uppercase" /></div>
+        </div>
+        <div class="sec">Nhận hoa hồng và thuế</div>
+        <div class="row3">
+          <div class="field"><label for="fBank">Ngân hàng</label><input id="fBank" list="banks" required placeholder="VD: Vietcombank" /></div>
+          <div class="field"><label for="fAcc">Số tài khoản</label><input id="fAcc" inputmode="numeric" required /></div>
+          <div class="field"><label for="fHolder">Chủ tài khoản (không dấu)</label><input id="fHolder" required style="text-transform:uppercase" /></div>
+        </div>
+        <div class="field"><label for="fTax">Mã số thuế cá nhân</label><input id="fTax" inputmode="numeric" required placeholder="10 hoặc 12 số" /><span class="muted" style="font-size:.8rem">Từ 01/07/2025 số CCCD được dùng làm mã số thuế cá nhân. <a href="#" id="taxFromId">Dùng số CCCD</a></span></div>
+        <div class="sec">Chính sách cộng tác viên</div>
+        <div class="policy-box">
+          <ul>
+            <li>Hoa hồng trực tiếp {tiers.map((t) => `${t.direct}%`).join(' / ')} theo hạng, gián tiếp 1 và gián tiếp 2 theo bảng hạng; tính trên tiền hàng sau giảm giá, không tính phí ship.</li>
+            <li>Hoa hồng ghi nhận khi đơn giao thành công, chuyển sang khả dụng sau {aff.hold_days ?? 7} ngày; huỷ nếu đơn bị huỷ hoặc hoàn hàng.</li>
+            <li>Rút tối thiểu {(aff.min_withdraw || 0).toLocaleString('vi-VN')}đ, chi trả {aff.payout_days || 'định kỳ'} về đúng tài khoản ngân hàng đứng tên cộng tác viên.</li>
+            <li>{BRAND} khấu trừ thuế thu nhập cá nhân trên hoa hồng theo quy định hiện hành trước khi chi trả.</li>
+            <li>Không quảng cáo sản phẩm có tác dụng chữa bệnh, không tự ý giảm giá dưới giá niêm yết, không spam hay mạo danh {BRAND}.</li>
+            <li>{selfText}</li>
+            <li>{BRAND} có quyền tạm khoá tài khoản và huỷ hoa hồng phát sinh từ đơn ảo hoặc vi phạm chính sách.</li>
+          </ul>
+          <a href="/chinh-sach#ctv" target="_blank" rel="noopener">Đọc đầy đủ chính sách cộng tác viên</a>
+        </div>
+        <label class="agree"><input type="checkbox" id="fAgree" /> Tôi đã đọc, hiểu và đồng ý với chính sách cộng tác viên của {BRAND}, đồng thời cam kết thông tin trên là chính xác.</label>
+        <div id="fOtpBox"></div>
+        <button type="submit" class="btn sun">Gửi hồ sơ đăng ký <span class="shine"></span></button>
+      </form>
+      <datalist id="banks">{['Vietcombank', 'VietinBank', 'BIDV', 'Agribank', 'Techcombank', 'MB Bank', 'ACB', 'VPBank', 'TPBank', 'Sacombank', 'VIB', 'HDBank', 'SHB', 'OCB', 'MSB', 'SeABank', 'LienVietPostBank', 'Nam A Bank', 'Bac A Bank', 'Cake', 'Timo'].map((b) => <option value={b} />)}</datalist>
+
+      <section class="ctv-band" style="margin:40px 0">
+        <h2>Ba hạng, ba mức hoa hồng</h2>
+        <p style="max-width:60ch;position:relative;z-index:1">Hạng được xét tự động theo doanh số trực tiếp của tháng này hoặc tháng trước, lấy mức cao hơn.</p>
+        <div class="tiers">
+          {tiers.map((t) => (
+            <div class="tier"><small>{t.name}</small><b>{t.direct}%</b><div>Gián tiếp 1: <b style="display:inline;font-size:1rem">{t.l1}%</b> · Gián tiếp 2: <b style="display:inline;font-size:1rem">{t.l2}%</b></div><small>{t.min_sales ? `Doanh số từ ${mil(t.min_sales)}/tháng` : 'Ngay khi đăng ký'}</small></div>
+          ))}
+        </div>
+        <div class="levels"><span>Trực tiếp: đơn từ link, mã của bạn</span><span>Gián tiếp 1: đơn của người bạn mời</span><span>Gián tiếp 2: đơn của người họ mời</span></div>
+      </section>
+
+      <section class="ctv-example panel">
+        <h3>Ví dụ một tháng</h3>
+        <p class="muted">Bạn là Đại sứ, tự bán 6 triệu. Hai người bạn mời bán mỗi người 3 triệu, và người họ mời bán thêm 4 triệu.</p>
+        <div class="ex-row"><span>Trực tiếp 6.000.000đ × {tiers[1]?.direct ?? 20}%</span><b>{(6e6 * (tiers[1]?.direct ?? 20) / 100).toLocaleString('vi-VN')}đ</b></div>
+        <div class="ex-row"><span>Gián tiếp 1: 6.000.000đ × {tiers[1]?.l1 ?? 2}%</span><b>{(6e6 * (tiers[1]?.l1 ?? 2) / 100).toLocaleString('vi-VN')}đ</b></div>
+        <div class="ex-row"><span>Gián tiếp 2: 4.000.000đ × {tiers[1]?.l2 ?? 1}%</span><b>{(4e6 * (tiers[1]?.l2 ?? 1) / 100).toLocaleString('vi-VN')}đ</b></div>
+        <div class="ex-row total"><span>Tổng hoa hồng</span><b>{((6e6 * (tiers[1]?.direct ?? 20) + 6e6 * (tiers[1]?.l1 ?? 2) + 4e6 * (tiers[1]?.l2 ?? 1)) / 100).toLocaleString('vi-VN')}đ</b></div>
+        <p class="muted" style="font-size:.85rem;margin:12px 0 0">Hoa hồng tính trên tiền hàng sau giảm giá, không tính phí ship. Hoa hồng được ghi nhận khi đơn giao thành công và chuyển sang khả dụng sau {aff.hold_days ?? 7} ngày (thời gian đổi trả). Rút tối thiểu {(aff.min_withdraw || 0).toLocaleString('vi-VN')}đ.</p>
+      </section>
+    </section>
+
+    <!-- Cộng tác viên đã đăng nhập -->
+    <section id="dash" hidden>
+      <div class="dash-head">
+        <div><span class="eyebrow" id="dTier">Cộng tác viên</span><h1 class="dash-title">Chào <span id="dName"></span></h1><p class="muted" id="dSub"></p></div>
+        <button class="btn ghost sm" id="logout">Đăng xuất</button>
+      </div>
+      <div class="dash-grid">
+        <div class="wallet">
+          <small>Số dư rút được</small>
+          <div class="wallet-amt" id="wBal">0đ</div>
+          <div class="wallet-row"><span>Chờ duyệt <b id="wPend">0đ</b></span><span>Đang rút <b id="wReq">0đ</b></span><span>Đã nhận <b id="wPaid">0đ</b></span></div>
+          <button class="btn white sm" id="openWd">Rút tiền</button>
+        </div>
+        <div class="panel share">
+          <h3>Link và mã của bạn</h3>
+          <div class="copy-row"><input id="myLink" readonly aria-label="Link giới thiệu" /><button class="btn sm" data-copy="#myLink">Sao chép</button></div>
+          <div class="copy-row"><input id="myCode" readonly aria-label="Mã giới thiệu" /><button class="btn sm sun" data-copy="#myCode">Sao chép mã</button></div>
+          <div class="copy-row"><input id="myInvite" readonly aria-label="Link mời cộng tác viên" /><button class="btn sm ghost" data-copy="#myInvite">Link mời CTV</button></div>
+          <p class="muted" style="font-size:.85rem;margin:0" id="shareNote"></p>
+        </div>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="panel" id="tierBox"></div>
+
+      <div class="tabs" role="tablist">
+        <button class="on" data-dtab="orders">Đơn và hoa hồng</button>
+        <button data-dtab="team">Đội nhóm</button>
+        <button data-dtab="wd">Lịch sử rút</button>
+        <button data-dtab="profile">Ngân hàng & thuế</button>
+        <button data-dtab="kit">Bộ nội dung bán hàng</button>
+      </div>
+      <div class="tab-pane on" data-dpane="orders"><div id="orders" class="tbl-wrap"><p class="muted">Đang tải…</p></div></div>
+      <div class="tab-pane" data-dpane="team"><div id="team"><p class="muted">Đang tải…</p></div></div>
+      <div class="tab-pane" data-dpane="wd"><div id="wds" class="tbl-wrap"></div></div>
+      <div class="tab-pane" data-dpane="profile">
+        <form id="profForm" class="panel" style="max-width:640px" novalidate>
+          <div class="row2">
+            <div class="field"><label for="pName">Họ tên</label><input id="pName" /></div>
+            <div class="field"><label for="pEmail">Email</label><input id="pEmail" type="email" /></div>
+          </div>
+          <div class="field"><label for="pProv">Tỉnh / thành</label><input id="pProv" /></div>
+          <div class="row2">
+            <div class="field"><label for="pBank">Ngân hàng</label><input id="pBank" list="banks" placeholder="VD: Vietcombank" /></div>
+            <div class="field"><label for="pAcc">Số tài khoản</label><input id="pAcc" inputmode="numeric" /></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="pHolder">Chủ tài khoản (không dấu)</label><input id="pHolder" style="text-transform:uppercase" /></div>
+            <div class="field"><label for="pTax">Mã số thuế cá nhân</label><input id="pTax" inputmode="numeric" /></div>
+          </div>
+          <details style="margin-bottom:14px"><summary class="muted">Đổi mật khẩu</summary>
+            <div class="row2" style="margin-top:10px">
+              <div class="field"><label for="pOld">Mật khẩu hiện tại</label><input id="pOld" type="password" autocomplete="current-password" /></div>
+              <div class="field"><label for="pNew">Mật khẩu mới</label><input id="pNew" type="password" autocomplete="new-password" /></div>
+            </div>
+          </details>
+          <button class="btn">Lưu thông tin</button>
+        </form>
+      </div>
+      <div class="tab-pane" data-dpane="kit">
+        <div class="kit-grid" id="kit"></div>
+      </div>
+    </section>
+
+    <div class="modal-bg" id="wdModal" hidden>
+      <form class="modal panel" id="wdForm" novalidate>
+        <h3>Rút tiền hoa hồng</h3>
+        <p class="muted" id="wdInfo"></p>
+        <div class="field"><label for="wdAmt">Số tiền (đ)</label><input id="wdAmt" inputmode="numeric" required /></div>
+        <div class="field"><label for="wdNote">Ghi chú <span class="muted">(không bắt buộc)</span></label><input id="wdNote" /></div>
+        <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn ghost sm" data-close>Huỷ</button><button class="btn sun sm">Gửi yêu cầu</button></div>
+      </form>
+    </div>
+  </div>
+  <script is:inline slot="scripts" src="/assets/js/auth.js?v=1" defer></script>
+  <script is:inline slot="scripts" src="/assets/js/ctv.js?v=2" defer></script>
+</Store>
