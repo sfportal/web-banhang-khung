@@ -43,10 +43,12 @@ jobs:
           if [ -n "$ONE" ] && [ "$ONE" != "all" ]; then
             node scripts/check-clients.mjs > /dev/null
             [ -f "clients/$ONE/client.json" ] || { echo "::error::Không có clients/$ONE"; exit 1; }
-            echo "clients=[\"$ONE\"]" >> "$GITHUB_OUTPUT"
+            LIST="[\"$ONE\"]"
           else
-            echo "clients=$(node scripts/check-clients.mjs --deploy)" >> "$GITHUB_OUTPUT"
+            LIST=$(node scripts/check-clients.mjs --deploy)
           fi
+          # Mỗi khách kèm key in hoa để đọc đúng secret ADMIN_PASSWORD_<KEY>, APP_SECRET_<KEY>
+          echo "clients=$(node -e "console.log(JSON.stringify(JSON.parse(process.argv[1]).map(s=>({slug:s,key:s.toUpperCase().replace(/-/g,'_')}))))" "$LIST")" >> "$GITHUB_OUTPUT"
       - name: Danh sách sẽ deploy
         run: |
           echo "### Sẽ deploy: ${{ steps.list.outputs.clients }}" >> "$GITHUB_STEP_SUMMARY"
@@ -60,8 +62,8 @@ jobs:
       max-parallel: 1
       fail-fast: true
       matrix:
-        client: ${{ fromJson(needs.plan.outputs.clients) }}
-    name: deploy (${{ matrix.client }})
+        c: ${{ fromJson(needs.plan.outputs.clients) }}
+    name: deploy (${{ matrix.c.slug }})
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -78,17 +80,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Deploy ${{ matrix.client }}
+      - name: Deploy ${{ matrix.c.slug }}
         env:
-          SECRETS_JSON: ${{ toJson(secrets) }}
-        run: |
-          # Đưa ADMIN_PASSWORD_<MAKHACH>, APP_SECRET_<MAKHACH> (nếu có) vào biến môi trường cho script deploy
-          eval "$(node -e "const s=JSON.parse(process.env.SECRETS_JSON);for(const[k,v]of Object.entries(s))if(/^(ADMIN_PASSWORD|APP_SECRET)(_[A-Z0-9_]+)?$/.test(k))console.log('export '+k+'='+JSON.stringify(v))")"
-          node scripts/deploy-client.mjs ${{ matrix.client }}
+          # Secret riêng của khách, không có thì dùng secret chung
+          ADMIN_PASSWORD: ${{ secrets[format('ADMIN_PASSWORD_{0}', matrix.c.key)] || secrets.ADMIN_PASSWORD }}
+          APP_SECRET: ${{ secrets[format('APP_SECRET_{0}', matrix.c.key)] || secrets.APP_SECRET }}
+          SLUG: ${{ matrix.c.slug }}
+        run: node scripts/deploy-client.mjs "$SLUG"
       - name: Tóm tắt
         run: |
           V=$(node -p "require('./package.json').version")
-          echo "### Đã deploy ${{ matrix.client }} · v$V · bản dựng #${{ github.run_number }} · ${GITHUB_SHA::7}" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Đã deploy ${{ matrix.c.slug }} · v$V · bản dựng #${{ github.run_number }} · ${GITHUB_SHA::7}" >> "$GITHUB_STEP_SUMMARY"
 
   release:
     needs: deploy
