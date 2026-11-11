@@ -1,0 +1,7 @@
+# Sao chép thành .dev.vars ở thư mục gốc; npm run client:dev <ma-khach> sẽ chép sang .build/<ma-khach>/
+ADMIN_PASSWORD=doi-mat-khau-nay
+APP_SECRET=chuoi-ngau-nhien-dai-it-nhat-32-ky-tu
+# Không bắt buộc: thường nhập trong trang Quản trị → Cài đặt → Kết nối hệ thống Thu-Chi
+# THUCHI_BASE_URL=https://sepay-thuchi.minhducuy.workers.dev
+# THUCHI_API_KEY=tc_xxx
+# CRON_KEY=xxx

@@ -1,0 +1,22 @@
+{
+  "name": "web-banhang-khung",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Bộ khung website bán hàng dùng chung cho nhiều khách (tách từ DaLa): cửa hàng, CTV 3 tầng, điểm, CRM/CSM, thanh toán và giao hàng qua Thu-Chi (Astro + Cloudflare Workers + D1)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/build-info.mjs && astro build",
+    "test": "node --test test/*.test.js",
+    "client:check": "node scripts/check-clients.mjs",
+    "client:build": "node scripts/build-client.mjs",
+    "client:dev": "node scripts/dev-client.mjs",
+    "client:deploy": "node scripts/deploy-client.mjs",
+    "client:new": "node scripts/new-client.mjs"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.4.7",
+    "astro": "^7.4.10",
+    "wrangler": "^4.160.0"
+  }
+}

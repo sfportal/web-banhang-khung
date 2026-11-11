@@ -1,0 +1,49 @@
+name: CI
+
+# Mỗi PR: kiểm thử mã chung, kiểm tra cấu hình mọi khách, rồi build thử từng khách (kể cả khách mẫu _mau).
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      clients: ${{ steps.list.outputs.clients }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Kiểm tra nhật ký cập nhật có mục cho phiên bản trong package.json
+        run: node scripts/release-notes.mjs > /dev/null
+      - name: Kiểm thử hoa hồng 3 tầng, ví, phí giao hàng, điểm, OTP
+        run: npm test
+      - name: Kiểm tra client.json của mọi khách
+        run: node scripts/check-clients.mjs
+      - id: list
+        run: echo "clients=$(node scripts/check-clients.mjs --matrix)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJson(needs.test.outputs.clients) }}
+    name: build (${{ matrix.client }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build website của khách
+        run: node scripts/build-client.mjs ${{ matrix.client }}
+      - name: Kiểm tra migration và dữ liệu khởi tạo chạy được trên D1 trống
+        working-directory: .build/${{ matrix.client }}
+        run: npx wrangler d1 migrations apply "$(node -p "JSON.parse(require('fs').readFileSync('wrangler.jsonc','utf8').replace(/^\/\/.*\n/,'')).d1_databases[0].database_name")" --local

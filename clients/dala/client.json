@@ -1,0 +1,213 @@
+{
+  "slug": "dala",
+  "industry": "fmcg",
+  "brand": {
+    "name": "DaLa",
+    "legal_name": "HTX Nông nghiệp Công nghệ cao DaLa",
+    "tagline": "Nắng cao nguyên, quét QR thấy vườn",
+    "logo": "/assets/img/logo.webp",
+    "logo_light": "/assets/img/logo-light.webp",
+    "favicon": "/assets/img/favicon.png",
+    "icon": "/assets/img/icon-192.png",
+    "og_image": "/assets/img/og.jpg",
+    "order_prefix": "DL"
+  },
+  "theme": {
+    "primary": "#2e7827",
+    "primary_dark": "#1d4d1a",
+    "primary_light": "#e6f0dc",
+    "accent": "#f2a516",
+    "accent_dark": "#e8811a",
+    "accent_light": "#fff1d2",
+    "background": "#fbf6e9",
+    "ink": "#1f2a1c"
+  },
+  "features": {
+    "affiliate": true,
+    "loyalty": true,
+    "flash_sale": true,
+    "lot_qr": true,
+    "blog": true,
+    "otp": true
+  },
+  "deploy": {
+    "worker": "dala-shop",
+    "d1_name": "dala-shop",
+    "d1_id": "f0ae287f-6093-4236-9d04-6c7d33e0ed6e",
+    "site_url": "https://dala.vn",
+    "thuchi_service": "sepay-thuchi",
+    "enabled": false,
+    "note": "DaLa đang chạy từ repo sfportal/web-dala-banhang. Bật enabled khi chuyển hẳn sang khung."
+  },
+  "content": {
+    "topbar": [
+      "☀ Nắng cao nguyên, quét QR thấy vườn",
+      "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
+      "🌱 100% trái cây · Không đường thêm · Không chất bảo quản",
+      "🤝 Làm cộng tác viên, hoa hồng đến 25%"
+    ],
+    "footer_about": "Trái cây Tây Nguyên chế biến lành mạnh: sấy thăng hoa, sấy dẻo không đường, cốt nguyên chất, bột chức năng.",
+    "disclaimer": "Sản phẩm là thực phẩm, không phải thuốc, không thay thế thuốc chữa bệnh.",
+    "catalog_title": "Sản phẩm DaLa: bột chuối xanh, chanh leo sấy thăng hoa, cốt chanh leo",
+    "catalog_description": "Trái cây Tây Nguyên chế biến lành mạnh: 3 dòng chủ lực, cỡ dùng thử, combo tiết kiệm và hộp quà Tết. Không đường thêm, QR truy xuất từng lô.",
+    "personas": [
+      {
+        "id": "van-phong",
+        "ico": "💼",
+        "label": "Dân văn phòng",
+        "who": "Minh, 26 tuổi · Hà Nội",
+        "quote": "Đói giữa giờ mà không muốn ăn bánh kẹo.",
+        "needs": [
+          "Ăn vặt ít đường, no lâu, tiện mang",
+          "Gói nhỏ để thử trước",
+          "Mua nhanh qua TikTok Shop, Shopee"
+        ]
+      },
+      {
+        "id": "me-be",
+        "ico": "👩‍👧",
+        "label": "Mẹ bỉm sữa",
+        "who": "Chị Lan, 32 tuổi · TP.HCM",
+        "quote": "Đồ ăn vặt cho con phải biết rõ trồng ở đâu.",
+        "needs": [
+          "Không đường thêm, không phẩm màu",
+          "Quét QR thấy vườn và phiếu kiểm nghiệm",
+          "Cả nhà cùng ăn được"
+        ]
+      },
+      {
+        "id": "duong-huyet",
+        "ico": "🌿",
+        "label": "Lo đường huyết",
+        "who": "Cô Hạnh, 56 tuổi · Buôn Ma Thuột",
+        "quote": "Bác sĩ dặn bớt tinh bột, mà ăn gì cho no?",
+        "needs": [
+          "Thay một phần tinh bột trong bữa",
+          "Không đường, thành phần ngắn",
+          "Con cái mua hộ được online"
+        ]
+      },
+      {
+        "id": "qua-tang",
+        "ico": "🎁",
+        "label": "Mua quà biếu",
+        "who": "Anh Tuấn, 40 tuổi · Đà Nẵng",
+        "quote": "Quà phải có câu chuyện, không đụng hàng.",
+        "needs": [
+          "Hộp đẹp, câu chuyện vùng trồng",
+          "Xuất hoá đơn, in thiệp doanh nghiệp",
+          "Giao tận nơi trước Tết"
+        ]
+      },
+      {
+        "id": "quan-tra",
+        "ico": "🧋",
+        "label": "Chủ quán trà",
+        "who": "Quán trà, cà phê · Tây Nguyên, Nam Trung Bộ",
+        "quote": "Cần vị chanh leo đều tay mỗi ly, giá ổn định.",
+        "needs": [
+          "Cốt 100% không đường, quán tự cân vị",
+          "Giá sỉ theo thùng, giao gần",
+          "Hồ sơ nguồn gốc cho chuỗi"
+        ]
+      }
+    ],
+    "journey": [
+      {
+        "ico": "🌱",
+        "title": "Vườn Tây Nguyên",
+        "text": "Mã số vùng trồng, nhật ký canh tác ghi trên FarmBase ngay từ lúc thu mua."
+      },
+      {
+        "ico": "🧪",
+        "title": "Kiểm nghiệm lô",
+        "text": "Lấy mẫu từng lô: dư lượng thuốc, kim loại nặng, hàm lượng tinh bột kháng."
+      },
+      {
+        "ico": "🏭",
+        "title": "Nhà máy chế biến",
+        "text": "Sấy thăng hoa, sấy dẻo, ép cốt trên dây chuyền đạt chuẩn an toàn thực phẩm."
+      },
+      {
+        "ico": "📦",
+        "title": "Đóng gói có QR",
+        "text": "Mỗi gói in QR lô hàng ở mặt trước, không giấu sau bao bì."
+      },
+      {
+        "ico": "📱",
+        "title": "Bạn quét, thấy vườn",
+        "text": "Tên vườn, nông dân, ngày thu hái, phiếu kiểm nghiệm và video vườn."
+      }
+    ],
+    "faqs": [
+      [
+        "Sản phẩm DaLa có thêm đường hay chất bảo quản không?",
+        "Không. Chanh leo sấy thăng hoa, bột chuối xanh, cốt chanh leo và khoai lang sấy dẻo đều không thêm đường, không chất bảo quản. Thành phần ghi rõ trên nhãn và trang sản phẩm."
+      ],
+      [
+        "Quét QR trên bao bì sẽ thấy gì?",
+        "Mã QR ở mặt trước mỗi gói dẫn tới trang lô hàng: vườn trồng, nông hộ, ngày thu hái, ngày chế biến, hạn dùng và tóm tắt phiếu kiểm nghiệm. Bạn cũng có thể nhập mã lô ở trang Quét QR."
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Hai cách: chuyển khoản qua mã VietQR (hệ thống tự xác nhận trong vài giây khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Phí giao hàng tính thế nào?",
+        "Phí được tính tự động theo địa chỉ, khối lượng và kích thước kiện hàng qua các hãng vận chuyển trên Goship. Đơn có hàng dễ vỡ (chai cốt, hộp quà, trái tươi) được đóng gói chống sốc. Đơn đạt ngưỡng sẽ được miễn phí giao hàng."
+      ],
+      [
+        "Khoai lang sấy dẻo sao không mua riêng được?",
+        "Khoai lang sấy dẻo là món bán kèm: bạn thêm vào bất kỳ đơn nào hoặc chọn combo để có giá tốt nhất."
+      ],
+      [
+        "Bột chuối xanh dùng thế nào?",
+        "Pha 1–2 thìa (khoảng 15g) với nước ấm, sữa hoặc xay cùng sinh tố; có thể thay một phần bột khi làm bánh. Đây là thực phẩm, không thay thế thuốc hay chỉ định của bác sĩ."
+      ],
+      [
+        "Làm cộng tác viên DaLa có mất phí không?",
+        "Không mất phí. Đăng ký xong bạn có ngay link và mã giới thiệu riêng, hoa hồng 15–25% trên đơn trực tiếp, thêm hoa hồng gián tiếp từ đội nhóm bạn tuyển, rút tiền về ngân hàng định kỳ."
+      ]
+    ],
+    "line_labels": {
+      "chuoi": "Bột chuối xanh",
+      "chanhleo": "Chanh leo",
+      "khoailang": "Khoai lang",
+      "qua": "Hộp quà",
+      "tuoi": "Trái tươi",
+      "combo": "Combo"
+    },
+    "story_link": "Câu chuyện từ vườn",
+    "blog_link": "Góc dinh dưỡng",
+    "blog_title": "Góc dinh dưỡng DaLa: tinh bột kháng, sấy thăng hoa, công thức",
+    "blog_description": "Kiến thức dinh dưỡng và công thức từ trái cây Tây Nguyên: tinh bột kháng trong chuối xanh, sấy thăng hoa, pha chế với cốt chanh leo.",
+    "blog_cta": {
+      "title": "Thử sản phẩm DaLa",
+      "text": "Không đường thêm, QR truy xuất từng lô. Nhập CHAOBAN giảm 10% đơn đầu."
+    },
+    "b2b_note": "Quà doanh nghiệp: xuất hoá đơn, in thiệp và logo theo yêu cầu, giá sỉ từ 20 hộp.",
+    "policies": {
+      "shipping_note": "Hàng dễ vỡ (chai cốt chanh leo, hộp quà, chanh leo sấy giòn, trái tươi) được đóng gói chống sốc, có phụ phí đóng gói nhỏ và ghi chú \"hàng dễ vỡ\" cho hãng vận chuyển.",
+      "return_days": 7,
+      "return_note": "Trái tươi được hỗ trợ trong 48 giờ kể từ khi nhận."
+    },
+    "kit": {
+      "skus": [
+        "BCX-350",
+        "CLTH-100",
+        "COT-250",
+        "COMBO-KHOE",
+        "COMBO-THU",
+        "QUA-TET"
+      ],
+      "captions": {
+        "BCX-350": "Bữa sáng no lâu mà không ngán: 1 thìa bột chuối xanh DaLa pha sữa hoặc sinh tố. Chuối xanh Đắk Lắk, không đường thêm, quét QR thấy vườn.",
+        "CLTH-100": "Chanh leo sấy thăng hoa giòn tan, chua ngọt tự nhiên, không đường. Ăn vặt văn phòng hay pha trà đều ngon.",
+        "COT-250": "Cốt chanh leo 100%, không đường: pha nước, làm trà, làm bánh. Một chai ~ 15 ly.",
+        "COMBO-KHOE": "Combo khỏe mỗi ngày: bột chuối xanh + chanh leo sấy + khoai lang sấy dẻo. Mua combo lợi hơn mua lẻ.",
+        "COMBO-THU": "Lần đầu biết DaLa? Combo dùng thử đủ 3 vị, giá dễ thử.",
+        "QUA-TET": "Quà Tết có câu chuyện: hộp quà nắng cao nguyên, mỗi gói có QR truy xuất vườn trồng."
+      }
+    }
+  }
+}
