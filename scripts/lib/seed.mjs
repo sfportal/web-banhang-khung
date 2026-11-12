@@ -47,17 +47,20 @@ const yes = (v) => /^(1|c[oó]|yes|true|x)$/i.test(String(v || '').trim());
 const list = (v) => (v ? String(v).split(';').map((x) => x.trim()).filter(Boolean) : []);
 
 // Cột products.csv: sku,name,subtitle,line,kind,price,compare_price,wholesale_price,cost,stock,image,short_desc,story,benefits,usage,ingredients,weight,badges,weight_g,length_cm,width_cm,height_cm,fragile,sort
-// benefits, badges: nhiều giá trị cách nhau bằng dấu ;   fragile: Có/Không   image: tên file trong public/assets/img
+// benefits, badges: nhiều giá trị cách nhau bằng dấu ;   fragile: Có/Không   image, image_bg: tên file trong public/assets/img
+// combo_items (dòng kind=combo): "SKU-A×1; SKU-B×2" (dùng × hoặc x hoặc *)
 export function productsCsvToSql(text) {
   const cols = ['sku', 'slug', 'name', 'subtitle', 'line', 'kind', 'price', 'compare_price', 'wholesale_price', 'cost', 'stock', 'image', 'image_bg', 'short_desc', 'story', 'benefits', 'usage', 'ingredients', 'weight', 'badges', 'personas', 'combo_items', 'seo_title', 'seo_desc', 'weight_g', 'length_cm', 'width_cm', 'height_cm', 'fragile', 'sort'];
   return parseCsv(text).map((r, i) => {
     if (!r.sku || !r.name || !num(r.price)) throw new Error(`products.csv dòng ${i + 2}: cần sku, name, price`);
-    const img = r.image ? (r.image.startsWith('/') ? r.image : `/assets/img/${r.image}`) : null;
+    const path = (f) => (f ? (f.startsWith('/') ? f : `/assets/img/${f}`) : null);
+    const img = path(r.image);
+    const combo = list(r.combo_items).map((x) => { const m = x.match(/^(.+?)\s*[×xX*]\s*(\d+)$/); return m ? { sku: m[1].trim().toUpperCase(), qty: Number(m[2]) } : { sku: x.toUpperCase(), qty: 1 }; });
     const v = {
       sku: r.sku.toUpperCase(), slug: r.slug || slugify(`${r.name} ${r.subtitle || ''}`), name: r.name, subtitle: r.subtitle || null, line: r.line ? slugify(r.line) : 'khac', kind: r.kind || 'main',
       price: num(r.price), compare_price: num(r.compare_price), wholesale_price: num(r.wholesale_price), cost: num(r.cost), stock: num(r.stock) ?? 0,
-      image: img, image_bg: img, short_desc: r.short_desc || null, story: r.story || null, benefits: JSON.stringify(list(r.benefits)), usage: r.usage || null,
-      ingredients: r.ingredients || null, weight: r.weight || null, badges: JSON.stringify(list(r.badges)), personas: JSON.stringify(list(r.personas)), combo_items: null,
+      image: img, image_bg: path(r.image_bg) || img, short_desc: r.short_desc || null, story: r.story || null, benefits: JSON.stringify(list(r.benefits)), usage: r.usage || null,
+      ingredients: r.ingredients || null, weight: r.weight || null, badges: JSON.stringify(list(r.badges)), personas: JSON.stringify(list(r.personas)), combo_items: combo.length ? JSON.stringify(combo) : null,
       seo_title: r.seo_title || null, seo_desc: r.seo_desc || r.short_desc || null, weight_g: num(r.weight_g) ?? 300, length_cm: num(r.length_cm) ?? 15, width_cm: num(r.width_cm) ?? 10,
       height_cm: num(r.height_cm) ?? 10, fragile: yes(r.fragile) ? 1 : 0, sort: num(r.sort) ?? i + 1,
     };

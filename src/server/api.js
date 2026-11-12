@@ -18,7 +18,8 @@ import { accountApi, linkedAffiliate } from './account.js';
 import { sendOtp, otpConfig } from '../lib/otp.js';
 import { adjustPoints } from '../lib/loyalty.js';
 import { refreshOrderShipment } from '../lib/shiptrack.js';
-import { BRAND, SLUG } from '../client.js';
+import { BRAND, SLUG, CLIENT } from '../client.js';
+const ORDER_PREFIX = String(CLIENT.brand?.order_prefix || 'DH').toUpperCase();
 const DEFAULT_ADMIN_PW = `${SLUG}12345`;
 
 
@@ -92,7 +93,7 @@ async function publicApi(request, env, url, p, m, ctx) {
     return json({ code: order.code, token: await orderToken(env, order.code), total: order.total, payment_method: order.payment_method });
   }
 
-  if ((mm = p.match(/^\/api\/orders\/(DL\d{6})$/)) && m === 'GET') {
+  if ((mm = p.match(/^\/api\/orders\/([A-Z]{1,4}\d{6})$/)) && m === 'GET') {
     const code = mm[1];
     if (url.searchParams.get('t') !== (await orderToken(env, code))) throw new HttpError(403, 'Liên kết đơn hàng không hợp lệ');
     let o = await first(env, 'SELECT * FROM orders WHERE code=?', code);
@@ -797,7 +798,7 @@ async function manualOrder(env, b, user) {
   const aff = b.affiliate_code ? await first(env, 'SELECT id FROM affiliates WHERE code=?', String(b.affiliate_code).toUpperCase()) : null;
   const custId = await upsertCustomer(env, { phone, name: b.name, address: b.address, province: b.province, source: channel, affiliate_id: aff?.id }, !!aff);
   let code;
-  for (let i = 0; i < 8 && !code; i++) { const c = 'DL' + randomCode(6, '0123456789'); if (!(await first(env, 'SELECT 1 FROM orders WHERE code=?', c))) code = c; }
+  for (let i = 0; i < 8 && !code; i++) { const c = ORDER_PREFIX + randomCode(6, '0123456789'); if (!(await first(env, 'SELECT 1 FROM orders WHERE code=?', c))) code = c; }
   const method = ['tiktok', 'shopee'].includes(channel) ? 'platform' : b.payment_method || 'cod';
   const parcel = buildParcel(items.map((i) => ({ ...i.p, qty: i.qty })), (await getSetting(env, 'shipping', {})) || {});
   const r = await run(env, `INSERT INTO orders (code, channel, external_id, customer_id, name, phone, address, province, note, subtotal, discount, shipping_fee, total, affiliate_id, ref_source,

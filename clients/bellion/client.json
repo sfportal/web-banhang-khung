@@ -1,0 +1,256 @@
+{
+  "slug": "bellion",
+  "industry": "fmcg",
+  "brand": {
+    "name": "Bellion",
+    "legal_name": "Bellion",
+    "tagline": "Vì cuộc sống khỏe mạnh và hạnh phúc cho mỗi gia đình Việt Nam",
+    "logo": "/assets/img/logo.png",
+    "logo_light": "/assets/img/logo-light.png",
+    "favicon": "/assets/img/favicon.png",
+    "icon": "/assets/img/favicon.png",
+    "og_image": "/assets/img/og.jpg",
+    "order_prefix": "BL"
+  },
+  "theme": {
+    "primary": "#1d4a3a",
+    "primary_dark": "#113128",
+    "primary_light": "#e5efe9",
+    "accent": "#d9a441",
+    "accent_dark": "#b5822a",
+    "accent_light": "#fbf1dc",
+    "background": "#f7f5ef",
+    "ink": "#18241f"
+  },
+  "features": {
+    "affiliate": true,
+    "loyalty": true,
+    "flash_sale": true,
+    "lot_qr": false,
+    "blog": true,
+    "otp": true
+  },
+  "deploy": {
+    "worker": "shop-bellion",
+    "d1_name": "shop-bellion",
+    "d1_id": "",
+    "site_url": "",
+    "thuchi_service": "sepay-thuchi",
+    "enabled": false,
+    "note": "Chờ Bellion duyệt nội dung, giá và chính sách CTV."
+  },
+  "content": {
+    "home": {
+      "eyebrow": "Bellion · Công nghệ sinh học cho gia đình",
+      "title": "Sạch nhà, thơm áo, dịu da cả nhà",
+      "lead": "Nước giặt, nước rửa chén, lau sàn, tẩy rửa và sản phẩm tắm gội ứng dụng enzyme sinh học và nano bạc. Có dòng Bio Baby riêng cho đồ dùng và làn da của bé.",
+      "hero_image": "",
+      "featured_skus": [
+        "BH-GX2-TT",
+        "BH-RC-CH",
+        "BH-LS-CS",
+        "BB-NG-CLM",
+        "BB-RB-DN",
+        "BD-ST-TM",
+        "BD-DG-TM",
+        "BH-TT-QUE"
+      ],
+      "trust": [
+        "Sản xuất trên dây chuyền công nghệ Đức",
+        "Nhà máy đạt tiêu chuẩn BSCI",
+        "Giao toàn quốc, COD khi nhận hàng"
+      ],
+      "promise": [
+        "Hàng chính hãng Bellion",
+        "Đổi trả 7 ngày",
+        "Thanh toán QR hoặc COD",
+        "Giao toàn quốc"
+      ],
+      "products_eyebrow": "Bán nhiều",
+      "products_title": "Sản phẩm được chọn nhiều",
+      "stats": []
+    },
+    "story": {
+      "title": "Câu chuyện Bellion",
+      "lead": "Bellion phát triển các dòng sản phẩm công nghệ sinh học chăm sóc cá nhân và gia đình, sản xuất trên dây chuyền công nghệ hiện đại của Đức, tại nhà máy đạt tiêu chuẩn quốc tế BSCI.",
+      "image": "/assets/img/bh-gx2-tt-bg.webp",
+      "sections": [
+        {
+          "icon": "🧪",
+          "title": "Công nghệ sinh học",
+          "text": "Enzyme sinh học giúp phân giải vết bẩn, nano bạc hỗ trợ kháng khuẩn. Công thức làm sạch hiệu quả mà vẫn dịu với tay và sợi vải."
+        },
+        {
+          "icon": "🏠",
+          "title": "Bio Home",
+          "text": "Giặt xả, xả vải khô, rửa chén, lau sàn, tẩy toilet, siêu tẩy đa năng: đủ bộ cho việc nhà hằng ngày."
+        },
+        {
+          "icon": "👶",
+          "title": "Bio Baby",
+          "text": "Dòng riêng cho bé: nước giặt đồ bé, nước rửa bình sữa, bọt tắm gội, bọt rửa tay, kem đánh răng dạng bọt. Chất làm sạch gốc thực vật từ ngô và dừa."
+        },
+        {
+          "icon": "🌿",
+          "title": "Bio Body",
+          "text": "Sữa tắm, dầu gội, xịt thơm toàn thân và kem đánh răng cho người lớn, hương nước hoa và thảo mộc."
+        },
+        {
+          "icon": "🤝",
+          "title": "Sứ mệnh",
+          "text": "Vì cuộc sống khỏe mạnh và hạnh phúc cho mỗi gia đình Việt Nam."
+        }
+      ]
+    },
+    "topbar": [
+      "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
+      "🎁 Mua theo combo lợi hơn mua lẻ",
+      "🤝 Làm cộng tác viên Bellion, hoa hồng từ 7% mỗi đơn"
+    ],
+    "footer_about": "Sản phẩm công nghệ sinh học chăm sóc nhà cửa, mẹ và bé, chăm sóc cá nhân. Sản xuất trên dây chuyền công nghệ Đức, nhà máy đạt tiêu chuẩn BSCI.",
+    "disclaimer": "",
+    "catalog_title": "Sản phẩm Bellion",
+    "catalog_description": "Bio Home, Bio Baby, Bio Body và combo tiết kiệm.",
+    "b2b_note": "Muốn làm đại lý, điểm bán Bellion: để lại thông tin ở trang Liên hệ, Bellion gửi chính sách đại lý.",
+    "policies": {
+      "shipping_note": "Chai, can được đóng gói chống tràn, chống va đập.",
+      "return_days": 7,
+      "return_note": "Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất hoặc giao sai, còn nguyên tem nhãn."
+    },
+    "personas": [
+      {
+        "id": "noi-tro",
+        "ico": "🏠",
+        "label": "Người lo việc nhà",
+        "who": "Lan, 34 tuổi · Hà Nội",
+        "quote": "Muốn quần áo thơm lâu, nhà sạch mà không phải chà mạnh.",
+        "needs": [
+          "Nước giặt lưu hương lâu",
+          "Tẩy rửa nhanh, ít tốn công",
+          "Mua theo bộ cho tiện"
+        ]
+      },
+      {
+        "id": "me-be",
+        "ico": "👶",
+        "label": "Mẹ có con nhỏ",
+        "who": "Hà, 29 tuổi · TP.HCM",
+        "quote": "Đồ của bé phải giặt riêng, rửa riêng, dịu nhẹ.",
+        "needs": [
+          "Nước giặt đồ bé riêng",
+          "Rửa sạch cặn sữa trên bình",
+          "Tắm gội dịu cho da bé"
+        ]
+      },
+      {
+        "id": "cham-soc",
+        "ico": "🌿",
+        "label": "Chăm sóc bản thân",
+        "who": "Tuấn, 31 tuổi · Đà Nẵng",
+        "quote": "Cần sữa tắm, dầu gội thơm, dùng tiết kiệm cả tháng.",
+        "needs": [
+          "Hương thơm lâu",
+          "Chai lớn, dùng lâu",
+          "Khử mùi sau vận động"
+        ]
+      }
+    ],
+    "journey": [],
+    "faqs": [
+      [
+        "Sản phẩm Bellion được sản xuất ở đâu?",
+        "Bellion sản xuất tại Việt Nam trên dây chuyền công nghệ hiện đại của Đức, nhà máy đạt tiêu chuẩn quốc tế BSCI."
+      ],
+      [
+        "Công nghệ sinh học trong sản phẩm là gì?",
+        "Các sản phẩm Bio Home dùng enzyme sinh học để phân giải vết bẩn và nano bạc hỗ trợ kháng khuẩn, giúp làm sạch hiệu quả mà dịu với da tay và sợi vải."
+      ],
+      [
+        "Đồ của bé nên dùng sản phẩm nào?",
+        "Dòng Bio Baby gồm nước giặt quần áo cho bé, nước rửa bình sữa, bọt tắm gội, bọt rửa tay và kem đánh răng dạng bọt hương dâu. Chất làm sạch gốc thực vật từ ngô và dừa."
+      ],
+      [
+        "Nước giặt xả Thiên Nga Trắng có mấy loại?",
+        "Có can 2kg, túi 1kg và túi 4,1kg, mỗi loại có hương Thiên Thanh và Gió Biển."
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Chuyển khoản qua mã VietQR (hệ thống tự xác nhận khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Phí giao hàng tính thế nào?",
+        "Phí được tính tự động theo địa chỉ và khối lượng kiện hàng ở bước thanh toán."
+      ],
+      [
+        "Tôi muốn làm cộng tác viên hoặc đại lý Bellion?",
+        "Cộng tác viên đăng ký ngay trên website ở mục Cộng tác viên, nhận hoa hồng từ 7% mỗi đơn. Đại lý, điểm bán vui lòng để lại thông tin ở trang Liên hệ để nhận chính sách đại lý."
+      ]
+    ],
+    "line_labels": {
+      "combo": "Combo",
+      "bio-home": "Bio Home",
+      "bio-baby": "Bio Baby",
+      "bio-body": "Bio Body"
+    },
+    "kit": {
+      "skus": [
+        "BH-GX2-TT",
+        "BB-NG-CLM",
+        "BD-ST-TM",
+        "COMBO-NHASACH",
+        "COMBO-BE"
+      ],
+      "captions": {
+        "BH-GX2-TT": "Nước giặt xả Bellion Thiên Nga Trắng can 2kg: enzyme sinh học làm sạch, lưu hương kép, áo quần thơm lâu cả khi phơi trong nhà.",
+        "BB-NG-CLM": "Đồ bé giặt riêng với nước giặt Bellion Bio Baby hương Cúc La Mã, công nghệ enzyme làm sạch vết sữa, đồ ăn dặm.",
+        "BD-ST-TM": "Sữa tắm Bellion Bio Body 800ml hương thảo mộc, da mềm mịn không nhờn rít, chai lớn dùng cả tháng.",
+        "COMBO-NHASACH": "Combo Nhà sạch Bellion: lau sàn, rửa chén, tẩy toilet, siêu tẩy đa năng. Mua theo bộ lợi hơn mua lẻ.",
+        "COMBO-BE": "Combo Chăm bé Bellion: giặt đồ bé, rửa bình sữa, bọt tắm gội. Chất làm sạch gốc thực vật."
+      }
+    },
+    "perk_genuine": "Chính hãng Bellion"
+  },
+  "settings": {
+    "shop": {
+      "facebook": "",
+      "tiktok_shop": "",
+      "shopee_shop": "https://shopee.vn/bellion.vn",
+      "address": "Tầng 4-5-6, Tòa nhà Capital Place, số 29 Liễu Giai, phường Ngọc Hà, Hà Nội"
+    },
+    "affiliate": {
+      "tiers": [
+        {
+          "id": 1,
+          "name": "Cộng tác viên",
+          "min_sales": 0,
+          "direct": 7,
+          "l1": 2,
+          "l2": 1
+        },
+        {
+          "id": 2,
+          "name": "Cộng tác viên Bạc",
+          "min_sales": 50000000,
+          "direct": 8,
+          "l1": 2,
+          "l2": 1
+        },
+        {
+          "id": 3,
+          "name": "Cộng tác viên Vàng",
+          "min_sales": 200000000,
+          "direct": 9,
+          "l1": 3,
+          "l2": 1
+        }
+      ],
+      "hold_days": 7,
+      "min_withdraw": 200000,
+      "payout_days": "5 và 20 hằng tháng",
+      "cookie_days": 30,
+      "buyer_discount_pct": 0,
+      "lifetime_binding": true,
+      "auto_approve": true
+    }
+  }
+}
