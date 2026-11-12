@@ -1,7 +1,7 @@
 ---
 import { env } from 'cloudflare:workers';
 import Store from '../../layouts/Store.astro';
-import { BRAND, CLIENT, CONTENT } from '../../client.js';
+import { BRAND, CLIENT, CONTENT, FEATURES } from '../../client.js';
 import ProductCard from '../../components/ProductCard.astro';
 import { loadCatalog } from '../../lib/catalog.js';
 import { getSettings, first } from '../../lib/db.js';
@@ -69,7 +69,7 @@ const maxQty = Math.max(1, Math.min(p.stock, 20));
         <div class="perks">
           <div><b>🚚</b>{free ? `Freeship từ ${(free / 1000).toLocaleString('vi-VN')}k` : 'Giao toàn quốc'}</div>
           <div><b>💳</b>QR tự xác nhận hoặc COD</div>
-          <div><b>📱</b>QR xem vườn trồng</div>
+          {FEATURES.lot_qr ? <div><b>📱</b>{CONTENT.perk_qr || 'QR xem vườn trồng'}</div> : <div><b>✅</b>{CONTENT.perk_genuine || 'Hàng chính hãng'}</div>}
         </div>
         {(p.tiktok_url || p.shopee_url) && <div class="channels">Cũng có trên: {p.tiktok_url && <a href={p.tiktok_url} target="_blank" rel="noopener" data-channel="tiktok">TikTok Shop</a>}{p.shopee_url && <a href={p.shopee_url} target="_blank" rel="noopener" data-channel="shopee">Shopee</a>}</div>}
 
