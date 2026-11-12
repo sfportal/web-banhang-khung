@@ -36,8 +36,8 @@
     "d1_id": "",
     "site_url": "",
     "thuchi_service": "sepay-thuchi",
-    "enabled": false,
-    "note": "Chờ Bellion duyệt nội dung, giá và chính sách CTV."
+    "enabled": true,
+    "note": "Bản chạy thử. Thông tin pháp lý, hotline, giá sỉ đang tạm, chờ Bellion xác nhận."
   },
   "content": {
     "home": {
@@ -111,11 +111,11 @@
     "disclaimer": "",
     "catalog_title": "Sản phẩm Bellion",
     "catalog_description": "Bio Home, Bio Baby, Bio Body và combo tiết kiệm.",
-    "b2b_note": "Muốn làm đại lý, điểm bán Bellion: để lại thông tin ở trang Liên hệ, Bellion gửi chính sách đại lý.",
+    "b2b_note": "Đại lý, điểm bán Bellion được hưởng giá sỉ, chiết khấu theo doanh số và hỗ trợ POSM, sample, đào tạo. Để lại thông tin ở trang Liên hệ, Bellion gửi chính sách đại lý.",
     "policies": {
       "shipping_note": "Chai, can được đóng gói chống tràn, chống va đập.",
       "return_days": 7,
-      "return_note": "Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất hoặc giao sai, còn nguyên tem nhãn."
+      "return_note": "Đổi trả trong 7 ngày kể từ khi nhận hàng nếu sản phẩm lỗi do nhà sản xuất, hư hỏng khi vận chuyển hoặc giao sai, sản phẩm còn nguyên tem nhãn. Bellion chịu phí gửi lại trong các trường hợp này."
     },
     "personas": [
       {
@@ -215,7 +215,8 @@
       "facebook": "",
       "tiktok_shop": "",
       "shopee_shop": "https://shopee.vn/bellion.vn",
-      "address": "Tầng 4-5-6, Tòa nhà Capital Place, số 29 Liễu Giai, phường Ngọc Hà, Hà Nội"
+      "address": "Tầng 4-5-6, Tòa nhà Capital Place, số 29 Liễu Giai, phường Ngọc Hà, Hà Nội",
+      "legal_name": "Bellion"
     },
     "affiliate": {
       "tiers": [
@@ -251,6 +252,16 @@
       "buyer_discount_pct": 0,
       "lifetime_binding": true,
       "auto_approve": true
+    },
+    "shipping": {
+      "origin": {
+        "name": "Kho Bellion",
+        "phone": "",
+        "street": "29 Liễu Giai, Tòa nhà Capital Place",
+        "city": "Hà Nội",
+        "district": "",
+        "ward": "Ngọc Hà"
+      }
     }
   }
 }
