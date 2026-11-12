@@ -23,7 +23,10 @@ export function validateClient(c, slug) {
   need(c.deploy?.worker && /^[a-z0-9-]{1,63}$/.test(c.deploy.worker), 'deploy.worker phải có, gồm chữ thường, số, dấu -');
   need(c.deploy?.d1_name, 'thiếu deploy.d1_name');
   need(!c.brand?.order_prefix || /^[A-Z]{1,4}$/.test(c.brand.order_prefix), 'brand.order_prefix gồm 1–4 chữ in hoa');
-  for (const [k, v] of Object.entries(c.theme || {})) need(/^#[0-9a-fA-F]{3,8}$/.test(v), `theme.${k} phải là mã màu dạng #rrggbb`);
+  for (const [k, v] of Object.entries(c.theme || {})) {
+    if (k === 'custom_css') { need(/^\/assets\/css\/[\w.-]+\.css$/.test(v), 'theme.custom_css phải là đường dẫn /assets/css/<tên>.css'); continue; }
+    need(/^#[0-9a-fA-F]{3,8}$/.test(v), `theme.${k} phải là mã màu dạng #rrggbb`);
+  }
   const secretLike = JSON.stringify(c).match(/"(api_key|secret|password|token)"\s*:/i);
   need(!secretLike, 'client.json không được chứa khoá API hay mật khẩu (khách tự nhập trong Admin)');
   return err;

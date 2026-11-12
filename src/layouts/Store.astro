@@ -55,6 +55,7 @@ const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, fla
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Lora:ital,wght@1,500;1,600&display=swap" />
   <link rel="stylesheet" href="/assets/css/store.css?v=1" />
+  {CLIENT.theme?.custom_css && <link rel="stylesheet" href={CLIENT.theme.custom_css} />}
   {themeCss && <style is:inline set:html={`:root{${themeCss}}`} />}
   {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
   <script is:inline set:html={`window.DALA=${JSON.stringify(boot)}`} />
