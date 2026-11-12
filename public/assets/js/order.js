@@ -78,7 +78,7 @@
         <div class="sum-row total"><span>Tổng cộng</span><span>${vnd(o.total)}</span></div></div>
         <p class="muted" style="margin-top:14px;font-size:.9rem">Giao tới: ${esc(o.name)} · ${esc(o.phone)} · ${esc(o.address)}${o.province ? ', ' + esc(o.province) : ''}<br>Thanh toán: ${o.payment_method === 'cod' ? 'Tiền mặt khi nhận hàng (COD)' : 'Chuyển khoản QR'} · ${esc(o.payment_label)}${o.tracking_code ? `<br>Mã vận đơn: <b>${esc(o.tracking_code)}</b> ${o.tracking_url ? `<a href="${esc(o.tracking_url)}" target="_blank" rel="noopener">Theo dõi</a>` : ''} ${o.ship_status_text ? '· ' + esc(o.ship_status_text) : ''}` : ''}</p>
       </div>
-      <div class="panel" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:240px"><b>Nhận hàng xong, quét QR trên bao bì</b><div class="muted" style="font-size:.9rem">để xem vườn trồng và phiếu kiểm nghiệm của chính lô bạn mua.</div></div><a class="btn ghost sm" href="/ctv">Giới thiệu bạn bè, nhận hoa hồng</a></div>`;
+      <div class="panel" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:240px">${window.DALA?.lot_qr === false ? '<b>Dùng hài lòng thì giới thiệu bạn bè</b><div class="muted" style="font-size:.9rem">Làm cộng tác viên, nhận hoa hồng cho mỗi đơn bạn giới thiệu.</div>' : '<b>Nhận hàng xong, quét QR trên bao bì</b><div class="muted" style="font-size:.9rem">để xem vườn trồng và phiếu kiểm nghiệm của chính lô bạn mua.</div>'}</div><a class="btn ghost sm" href="/ctv">Giới thiệu bạn bè, nhận hoa hồng</a></div>`;
     return o.payment_method === 'sepay' && !paid && !cancelled;
   }
 

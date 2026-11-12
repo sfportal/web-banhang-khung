@@ -19,11 +19,11 @@ const ref = (Astro.url.searchParams.get('ref') || '').toUpperCase().replace(/[^A
       <div class="ctv-hero">
         <div>
           <span class="eyebrow">Cộng tác viên · Đại lý</span>
-          <h1>Chia sẻ <span class="serif">nắng cao nguyên</span>, nhận hoa hồng mỗi đơn</h1>
+          {CONTENT.ctv_title ? <h1 set:html={CONTENT.ctv_title} /> : <h1>Giới thiệu <span class="serif">{BRAND}</span>, nhận hoa hồng mỗi đơn</h1>}
           <p class="lead">Không vốn, không ôm hàng. {BRAND} giao hàng, thu tiền, chăm sóc khách. Bạn chỉ cần chia sẻ link hoặc mã giới thiệu riêng.</p>
           <div class="ctv-steps">
             <div><b>1</b>Tạo tài khoản bằng số điện thoại, điền hồ sơ, có ngay link và mã</div>
-            <div><b>2</b>Khách mua qua link hoặc nhập mã, được giảm {aff.buyer_discount_pct || 5}%</div>
+            <div><b>2</b>{Number(aff.buyer_discount_pct ?? 5) > 0 ? `Khách mua qua link hoặc nhập mã, được giảm ${aff.buyer_discount_pct ?? 5}%` : 'Khách mua qua link hoặc nhập mã của bạn, đơn được tính cho bạn'}</div>
             <div><b>3</b>Hoa hồng vào ví, rút về ngân hàng ngày {aff.payout_days || 'định kỳ'}</div>
           </div>
         </div>
