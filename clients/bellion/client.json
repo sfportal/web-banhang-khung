@@ -16,11 +16,12 @@
     "primary": "#1d4a3a",
     "primary_dark": "#113128",
     "primary_light": "#e5efe9",
-    "accent": "#d9a441",
-    "accent_dark": "#b5822a",
-    "accent_light": "#fbf1dc",
-    "background": "#f7f5ef",
-    "ink": "#18241f"
+    "accent": "#e9b8a4",
+    "accent_dark": "#c27c63",
+    "accent_light": "#f8ebe4",
+    "background": "#f8f7f3",
+    "ink": "#1a2721",
+    "custom_css": "/assets/css/client.css"
   },
   "features": {
     "affiliate": true,
@@ -41,17 +42,17 @@
   },
   "content": {
     "home": {
-      "eyebrow": "Bellion · Công nghệ sinh học cho gia đình",
-      "title": "Sạch nhà, thơm áo, dịu da cả nhà",
+      "eyebrow": "Bellion · Công nghệ sinh học",
+      "title": "Sạch dịu cho cả nhà",
       "lead": "Nước giặt, nước rửa chén, lau sàn, tẩy rửa và sản phẩm tắm gội ứng dụng enzyme sinh học và nano bạc. Có dòng Bio Baby riêng cho đồ dùng và làn da của bé.",
       "hero_image": "",
       "featured_skus": [
         "BH-GX2-TT",
+        "BB-NG-CLM",
+        "BD-ST-TM",
         "BH-RC-CH",
         "BH-LS-CS",
-        "BB-NG-CLM",
         "BB-RB-DN",
-        "BD-ST-TM",
         "BD-DG-TM",
         "BH-TT-QUE"
       ],
