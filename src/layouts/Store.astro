@@ -27,7 +27,7 @@ const navAll = [['/san-pham', 'Sản phẩm', 'products'], ['/san-pham?loai=comb
 const off = { flash: !FEATURES.flash_sale, qr: !FEATURES.lot_qr, ctv: !FEATURES.affiliate };
 const nav = navAll.filter(([, , k]) => !off[k]);
 const topbar = CONTENT.topbar || [];
-const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, flash_ends: flash.sale?.ends_at || null, cookie_days: s.affiliate?.cookie_days || 30, ga4: seo.ga4 || null };
+const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, flash_ends: flash.sale?.ends_at || null, cookie_days: s.affiliate?.cookie_days || 30, ga4: seo.ga4 || null, lot_qr: FEATURES.lot_qr !== false };
 ---
 <!doctype html>
 <html lang="vi">
