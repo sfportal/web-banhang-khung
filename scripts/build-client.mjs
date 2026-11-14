@@ -49,8 +49,9 @@ const wrangler = {
   assets: { directory: './dist/client', binding: 'ASSETS' },
   d1_databases: [{ binding: 'DB', database_name: d.d1_name, database_id: d.d1_id || '00000000-0000-0000-0000-000000000000', migrations_dir: 'migrations' }],
   ...(d.thuchi_service ? { services: [{ binding: 'THUCHI', service: d.thuchi_service }] } : {}),
-  triggers: { crons: ['*/5 * * * *'] },
-  vars: { SITE_URL: d.site_url || '', CLIENT_SLUG: slug },
+  // deploy.cron = false: không đăng ký cron riêng (gói Workers Free chỉ cho 5 cron mỗi tài khoản), việc định kỳ chạy theo lượt truy cập
+  triggers: { crons: d.cron === false ? [] : ['*/5 * * * *'] },
+  vars: { SITE_URL: d.site_url || '', CLIENT_SLUG: slug, CRON_MODE: d.cron === false ? 'lazy' : 'cron' },
   ...(d.routes?.length ? { routes: d.routes } : {}),
 };
 writeFileSync(join(out, 'wrangler.jsonc'), `// Tự sinh bởi scripts/build-client.mjs cho khách ${slug}\n` + JSON.stringify(wrangler, null, 2) + '\n');

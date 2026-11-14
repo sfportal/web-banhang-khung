@@ -38,6 +38,8 @@ Ngành (`industry`): `fmcg`, `me-be`, `my-pham`, `vat-tu-nong-nghiep`, `dich-vu-
 
 Khi xong, đặt `deploy.enabled: true` và mở PR. Gộp vào `main` thì khách được deploy. `deploy.d1_id` để trống thì lần deploy đầu tự tạo D1 theo `deploy.d1_name`.
 
+Gói Workers Free chỉ cho 5 cron trên cả tài khoản Cloudflare. Khi hết suất, đặt `deploy.cron: false` cho khách mới: shop không đăng ký cron riêng, các việc định kỳ (đồng bộ thanh toán, huỷ đơn quá hạn, nhả hoa hồng) chạy theo lượt truy cập, tối đa 5 phút một lần.
+
 **Không ghi khoá API, mật khẩu vào `client.json`** (công cụ kiểm tra sẽ báo lỗi). Khách tự nhập API key Thu-Chi trong Admin → Cài đặt → Kết nối hệ thống Thu-Chi.
 
 ### Mức chỉnh riêng cho từng khách

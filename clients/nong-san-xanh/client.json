@@ -37,6 +37,7 @@
     "site_url": "",
     "thuchi_service": "sepay-thuchi",
     "enabled": true,
+    "cron": false,
     "note": "Website mẫu chạy thử luồng Salefronts AI. Thương hiệu, sản phẩm, giá đều là dữ liệu giả."
   },
   "content": {

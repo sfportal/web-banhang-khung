@@ -3,6 +3,10 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.2.0 – 14/11/2026
+- Cron tuỳ chọn cho từng khách: đặt `deploy.cron: false` trong `client.json` thì shop không đăng ký cron riêng. Đồng bộ thanh toán, huỷ đơn quá hạn, nhả hoa hồng chạy theo lượt truy cập, tối đa 5 phút một lần. Dùng khi tài khoản Cloudflare gói Free đã hết 5 cron.
+- Thêm khách mẫu Nông Sản Xanh (tắt cron riêng).
+
 ## 0.1.1 – 11/11/2026
 - Deploy: đọc secret riêng từng khách bằng tên cụ thể, bỏ cách lấy toàn bộ secrets khiến lần chạy Deploy bị chặn ("action_required").
 

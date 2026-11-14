@@ -1,6 +1,6 @@
 {
   "name": "web-banhang-khung",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Bộ khung website bán hàng dùng chung cho nhiều khách (tách từ DaLa): cửa hàng, CTV 3 tầng, điểm, CRM/CSM, thanh toán và giao hàng qua Thu-Chi (Astro + Cloudflare Workers + D1)",
