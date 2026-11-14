@@ -1,0 +1,141 @@
+{
+  "slug": "nong-san-xanh",
+  "industry": "fmcg",
+  "brand": {
+    "name": "Nông Sản Xanh",
+    "legal_name": "Công ty TNHH Nông Sản Xanh (dữ liệu mẫu)",
+    "tagline": "Đặc sản vùng cao, từ vườn đến bếp nhà bạn",
+    "logo": "/assets/img/nsx-logo.svg",
+    "logo_light": "/assets/img/nsx-logo-light.svg",
+    "favicon": "/assets/img/nsx-favicon.svg",
+    "icon": "/assets/img/nsx-favicon.svg",
+    "og_image": "/assets/img/nsx-og.svg",
+    "order_prefix": "NX"
+  },
+  "theme": {
+    "primary": "#2e7d46",
+    "primary_dark": "#1b5230",
+    "primary_light": "#e4f2e8",
+    "accent": "#e6a817",
+    "accent_dark": "#b9820a",
+    "accent_light": "#fdf3d6",
+    "background": "#f7f8f4",
+    "ink": "#1c2a20"
+  },
+  "features": {
+    "affiliate": true,
+    "loyalty": true,
+    "flash_sale": true,
+    "lot_qr": false,
+    "blog": true,
+    "otp": true
+  },
+  "deploy": {
+    "worker": "shop-nong-san-xanh",
+    "d1_name": "shop-nong-san-xanh",
+    "d1_id": "",
+    "site_url": "",
+    "thuchi_service": "sepay-thuchi",
+    "enabled": true,
+    "note": "Website mẫu chạy thử luồng Salefronts AI. Thương hiệu, sản phẩm, giá đều là dữ liệu giả."
+  },
+  "content": {
+    "home": {
+      "eyebrow": "Nông Sản Xanh · Đặc sản vùng cao",
+      "title": "Đặc sản vùng cao, từ vườn đến bếp nhà bạn",
+      "lead": "Cà phê rang mộc, mật ong hoa rừng, trà shan tuyết, hạt và trái cây sấy lấy trực tiếp từ nhà vườn, hợp tác xã. Đóng gói nhỏ, ghi rõ ngày sản xuất, giao toàn quốc.",
+      "hero_image": "",
+      "featured_skus": [
+        "NX-CF-250",
+        "NX-MO-500",
+        "NX-TR-100",
+        "NX-MC-300",
+        "COMBO-QUA"
+      ],
+      "trust": [
+        "Lấy hàng trực tiếp từ nhà vườn",
+        "Ghi rõ ngày sản xuất, hạn dùng",
+        "Giao toàn quốc, COD khi nhận hàng"
+      ],
+      "promise": [
+        "Đúng nguồn gốc",
+        "Đổi trả 7 ngày",
+        "Thanh toán QR hoặc COD",
+        "Giao toàn quốc"
+      ],
+      "stats": []
+    },
+    "story": {
+      "title": "Câu chuyện Nông Sản Xanh",
+      "lead": "Nông Sản Xanh bắt đầu từ những chuyến đi lên vùng cao tìm cà phê và mật ong cho gia đình. Chúng tôi chọn làm việc trực tiếp với nhà vườn và hợp tác xã, mua theo mùa, đóng gói nhỏ để hàng đến tay bạn còn mới.",
+      "image": "",
+      "sections": [
+        {
+          "icon": "🌱",
+          "title": "Nguồn hàng",
+          "text": "Mỗi sản phẩm ghi rõ vùng trồng và ngày đóng gói. Chúng tôi chỉ nhập theo mùa, không trữ hàng qua năm."
+        },
+        {
+          "icon": "🤝",
+          "title": "Làm cùng nhà vườn",
+          "text": "Thu mua trực tiếp, thống nhất giá từ đầu vụ để bà con yên tâm chăm vườn."
+        },
+        {
+          "icon": "📦",
+          "title": "Cam kết",
+          "text": "Đóng gói kín, chống ẩm. Hàng lỗi hoặc không đúng mô tả được đổi trả trong 7 ngày."
+        }
+      ]
+    },
+    "topbar": [
+      "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
+      "🎁 Hộp quà đặc sản cho gia đình và đối tác",
+      "🤝 Làm cộng tác viên, nhận hoa hồng mỗi đơn"
+    ],
+    "footer_about": "Đặc sản vùng cao lấy trực tiếp từ nhà vườn và hợp tác xã: cà phê, mật ong, trà, hạt và trái cây sấy.",
+    "disclaimer": "",
+    "catalog_title": "Sản phẩm của Nông Sản Xanh",
+    "catalog_description": "Cà phê, mật ong, trà, hạt, trái cây sấy và hộp quà đặc sản.",
+    "b2b_note": "Đặt quà doanh nghiệp, mua số lượng lớn hoặc làm đại lý: để lại thông tin ở trang Liên hệ để nhận báo giá sỉ.",
+    "policies": {
+      "shipping_note": "Hũ thuỷ tinh được bọc chống sốc. Hàng khô đóng túi zip kín, chống ẩm.",
+      "return_days": 7,
+      "return_note": "Đổi trả trong 7 ngày nếu sản phẩm lỗi, hư hỏng khi vận chuyển hoặc giao sai, sản phẩm còn nguyên tem."
+    },
+    "personas": [],
+    "journey": [],
+    "faqs": [
+      [
+        "Sản phẩm lấy từ đâu?",
+        "Chúng tôi thu mua trực tiếp từ nhà vườn và hợp tác xã ở vùng cao. Vùng trồng được ghi trên từng trang sản phẩm."
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Chuyển khoản qua mã VietQR (hệ thống tự xác nhận khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Phí giao hàng tính thế nào?",
+        "Phí được tính tự động theo địa chỉ và khối lượng kiện hàng ở bước thanh toán."
+      ],
+      [
+        "Cà phê là hạt hay bột?",
+        "Mặc định là cà phê bột xay vừa cho pha phin. Cần hạt nguyên, bạn ghi chú ở bước đặt hàng."
+      ],
+      [
+        "Mật ong bị kết tinh có dùng được không?",
+        "Mật ong có thể kết tinh khi trời lạnh, đó là hiện tượng tự nhiên. Ngâm hũ trong nước ấm khoảng 40°C để mật lỏng lại."
+      ],
+      [
+        "Có nhận làm quà doanh nghiệp không?",
+        "Có. Hộp quà có thể in thiệp theo tên doanh nghiệp. Liên hệ trước 7 ngày với đơn từ 30 hộp."
+      ]
+    ],
+    "line_labels": {
+      "combo": "Hộp quà",
+      "ca-phe": "Cà phê",
+      "mat-ong": "Mật ong",
+      "tra": "Trà",
+      "hat-trai-cay-say": "Hạt & trái cây sấy"
+    }
+  }
+}
