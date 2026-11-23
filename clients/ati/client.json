@@ -1,0 +1,198 @@
+{
+  "slug": "ati",
+  "industry": "fmcg",
+  "brand": {
+    "name": "ATI",
+    "legal_name": "Asia Trading Investment Corporation",
+    "tagline": "Kết nối sản phẩm chất lượng đến mọi nhà",
+    "logo": "/assets/img/logo.png",
+    "logo_light": "/assets/img/logo-light.png",
+    "favicon": "/assets/img/favicon.png",
+    "icon": "/assets/img/icon-192.png",
+    "og_image": "/assets/img/og.jpg",
+    "order_prefix": "AT"
+  },
+  "theme": {
+    "primary": "#39764c",
+    "primary_dark": "#245236",
+    "primary_light": "#e6f0e8",
+    "accent": "#dab531",
+    "accent_dark": "#b8941c",
+    "accent_light": "#faf2d3",
+    "background": "#faf8f1",
+    "ink": "#1c2a20",
+    "custom_css": "/assets/css/client.css"
+  },
+  "features": {
+    "affiliate": true,
+    "loyalty": true,
+    "flash_sale": true,
+    "lot_qr": false,
+    "blog": true,
+    "otp": true
+  },
+  "deploy": {
+    "worker": "shop-ati",
+    "d1_name": "shop-ati",
+    "d1_id": "",
+    "site_url": "",
+    "thuchi_service": "sepay-thuchi",
+    "enabled": false,
+    "note": "Website khung. Nội dung giới thiệu, chính sách, địa chỉ, hotline và sản phẩm đang là bản mẫu, chờ ATI cung cấp dữ liệu thật."
+  },
+  "content": {
+    "home": {
+      "eyebrow": "ATI · Asia Trading Investment",
+      "title": "Sản phẩm chọn lọc cho mọi nhà",
+      "lead": "ATI tuyển chọn và phân phối các sản phẩm chất lượng, rõ nguồn gốc, giao tận nơi trên toàn quốc. (Đoạn mẫu, thay bằng giới thiệu thật của ATI.)",
+      "hero_image": "",
+      "featured_skus": [],
+      "trust": [
+        "Hàng chính hãng, rõ nguồn gốc",
+        "Giao toàn quốc",
+        "COD khi nhận hàng"
+      ],
+      "promise": [
+        "Hàng chính hãng ATI",
+        "Đổi trả 7 ngày",
+        "Thanh toán QR hoặc COD",
+        "Giao toàn quốc"
+      ],
+      "products_eyebrow": "Nổi bật",
+      "products_title": "Sản phẩm được chọn nhiều",
+      "stats": []
+    },
+    "story": {
+      "title": "Về ATI",
+      "lead": "Asia Trading Investment Corporation (ATI) hoạt động trong lĩnh vực thương mại và đầu tư. (Đoạn mẫu: thay bằng 5–10 dữ kiện thật về ATI: năm thành lập, lĩnh vực, thị trường, đối tác, chứng nhận.)",
+      "image": "/assets/img/logo-full.png",
+      "sections": [
+        {
+          "icon": "🌿",
+          "title": "Sứ mệnh",
+          "text": "Điều ATI muốn mang lại cho khách hàng và đối tác. (Nội dung mẫu.)"
+        },
+        {
+          "icon": "🤝",
+          "title": "Đối tác",
+          "text": "Nhà sản xuất, vùng nguyên liệu và kênh phân phối ATI đang hợp tác. (Nội dung mẫu.)"
+        },
+        {
+          "icon": "✅",
+          "title": "Cam kết chất lượng",
+          "text": "Tiêu chuẩn chọn hàng, kiểm nghiệm, chứng nhận. (Nội dung mẫu.)"
+        },
+        {
+          "icon": "🌏",
+          "title": "Tầm nhìn",
+          "text": "Định hướng phát triển của ATI tại Việt Nam và châu Á. (Nội dung mẫu.)"
+        }
+      ]
+    },
+    "topbar": [
+      "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
+      "🚚 Giao hàng toàn quốc",
+      "🤝 Làm cộng tác viên ATI, nhận hoa hồng mỗi đơn"
+    ],
+    "footer_about": "Tuyển chọn và phân phối sản phẩm chất lượng. (Nội dung mẫu.)",
+    "disclaimer": "",
+    "catalog_title": "Sản phẩm ATI",
+    "catalog_description": "Sản phẩm, combo và ưu đãi đang có tại ATI.",
+    "b2b_note": "Đại lý, điểm bán và khách mua số lượng lớn được hưởng giá sỉ. Để lại thông tin ở trang Liên hệ, ATI gửi chính sách đại lý.",
+    "policies": {
+      "shipping_note": "Hàng được đóng gói cẩn thận, chống va đập.",
+      "return_days": 7,
+      "return_note": "Đổi trả trong 7 ngày kể từ khi nhận hàng nếu sản phẩm lỗi do nhà sản xuất, hư hỏng khi vận chuyển hoặc giao sai. (Chính sách mẫu, chờ ATI xác nhận.)"
+    },
+    "personas": [],
+    "journey": [],
+    "faqs": [
+      [
+        "ATI là công ty gì?",
+        "Asia Trading Investment Corporation (ATI) hoạt động trong lĩnh vực thương mại và đầu tư. (Câu trả lời mẫu, chờ ATI bổ sung.)"
+      ],
+      [
+        "Sản phẩm của ATI có nguồn gốc ở đâu?",
+        "Thông tin nguồn gốc ghi trên từng trang sản phẩm. (Câu trả lời mẫu.)"
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Chuyển khoản qua mã VietQR (hệ thống tự xác nhận khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Phí giao hàng tính thế nào?",
+        "Phí được tính tự động theo địa chỉ và khối lượng kiện hàng ở bước thanh toán."
+      ],
+      [
+        "Bao lâu tôi nhận được hàng?",
+        "Thời gian giao dự kiến hiện ở bước thanh toán, tuỳ địa chỉ nhận."
+      ],
+      [
+        "Tôi muốn làm cộng tác viên hoặc đại lý ATI?",
+        "Cộng tác viên đăng ký ngay trên website ở mục Cộng tác viên. Đại lý, điểm bán vui lòng để lại thông tin ở trang Liên hệ."
+      ]
+    ],
+    "line_labels": {
+      "combo": "Combo"
+    },
+    "kit": {
+      "skus": [],
+      "captions": {}
+    },
+    "perk_genuine": "Chính hãng ATI"
+  },
+  "settings": {
+    "shop": {
+      "facebook": "",
+      "tiktok_shop": "",
+      "shopee_shop": "https://shopee.vn/shop/1728219880",
+      "address": "",
+      "legal_name": "Asia Trading Investment Corporation"
+    },
+    "affiliate": {
+      "tiers": [
+        {
+          "id": 1,
+          "name": "Cộng tác viên",
+          "min_sales": 0,
+          "direct": 7,
+          "l1": 2,
+          "l2": 1
+        },
+        {
+          "id": 2,
+          "name": "Cộng tác viên Bạc",
+          "min_sales": 50000000,
+          "direct": 8,
+          "l1": 2,
+          "l2": 1
+        },
+        {
+          "id": 3,
+          "name": "Cộng tác viên Vàng",
+          "min_sales": 200000000,
+          "direct": 9,
+          "l1": 3,
+          "l2": 1
+        }
+      ],
+      "hold_days": 7,
+      "min_withdraw": 200000,
+      "payout_days": "5 và 20 hằng tháng",
+      "cookie_days": 30,
+      "buyer_discount_pct": 0,
+      "lifetime_binding": true,
+      "auto_approve": true
+    },
+    "shipping": {
+      "origin": {
+        "name": "Kho ATI",
+        "phone": "",
+        "street": "",
+        "city": "",
+        "district": "",
+        "ward": ""
+      }
+    }
+  }
+}
