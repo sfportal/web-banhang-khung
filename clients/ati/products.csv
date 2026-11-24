@@ -1,0 +1,3 @@
+sku,name,subtitle,line,kind,price,compare_price,wholesale_price,cost,stock,image,short_desc,benefits,badges,weight_g,length_cm,width_cm,height_cm,fragile,sort
+ATI-001,Sản phẩm mẫu 1,Quy cách: chờ dữ liệu Shopee,Sản phẩm ATI,main,100000,,,,100,ati-sp-1.svg,"Chỗ giữ cho sản phẩm Shopee số 57812819041. Tên, hình, giá, mô tả sẽ được thay bằng dữ liệu thật.","Lợi ích 1 (chờ dữ liệu); Lợi ích 2 (chờ dữ liệu); Lợi ích 3 (chờ dữ liệu)",Mẫu,500,15,10,10,Không,1
+ATI-002,Sản phẩm mẫu 2,Quy cách: chờ dữ liệu Shopee,Sản phẩm ATI,main,100000,,,,100,ati-sp-2.svg,"Chỗ giữ cho sản phẩm Shopee số 56308990956. Tên, hình, giá, mô tả sẽ được thay bằng dữ liệu thật.","Lợi ích 1 (chờ dữ liệu); Lợi ích 2 (chờ dữ liệu); Lợi ích 3 (chờ dữ liệu)",Mẫu,500,15,10,10,Không,2
