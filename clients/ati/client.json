@@ -37,8 +37,9 @@
     "d1_id": "",
     "site_url": "",
     "thuchi_service": "sepay-thuchi",
-    "enabled": false,
-    "note": "Website khung. Nội dung giới thiệu, chính sách, địa chỉ, hotline và sản phẩm đang là bản mẫu, chờ ATI cung cấp dữ liệu thật."
+    "enabled": true,
+    "note": "Bản chạy thử trên workers.dev. Nội dung giới thiệu, chính sách, địa chỉ, hotline và 2 sản phẩm còn là bản mẫu, chờ ATI cung cấp. Tắt cron riêng vì tài khoản đã hết suất cron gói Free.",
+    "cron": false
   },
   "content": {
     "home": {
