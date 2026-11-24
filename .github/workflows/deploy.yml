@@ -1,8 +1,11 @@
 name: Deploy
 
 # Deploy website của các khách lên Cloudflare Workers.
-# - Gộp vào main: deploy lần lượt mọi khách có deploy.enabled = true. Khách đầu lỗi thì dừng, các khách sau giữ bản cũ.
+# - Gộp vào main: chỉ deploy khách bị ảnh hưởng. Đổi clients/<ma-khach>/ thì deploy riêng khách đó;
+#   đổi mã chung (src/, public/, migrations/, package*.json, scripts/...) thì deploy mọi khách có deploy.enabled = true;
+#   chỉ đổi tài liệu thì không deploy. Mỗi khách là một job độc lập: khách này lỗi không chặn khách khác.
 # - Chạy tay (Actions → Deploy → Run workflow): chọn một mã khách, hoặc "all".
+# Khoá deploy theo từng khách: hai lần deploy cùng một khách chạy lần lượt, khác khách thì không chờ nhau.
 # Cổng duyệt: job deploy dùng môi trường "production". Vào Settings → Environments → production → Required reviewers
 # để bắt buộc chủ dự án duyệt trước mỗi lần deploy.
 # Secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID (bắt buộc); ADMIN_PASSWORD_<MAKHACH>, APP_SECRET_<MAKHACH> (không bắt buộc).
@@ -19,10 +22,6 @@ on:
 permissions:
   contents: write   # tạo tag và bản phát hành
 
-concurrency:
-  group: deploy-production
-  cancel-in-progress: false
-
 jobs:
   plan:
     runs-on: ubuntu-latest
@@ -30,6 +29,8 @@ jobs:
       clients: ${{ steps.list.outputs.clients }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # cần lịch sử để so file thay đổi
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -39,11 +40,16 @@ jobs:
       - id: list
         env:
           ONE: ${{ github.event.inputs.client }}
+          BEFORE: ${{ github.event.before }}
         run: |
           if [ -n "$ONE" ] && [ "$ONE" != "all" ]; then
             node scripts/check-clients.mjs > /dev/null
             [ -f "clients/$ONE/client.json" ] || { echo "::error::Không có clients/$ONE"; exit 1; }
             LIST="[\"$ONE\"]"
+          elif [ "${{ github.event_name }}" = "push" ] && [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qE '^0+$' \
+               && git diff --name-only "$BEFORE" "$GITHUB_SHA" > /tmp/changed.txt 2>/dev/null; then
+            echo "File thay đổi:"; cat /tmp/changed.txt
+            LIST=$(node scripts/check-clients.mjs --deploy --changed /tmp/changed.txt)
           else
             LIST=$(node scripts/check-clients.mjs --deploy)
           fi
@@ -58,9 +64,11 @@ jobs:
     if: needs.plan.outputs.clients != '[]'
     runs-on: ubuntu-latest
     environment: production
+    concurrency:
+      group: deploy-${{ matrix.c.slug }}
+      cancel-in-progress: false
     strategy:
-      max-parallel: 1
-      fail-fast: true
+      fail-fast: false
       matrix:
         c: ${{ fromJson(needs.plan.outputs.clients) }}
     name: deploy (${{ matrix.c.slug }})

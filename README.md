@@ -64,7 +64,8 @@ npm run client:build -- _mau     # build thử một khách
 
 - **CI** (`.github/workflows/ci.yml`) ở mỗi PR: kiểm thử, kiểm tra `client.json` mọi khách, build và chạy migration trên D1 trống cho từng khách.
 - **Deploy** (`.github/workflows/deploy.yml`):
-  - Gộp vào `main`: deploy lần lượt các khách có `deploy.enabled: true`. Một khách lỗi thì dừng, các khách sau giữ bản cũ.
+  - Gộp vào `main`: chỉ deploy khách bị ảnh hưởng. Đổi `clients/<ma-khach>/` thì deploy riêng khách đó; đổi mã chung (`src/`, `public/`, `migrations/`, `package*.json`, `scripts/`) thì deploy mọi khách có `deploy.enabled: true`; chỉ đổi tài liệu thì không deploy.
+  - Mỗi khách là một job với khoá riêng: khách này lỗi hay chờ duyệt không chặn khách khác.
   - Chạy tay: Actions → Deploy → Run workflow, nhập mã khách hoặc `all`.
   - Mỗi khách: tạo D1 nếu chưa có, áp migration, deploy Worker, đặt secret.
 
