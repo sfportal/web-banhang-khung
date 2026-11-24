@@ -7,6 +7,7 @@ Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi t
 - Deploy độc lập từng khách: gộp vào `main` chỉ deploy khách có file trong `clients/<ma-khach>/` thay đổi. Đổi mã chung thì deploy mọi khách đang bật, chỉ đổi tài liệu thì không deploy.
 - Mỗi khách một job và một khoá deploy riêng: khách này lỗi hay đang chờ duyệt không chặn khách khác.
 - Thêm khách ATI (Asia Trading Investment Corporation), bản chạy thử.
+- Gỡ khách Nông Sản Xanh (đã xoá D1 `shop-nong-san-xanh`) và D1 `shop-mau` để có chỗ cho ATI trên gói Free.
 
 ## 0.2.0 – 14/11/2026
 - Cron tuỳ chọn cho từng khách: đặt `deploy.cron: false` trong `client.json` thì shop không đăng ký cron riêng. Đồng bộ thanh toán, huỷ đơn quá hạn, nhả hoa hồng chạy theo lượt truy cập, tối đa 5 phút một lần. Dùng khi tài khoản Cloudflare gói Free đã hết 5 cron.
