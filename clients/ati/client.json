@@ -47,7 +47,10 @@
       "title": "Sản phẩm chọn lọc cho mọi nhà",
       "lead": "ATI tuyển chọn và phân phối các sản phẩm chất lượng, rõ nguồn gốc, giao tận nơi trên toàn quốc. (Đoạn mẫu, thay bằng giới thiệu thật của ATI.)",
       "hero_image": "",
-      "featured_skus": [],
+      "featured_skus": [
+        "STW-GINGER",
+        "STW-RAUCU-2"
+      ],
       "trust": [
         "Hàng chính hãng, rõ nguồn gốc",
         "Giao toàn quốc",
@@ -134,7 +137,8 @@
       ]
     ],
     "line_labels": {
-      "combo": "Combo"
+      "combo": "Combo",
+      "staywell": "Staywell"
     },
     "kit": {
       "skus": [],

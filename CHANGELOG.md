@@ -3,6 +3,10 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.3.1 – 24/11/2026
+- `products.csv`: cột `image` nhận URL `https://…` (ảnh lấy thẳng từ sàn), thêm cột `shopee_url` để hiện nút "Cũng có trên Shopee".
+- ATI: thay 2 sản phẩm giữ chỗ bằng Nước gừng Ginger Shot và Bột rau củ Staywell lấy từ Shopee (migration riêng của khách `1001_ati_san_pham_staywell.sql` cho D1 đang chạy).
+
 ## 0.3.0 – 24/11/2026
 - Deploy độc lập từng khách: gộp vào `main` chỉ deploy khách có file trong `clients/<ma-khach>/` thay đổi. Đổi mã chung thì deploy mọi khách đang bật, chỉ đổi tài liệu thì không deploy.
 - Mỗi khách một job và một khoá deploy riêng: khách này lỗi hay đang chờ duyệt không chặn khách khác.
