@@ -155,7 +155,7 @@ async function publicApi(request, env, url, p, m, ctx) {
     if (!validPhone(phone)) throw new HttpError(400, 'Số điện thoại chưa đúng');
     if (String(b.message || '').trim().length < 3) throw new HttpError(400, 'Vui lòng nhập nội dung');
     const c = await first(env, 'SELECT id FROM customers WHERE phone=?', phone);
-    const topic = ['tu-van', 'khieu-nai', 'doi-tra', 'b2b', 'ctv', 'khac'].includes(b.topic) ? b.topic : 'tu-van';
+    const topic = ['tu-van', 'bao-gia', 'khieu-nai', 'doi-tra', 'b2b', 'ctv', 'khac'].includes(b.topic) ? b.topic : 'tu-van';
     await run(env, 'INSERT INTO tickets (customer_id, name, phone, email, topic, message, order_code, channel, priority) VALUES (?,?,?,?,?,?,?,?,?)',
       c?.id || null, String(b.name || '').slice(0, 80), phone, b.email || null, topic, String(b.message).slice(0, 2000), b.order_code || null, 'web',
       topic === 'khieu-nai' || topic === 'doi-tra' ? 'high' : 'normal');

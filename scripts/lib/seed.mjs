@@ -47,12 +47,14 @@ const yes = (v) => /^(1|c[oó]|yes|true|x)$/i.test(String(v || '').trim());
 const list = (v) => (v ? String(v).split(';').map((x) => x.trim()).filter(Boolean) : []);
 
 // Cột products.csv: sku,name,subtitle,line,kind,price,compare_price,wholesale_price,cost,stock,image,short_desc,story,benefits,usage,ingredients,weight,badges,weight_g,length_cm,width_cm,height_cm,fragile,sort
+// price = 0: sản phẩm hiện "Liên hệ" thay cho giá, không cho thêm vào giỏ
 // benefits, badges: nhiều giá trị cách nhau bằng dấu ;   fragile: Có/Không   image, image_bg: tên file trong public/assets/img hoặc URL https://…   shopee_url: link sản phẩm trên Shopee
 // combo_items (dòng kind=combo): "SKU-A×1; SKU-B×2" (dùng × hoặc x hoặc *)
 export function productsCsvToSql(text) {
   const cols = ['sku', 'slug', 'name', 'subtitle', 'line', 'kind', 'price', 'compare_price', 'wholesale_price', 'cost', 'stock', 'image', 'image_bg', 'short_desc', 'story', 'benefits', 'usage', 'ingredients', 'weight', 'badges', 'personas', 'combo_items', 'shopee_url', 'seo_title', 'seo_desc', 'weight_g', 'length_cm', 'width_cm', 'height_cm', 'fragile', 'sort'];
   return parseCsv(text).map((r, i) => {
-    if (!r.sku || !r.name || !num(r.price)) throw new Error(`products.csv dòng ${i + 2}: cần sku, name, price`);
+    const pr = num(r.price);
+    if (!r.sku || !r.name || pr === null || Number.isNaN(pr) || pr < 0) throw new Error(`products.csv dòng ${i + 2}: cần sku, name, price (0 = giá Liên hệ)`);
     const path = (f) => (f ? (f.startsWith('/') || /^https?:\/\//.test(f) ? f : `/assets/img/${f}`) : null);
     const img = path(r.image);
     const combo = list(r.combo_items).map((x) => { const m = x.match(/^(.+?)\s*[×xX*]\s*(\d+)$/); return m ? { sku: m[1].trim().toUpperCase(), qty: Number(m[2]) } : { sku: x.toUpperCase(), qty: 1 }; });

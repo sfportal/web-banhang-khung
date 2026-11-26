@@ -2,7 +2,9 @@
 // Thẻ sản phẩm: giá Flash Sale, tiết kiệm, thanh suất còn lại, nút thêm giỏ (bay vào giỏ)
 const { p, delay = 0, light = false } = Astro.props;
 const full = p.line === 'qua';
+import { CONTENT } from '../client.js';
 const vnd = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+const contact = !(p.effective_price > 0);
 const flashPct = p.flash && p.flash.quota ? Math.min(100, Math.round((p.flash.sold / p.flash.quota) * 100)) : 0;
 const tags = [];
 if (p.flash) tags.push(['⚡ Flash', 'red']);
@@ -23,8 +25,10 @@ else if (p.badges?.[0]) tags.push([p.badges[0], p.kind === 'trial' ? 'green' : p
     </Fragment>
   )}
   <div class="row">
-    <div class:list={['price', { red: !!p.flash }]}>{vnd(p.effective_price)}{p.ref_price && <s>{vnd(p.ref_price)}</s>}</div>
-    {p.stock > 0
+    {contact
+      ? <div class="price contact">{CONTENT.price_contact_label || 'Liên hệ'}</div>
+      : <div class:list={['price', { red: !!p.flash }]}>{vnd(p.effective_price)}{p.ref_price && <s>{vnd(p.ref_price)}</s>}</div>}
+    {contact ? <span class="badge">Báo giá</span> : p.stock > 0
       ? <button class="add" data-add={p.sku} aria-label={`Thêm ${p.name} vào giỏ`} data-img={full ? p.image : p.image.replace('.webp', '-sm.webp')}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
       : <span class="badge">Hết hàng</span>}
   </div>

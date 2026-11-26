@@ -92,6 +92,7 @@ export async function priceCart(env, input, { withShipping = true } = {}) {
   for (const [sku, qty0] of qtyBySku) {
     const p = bySku.get(sku);
     if (!p) { errors.push(`Sản phẩm ${sku} không còn bán`); continue; }
+    if (!(p.price > 0)) { errors.push(`${p.name} (${p.subtitle}) cần liên hệ để báo giá, chưa đặt online được`); continue; }
     let qty = qty0;
     if (p.stock < qty) {
       if (p.stock <= 0) { errors.push(`${p.name} (${p.subtitle}) đã hết hàng`); continue; }

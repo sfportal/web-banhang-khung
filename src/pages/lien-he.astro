@@ -6,7 +6,8 @@ import { getSettings } from '../lib/db.js';
 const s = await getSettings(env);
 const shop = s.shop || {};
 const topic = Astro.url.searchParams.get('chu-de') || 'tu-van';
-const topics = [['tu-van', 'Tư vấn sản phẩm'], ['b2b', 'Số lượng lớn, đại lý'], ['doi-tra', 'Đổi trả, khiếu nại'], ['ctv', 'Cộng tác viên'], ['khac', 'Khác']];
+const sp = (Astro.url.searchParams.get('sp') || '').slice(0, 120);
+const topics = [['tu-van', 'Tư vấn sản phẩm'], ['bao-gia', 'Báo giá sản phẩm'], ['b2b', 'Số lượng lớn, đại lý'], ['doi-tra', 'Đổi trả, khiếu nại'], ['ctv', 'Cộng tác viên'], ['khac', 'Khác']];
 ---
 <Store title={`Liên hệ ${BRAND}: tư vấn, đặt số lượng lớn, đại lý`} description={`Gửi yêu cầu tư vấn, báo giá số lượng lớn, đại lý hoặc hỗ trợ đổi trả. ${BRAND} phản hồi trong giờ làm việc.`} path="/lien-he" settings={s}>
   <section class="section" style="padding-top:40px"><div class="container checkout" style="padding:0">
@@ -16,7 +17,7 @@ const topics = [['tu-van', 'Tư vấn sản phẩm'], ['b2b', 'Số lượng l�
         <div class="row2"><div class="field"><label>Họ tên</label><input name="name" required /></div><div class="field"><label>Số điện thoại</label><input name="phone" inputmode="tel" required /></div></div>
         <div class="field"><label>Chủ đề</label><select name="topic">{topics.map(([k, l]) => <option value={k} selected={k === topic}>{l}</option>)}</select></div>
         <div class="field"><label>Mã đơn hàng (nếu có)</label><input name="order_code" placeholder={`${CLIENT.brand?.order_prefix || 'DH'}123456`} /></div>
-        <div class="field"><label>Nội dung</label><textarea name="message" rows="5" required placeholder="Nội dung cần hỗ trợ"></textarea></div>
+        <div class="field"><label>Nội dung</label><textarea name="message" rows="5" required placeholder="Nội dung cần hỗ trợ">{sp ? `Xin báo giá: ${sp}. Số lượng: ` : ''}</textarea></div>
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
         <button class="btn sun">Gửi yêu cầu</button>
       </form>

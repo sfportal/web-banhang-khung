@@ -3,6 +3,14 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.4.0 – 26/11/2026
+- Thêm khách Nông Xanh Tây Nguyên (vật tư nông nghiệp): 39 sản phẩm phân bón, thuốc BVTV của Hàn Việt, Map Pacific, Sumitomo, Ngân Anh. Chưa bật deploy, chờ chủ cửa hàng duyệt.
+- Giá "Liên hệ": sản phẩm có `price = 0` trong `products.csv` hiện nhãn Liên hệ thay cho giá, có nút "Nhận báo giá" sang trang Liên hệ (điền sẵn tên sản phẩm), không thêm vào giỏ được, server chặn đặt online. Chủ đề liên hệ mới "Báo giá sản phẩm".
+- Trang Sản phẩm: lọc theo nhãn (`content.catalog_tag_filters`), ẩn nút lọc không có sản phẩm (`content.hide_empty_filters`), câu dẫn và ghi chú cuối trang lấy từ `content.catalog_lead`, `content.catalog_note`.
+- Trang chi tiết: tên tab và dòng lưu ý cuối tab thành phần lấy từ `content.pdp_story_tab`, `content.pdp_ing_tab`, `content.pdp_note`; dòng "mã QR lô hàng" chỉ hiện khi bật `lot_qr` hoặc có lô.
+- Ẩn mục menu theo khách bằng `content.nav_off` (ví dụ `["combo"]`), tiêu đề trang 404 lấy từ `content.not_found_title`.
+- Khách cũ không đặt các khoá mới thì giữ nguyên câu chữ như trước.
+
 ## 0.3.1 – 24/11/2026
 - `products.csv`: cột `image` nhận URL `https://…` (ảnh lấy thẳng từ sàn), thêm cột `shopee_url` để hiện nút "Cũng có trên Shopee".
 - ATI: thay 2 sản phẩm giữ chỗ bằng Nước gừng Ginger Shot và Bột rau củ Staywell lấy từ Shopee (migration riêng của khách `1001_ati_san_pham_staywell.sql` cho D1 đang chạy).

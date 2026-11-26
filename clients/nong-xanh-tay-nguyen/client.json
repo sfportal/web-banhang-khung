@@ -1,0 +1,287 @@
+{
+  "slug": "nong-xanh-tay-nguyen",
+  "industry": "vat-tu-nong-nghiep",
+  "brand": {
+    "name": "Nông Xanh Tây Nguyên",
+    "legal_name": "Nông Xanh Tây Nguyên",
+    "tagline": "Vật tư nông nghiệp chính hãng cho nhà vườn Tây Nguyên",
+    "logo": "/assets/img/logo.png",
+    "logo_light": "/assets/img/logo-light.png",
+    "favicon": "/assets/img/favicon.png",
+    "icon": "/assets/img/icon-192.png",
+    "og_image": "/assets/img/og.jpg",
+    "order_prefix": "NX"
+  },
+  "theme": {
+    "primary": "#344d25",
+    "primary_dark": "#22341a",
+    "primary_light": "#e8eedd",
+    "accent": "#78a330",
+    "accent_dark": "#5b8122",
+    "accent_light": "#eef5dc",
+    "background": "#f6f3e8",
+    "ink": "#1f2a18",
+    "custom_css": "/assets/css/client.css"
+  },
+  "features": {
+    "affiliate": true,
+    "loyalty": true,
+    "flash_sale": true,
+    "lot_qr": false,
+    "blog": true,
+    "otp": true
+  },
+  "deploy": {
+    "worker": "shop-nong-xanh-tay-nguyen",
+    "d1_name": "shop-nong-xanh-tay-nguyen",
+    "d1_id": "",
+    "site_url": "",
+    "thuchi_service": "sepay-thuchi",
+    "enabled": false,
+    "cron": false,
+    "note": "Bản chạy thử. Giá lấy theo giá bán lẻ tham khảo trên thị trường tháng 11/2026, ảnh sản phẩm lấy từ nhà sản xuất và nhà bán lẻ. Chờ chủ cửa hàng xác nhận giá, địa chỉ, hotline, số đăng ký thuốc BVTV."
+  },
+  "content": {
+    "home": {
+      "eyebrow": "Nông Xanh Tây Nguyên · Vật tư nông nghiệp",
+      "title": "Phân bón, thuốc BVTV chính hãng cho vườn Tây Nguyên",
+      "lead": "Phân bón NPK Hàn-Việt, thuốc bảo vệ thực vật Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết rõ ràng, tư vấn đúng bệnh, đúng cây cà phê, hồ tiêu, sầu riêng, rau màu.",
+      "hero_image": "",
+      "featured_skus": [
+        "HV-202015-25KG",
+        "MP-MATAXYL-100G",
+        "SM-DANITOLS-450ML",
+        "NA-TALAXYL-250G",
+        "HV-202015-1KG",
+        "MP-HERO-100G",
+        "SM-DANTOTSU-5G",
+        "NA-SULFOLAC-1L"
+      ],
+      "trust": [
+        "Hàng chính hãng từ nhà sản xuất, nhà phân phối",
+        "Tư vấn kỹ thuật theo từng loại cây",
+        "Giao tận vườn, trả tiền khi nhận hàng"
+      ],
+      "promise": [
+        "Hàng chính hãng",
+        "Giá niêm yết rõ ràng",
+        "Tư vấn đúng bệnh đúng thuốc",
+        "Thanh toán QR hoặc COD"
+      ],
+      "products_eyebrow": "Nhà vườn chọn nhiều",
+      "products_title": "Sản phẩm được tin dùng",
+      "stats": []
+    },
+    "story": {
+      "title": "Về Nông Xanh Tây Nguyên",
+      "lead": "Nông Xanh Tây Nguyên là cửa hàng vật tư nông nghiệp dành cho nhà vườn cà phê, hồ tiêu, sầu riêng và rau màu. Chúng tôi chọn những thương hiệu phân bón, thuốc bảo vệ thực vật đã quen thuộc với bà con, bán đúng hàng, đúng giá và hướng dẫn dùng đúng cách.",
+      "image": "/assets/img/og.jpg",
+      "sections": [
+        {
+          "icon": "🌱",
+          "title": "Phân bón Hàn-Việt",
+          "text": "NPK phức hợp một hạt một màu sản xuất theo công nghệ Hàn Quốc, đủ công thức bón lót, bón thúc, nuôi trái cho cây công nghiệp và cây ăn trái."
+        },
+        {
+          "icon": "🛡️",
+          "title": "Thuốc BVTV chính hãng",
+          "text": "Map Pacific, Sumitomo, Ngân Anh (Tân Qui): thuốc trừ bệnh, trừ sâu, trừ cỏ, thuốc sinh học và phân bón lá, có trong danh mục được phép sử dụng tại Việt Nam."
+        },
+        {
+          "icon": "🧑‍🌾",
+          "title": "Tư vấn đúng bệnh, đúng cây",
+          "text": "Gửi ảnh lá, trái, rễ qua Zalo, kỹ thuật viên gợi ý thuốc và liều phù hợp, tránh phun thừa, phun sai."
+        },
+        {
+          "icon": "🌍",
+          "title": "Canh tác bền vững",
+          "text": "Ưu tiên giải pháp sinh học, dùng thuốc theo nguyên tắc 4 đúng và đảm bảo thời gian cách ly để nông sản an toàn, xuất khẩu được."
+        }
+      ]
+    },
+    "topbar": [
+      "🌿 Phân bón, thuốc BVTV chính hãng: Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh",
+      "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
+      "📞 Bao lớn, mua số lượng: liên hệ để nhận giá theo đợt"
+    ],
+    "footer_about": "Cửa hàng vật tư nông nghiệp tại Tây Nguyên: phân bón Hàn-Việt, thuốc bảo vệ thực vật Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết, tư vấn kỹ thuật, giao tận vườn.",
+    "disclaimer": "Giá trên website là giá bán lẻ tham khảo, có thể thay đổi theo đợt hàng. Đọc kỹ nhãn trước khi dùng thuốc bảo vệ thực vật.",
+    "catalog_title": "Phân bón và thuốc BVTV",
+    "catalog_eyebrow": "Nông Xanh Tây Nguyên",
+    "catalog_heading": "Tất cả sản phẩm",
+    "catalog_description": "Phân bón NPK Hàn-Việt, thuốc trừ bệnh, trừ sâu, trừ cỏ Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết, giao tận vườn.",
+    "catalog_lead": "Chọn theo thương hiệu hoặc theo nhóm sản phẩm. Bao phân 50kg giá thay đổi theo đợt hàng, bấm Liên hệ để nhận báo giá.",
+    "catalog_note": "Chưa thấy sản phẩm cần tìm? Gửi tên thuốc hoặc ảnh bệnh cây qua trang <a href=\"/lien-he\">Liên hệ</a>, cửa hàng báo giá trong ngày.",
+    "catalog_tag_filters": [
+      "Phân bón",
+      "Phân bón lá",
+      "Thuốc trừ bệnh",
+      "Thuốc trừ sâu",
+      "Thuốc trừ cỏ",
+      "Sinh học"
+    ],
+    "hide_empty_filters": true,
+    "price_contact_label": "Liên hệ",
+    "price_contact_note": "Giá bao lớn thay đổi theo đợt hàng và khu vực giao. Để lại số điện thoại, cửa hàng gọi báo giá trong ngày.",
+    "pdp_story_tab": "Giới thiệu",
+    "pdp_ing_tab": "Thành phần & quy cách",
+    "pdp_note": "Đọc kỹ nhãn trước khi dùng. Dùng thuốc bảo vệ thực vật theo nguyên tắc 4 đúng, tuân thủ thời gian cách ly ghi trên nhãn, mang đồ bảo hộ khi pha và phun. Để xa tầm tay trẻ em.",
+    "not_found_title": "Trang này đã ra vườn",
+    "b2b_note": "Đại lý, hợp tác xã, nông trại mua số lượng lớn được báo giá theo đợt hàng. Để lại thông tin ở trang Liên hệ, cửa hàng gửi bảng giá sỉ.",
+    "policies": {
+      "shipping_note": "Chai thuốc được bọc chống tràn, chống vỡ. Bao phân lớn giao bằng xe tải trong khu vực.",
+      "return_days": 7,
+      "return_note": "Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất, hư hỏng khi vận chuyển hoặc giao sai, bao bì còn nguyên tem nhãn. Thuốc bảo vệ thực vật đã mở nắp không nhận đổi trả."
+    },
+    "personas": [
+      {
+        "id": "ca-phe",
+        "ico": "☕",
+        "label": "Vườn cà phê, hồ tiêu",
+        "who": "Anh Hùng, 42 tuổi · Đắk Lắk",
+        "quote": "Đầu mùa mưa là lo chết nhanh, rệp sáp. Cần phân bao lớn giá ổn định.",
+        "needs": [
+          "NPK bao lớn bón thúc, nuôi trái",
+          "Thuốc phòng chết nhanh, thối rễ",
+          "Trị rệp sáp, rầy xanh"
+        ]
+      },
+      {
+        "id": "sau-rieng",
+        "ico": "🌳",
+        "label": "Vườn sầu riêng, cây ăn trái",
+        "who": "Chị Mai, 38 tuổi · Đắk Nông",
+        "quote": "Sầu riêng xì mủ, rụng trái non là mất cả vụ.",
+        "needs": [
+          "Trị xì mủ, nứt thân, thán thư",
+          "Phân bón lá ra hoa, đậu trái",
+          "Kali nuôi trái, lên cơm"
+        ]
+      },
+      {
+        "id": "rau-mau",
+        "ico": "🥬",
+        "label": "Rau màu, lúa, bắp",
+        "who": "Chú Tư, 55 tuổi · Lâm Đồng",
+        "quote": "Sâu kháng thuốc nhiều, muốn chuyển dần qua thuốc sinh học.",
+        "needs": [
+          "Thuốc trừ sâu sinh học",
+          "Trị sâu kháng thuốc",
+          "Phân NPK gói nhỏ dễ dùng"
+        ]
+      }
+    ],
+    "journey": [],
+    "faqs": [
+      [
+        "Hàng ở Nông Xanh Tây Nguyên có chính hãng không?",
+        "Cửa hàng chỉ bán sản phẩm của các thương hiệu Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh nhập từ nhà sản xuất và nhà phân phối, còn nguyên tem nhãn, hạn dùng rõ ràng."
+      ],
+      [
+        "Giá trên website lấy ở đâu?",
+        "Giá là giá bán lẻ tham khảo trên thị trường, cập nhật theo từng đợt. Giá thực tế có thể thay đổi theo đợt hàng, cửa hàng xác nhận lại khi chốt đơn."
+      ],
+      [
+        "Vì sao bao phân 50kg ghi Liên hệ?",
+        "Giá phân bao lớn thay đổi theo giá nguyên liệu và khu vực giao. Bấm Liên hệ hoặc gọi hotline, cửa hàng báo giá đúng đợt hàng và phí chở tới vườn."
+      ],
+      [
+        "Tôi không biết cây bị bệnh gì, nên mua thuốc nào?",
+        "Chụp ảnh lá, trái, thân hoặc rễ gửi qua trang Liên hệ hay Zalo. Kỹ thuật viên sẽ gợi ý thuốc và liều phù hợp, tránh phun sai, phun thừa."
+      ],
+      [
+        "Dùng thuốc bảo vệ thực vật thế nào cho an toàn?",
+        "Đọc kỹ nhãn, pha đúng liều, phun đúng lúc, đúng cây và đúng đối tượng ghi trên nhãn. Mang khẩu trang, găng tay khi pha và phun, đảm bảo thời gian cách ly trước thu hoạch."
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Chuyển khoản qua mã VietQR (tự xác nhận khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Đại lý, hợp tác xã muốn lấy hàng số lượng lớn?",
+        "Để lại thông tin ở trang Liên hệ, cửa hàng gửi bảng giá sỉ theo đợt hàng và hỗ trợ giao tận nơi."
+      ]
+    ],
+    "line_labels": {
+      "combo": "Combo",
+      "han-viet": "Hàn Việt",
+      "map-pacific": "Map Pacific",
+      "sumitomo": "Sumitomo",
+      "ngan-anh": "Ngân Anh"
+    },
+    "kit": {
+      "skus": [
+        "HV-202015-25KG",
+        "MP-MATAXYL-100G",
+        "SM-DANITOLS-450ML",
+        "NA-TALAXYL-250G",
+        "NA-SULFOLAC-1L"
+      ],
+      "captions": {
+        "HV-202015-25KG": "NPK Hàn-Việt 20-20-15+TE bao 25kg: phức hợp một hạt một màu, bổ sung Bo, Kẽm, bón thúc cho cà phê, hồ tiêu, sầu riêng.",
+        "MP-MATAXYL-100G": "Mataxyl 500WP của Map Pacific: Metalaxyl 50%, tưới gốc phòng chết nhanh, thối rễ hồ tiêu, sầu riêng đầu mùa mưa.",
+        "SM-DANITOLS-450ML": "Danitol-S của Sumitomo: xông hơi mạnh, trị rệp sáp ẩn trong chùm quả cà phê, nhện gié.",
+        "NA-TALAXYL-250G": "Talaxyl 250WP của Ngân Anh: Metalaxyl lưu dẫn, phòng chết nhanh, chết chậm hồ tiêu, xì mủ cây ăn trái.",
+        "NA-SULFOLAC-1L": "OK Sulfolac 85SC: lưu huỳnh dạng sữa công nghệ Đức, trị phấn trắng, nhện đỏ, ít nóng lá non."
+      }
+    },
+    "perk_genuine": "Chính hãng nhà sản xuất",
+    "nav_off": [
+      "combo"
+    ]
+  },
+  "settings": {
+    "shop": {
+      "facebook": "",
+      "tiktok_shop": "",
+      "shopee_shop": "",
+      "address": "Tây Nguyên (cập nhật địa chỉ cửa hàng)",
+      "legal_name": "Nông Xanh Tây Nguyên"
+    },
+    "affiliate": {
+      "tiers": [
+        {
+          "id": 1,
+          "name": "Cộng tác viên",
+          "min_sales": 0,
+          "direct": 3,
+          "l1": 1,
+          "l2": 1
+        },
+        {
+          "id": 2,
+          "name": "Cộng tác viên Bạc",
+          "min_sales": 50000000,
+          "direct": 4,
+          "l1": 1,
+          "l2": 1
+        },
+        {
+          "id": 3,
+          "name": "Cộng tác viên Vàng",
+          "min_sales": 200000000,
+          "direct": 5,
+          "l1": 2,
+          "l2": 1
+        }
+      ],
+      "hold_days": 7,
+      "min_withdraw": 200000,
+      "payout_days": "5 và 20 hằng tháng",
+      "cookie_days": 30,
+      "buyer_discount_pct": 0,
+      "lifetime_binding": true,
+      "auto_approve": true
+    },
+    "shipping": {
+      "origin": {
+        "name": "Kho Nông Xanh Tây Nguyên",
+        "phone": "",
+        "street": "",
+        "city": "Đắk Lắk",
+        "district": "",
+        "ward": ""
+      }
+    }
+  }
+}
