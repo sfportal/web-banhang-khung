@@ -37,9 +37,9 @@
     "d1_id": "",
     "site_url": "",
     "thuchi_service": "sepay-thuchi",
-    "enabled": false,
+    "enabled": true,
     "cron": false,
-    "note": "Bản chạy thử. Giá lấy theo giá bán lẻ tham khảo trên thị trường tháng 11/2026, ảnh sản phẩm lấy từ nhà sản xuất và nhà bán lẻ. Chờ chủ cửa hàng xác nhận giá, địa chỉ, hotline, số đăng ký thuốc BVTV."
+    "note": "Bản chạy thử trên workers.dev. Giá theo giá bán lẻ tham khảo tháng 11/2026; địa chỉ, hotline, số đăng ký thuốc BVTV chờ chủ cửa hàng cung cấp. Tắt cron riêng vì tài khoản đã hết suất cron gói Free."
   },
   "content": {
     "home": {
