@@ -46,7 +46,7 @@
       "eyebrow": "Nông Xanh Tây Nguyên · Kỹ thuật thực chiến tại vườn",
       "title": "Đúng hàng, đúng bệnh, đúng giá cho vườn Tây Nguyên",
       "lead": "Phân bón và thuốc bảo vệ thực vật chính hãng Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh. Đội thạc sĩ, kỹ sư của Nông Xanh xem ảnh lá, ảnh rễ qua Zalo và chỉ đúng thuốc, đúng liều, miễn phí.",
-      "hero_image": "/assets/img/vuon/vuon-ky-su.webp",
+      "hero_image": "/assets/img/vuon/hero-trai.webp",
       "featured_skus": [
         "COMBO-CHETNHANH",
         "COMBO-XIMU-SAURIENG",
@@ -74,7 +74,7 @@
       "products_title": "Sản phẩm được tin dùng",
       "stats": [],
       "cta": "Chọn giải pháp cho vườn",
-      "hero_badge": "Kỹ thuật viên Nông Xanh tại vườn chanh dây",
+      "hero_badge": "Vườn chanh dây Nông Xanh mùa trái đầu",
       "pains_title": "Nhà vườn Tây Nguyên đang mất tiền ở đâu?",
       "pains": [
         {
@@ -148,11 +148,6 @@
           "img": "/assets/img/vuon/vuon-trai-dau.webp",
           "title": "Những trái đầu tiên",
           "text": "Sau 6 tháng canh tác, trái đầu tiên sai trĩu."
-        },
-        {
-          "img": "/assets/img/vuon/vuon-ky-su.webp",
-          "title": "Kỹ thuật tại vườn",
-          "text": "Đội kỹ thuật hướng dẫn chăm sóc ngay trên giàn."
         }
       ],
       "brands_title": "Thương hiệu chính hãng tại Nông Xanh",
@@ -179,7 +174,7 @@
         }
       ],
       "video": "",
-      "video_poster": "/assets/img/vuon/vuon-tham-vuon.webp",
+      "video_poster": "/assets/img/vuon/vuon-trai-dau.webp",
       "video_title": "Câu chuyện của những nhà vườn chọn Nông Xanh",
       "youtube": [
         {
@@ -233,13 +228,19 @@
         "text": "Bà con có gì thắc mắc cứ gọi hoặc nhắn Zalo, Nông Xanh hỗ trợ miễn phí. Rất vui được đồng hành để làm ra nông sản an toàn, chất lượng và năng suất cao."
       },
       "cta_title": "Vườn đang có vấn đề? Gửi ảnh cho Nông Xanh ngay",
-      "cta_text": "Chụp lá, trái, rễ, thân. Kỹ thuật viên trả lời trong giờ làm việc, không mua cũng tư vấn."
+      "cta_text": "Chụp lá, trái, rễ, thân. Kỹ thuật viên trả lời trong giờ làm việc, không mua cũng tư vấn.",
+      "hero_packs": [
+        "HV-202015-25KG",
+        "MP-MATAXYL-100G",
+        "NX-VISINH-TRAUVANG"
+      ],
+      "title_hl": 6
     },
     "story": {
       "title": "Tốt từ tâm, nâng tầm nông sản Việt",
       "eyebrow": "Về Nông Xanh Tây Nguyên",
       "lead": "Nông Xanh Tây Nguyên là đội ngũ thạc sĩ, kỹ sư nông nghiệp giàu kinh nghiệm thực chiến. Chúng mình có mặt để bà con mua được vật tư thật, dùng đúng cách, và có người đứng cạnh mình ngoài vườn khi cây gặp chuyện.",
-      "image": "/assets/img/vuon/vuon-tham-vuon.webp",
+      "image": "/assets/img/vuon/vuon-trai-dau.webp",
       "quote": "Nông nghiệp khó, nhưng không phải là không làm được. Làm từ tâm thì vườn sẽ trả lại.",
       "chapters": [
         {
@@ -249,13 +250,13 @@
           "text": "Nông Xanh bắt đầu bằng chính vườn chanh dây của mình: chọn giống, làm đất, ủ vi sinh. Mỗi quy trình phân, thuốc đều được thử ở đây trước khi chia sẻ cho bà con."
         },
         {
-          "img": "/assets/img/vuon/vuon-trai-dau.webp",
+          "img": "/assets/img/vuon/hero-trai.webp",
           "tag": "Thực chiến",
           "title": "Sau 6 tháng, trái đầu tiên",
           "text": "Những chùm trái đầu tiên sai trĩu là lời giải thích rõ nhất cho cách làm của chúng mình: đất khỏe, rễ khỏe, dùng thuốc đúng lúc, đúng liều."
         },
         {
-          "img": "/assets/img/vuon/vuon-ky-su.webp",
+          "img": "/assets/img/vuon/vuon-tham-vuon.webp",
           "tag": "Đồng hành",
           "title": "Xuống vườn cùng bà con",
           "text": "Đội kỹ thuật đi từng vườn cà phê, tiêu, sầu riêng, chanh dây. Bà con chỉ cần gửi ảnh qua Zalo hoặc gọi điện, Nông Xanh hỗ trợ miễn phí, không mua hàng vẫn tư vấn."

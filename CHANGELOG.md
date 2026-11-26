@@ -3,6 +3,9 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.5.1 – 27/11/2026
+- Nông Xanh Tây Nguyên: đổi ảnh đầu trang thành ảnh vườn chanh dây ghép 3 sản phẩm nổi bật, tiêu đề nhấn màu, sắp lại các thẻ nổi cho máy tính và điện thoại; bỏ ảnh cận mặt khỏi trang chủ và trang Về chúng tôi.
+
 ## 0.5.0 – 27/11/2026
 - Khung: thêm `content.nav_labels` để đổi tên mục menu theo từng khách (ví dụ "Câu chuyện" thành "Về chúng tôi").
 - Nông Xanh Tây Nguyên: trang chủ, danh mục, trang Về chúng tôi riêng (thư mục `overrides`); lọc sản phẩm theo thương hiệu, công dụng, cây trồng; 6 combo theo bệnh, theo mùa; thêm sản phẩm và ảnh vườn thật từ nongxanh.net; hotline, Zalo kỹ thuật; giao hàng, thanh toán như DaLa (miễn phí giao từ 300.000đ). Migration `1001_nx_noi_dung_dot2.sql` cập nhật D1 đang chạy.
