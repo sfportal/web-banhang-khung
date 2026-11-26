@@ -24,6 +24,7 @@ const phone = E.phone || shop.hotline || '';
 const zalo = E.zalo || (shop.zalo ? `https://zalo.me/${shop.zalo}` : '');
 const site = env.SITE_URL || Astro.url.origin;
 const faqLd = FAQS.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQS.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : [];
+const heroPacks = (H.hero_packs || []).map((k) => P[k]).filter(Boolean).slice(0, 3);
 const words = String(H.title || BRAND).split(/\s+/);
 const tel = (x) => String(x).replace(/\D/g, '');
 const fmtPhone = (x) => tel(x).replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
@@ -33,7 +34,7 @@ const fmtPhone = (x) => tel(x).replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
     <div class="container">
       <div class="nx-hero-text">
         {H.eyebrow && <div class="eyebrow fade-up" style="animation-delay:.1s">{H.eyebrow}</div>}
-        <h1>{words.map((w, i) => <Fragment><span class="split-word"><span style={`animation-delay:${0.15 + i * 0.06}s`}>{w}</span></span>{' '}</Fragment>)}</h1>
+        <h1>{words.map((w, i) => <Fragment><span class:list={['split-word', { hlw: i < (H.title_hl || 0) }]}><span style={`animation-delay:${0.15 + i * 0.06}s`}>{w}</span></span>{' '}</Fragment>)}</h1>
         {H.lead && <p class="lead fade-up" style="animation-delay:.7s">{H.lead}</p>}
         <div class="ctas fade-up" style="animation-delay:.85s">
           <a href="#giai-phap" class="btn sun">{H.cta || 'Xem giải pháp'} <span class="shine"></span></a>
@@ -48,6 +49,8 @@ const fmtPhone = (x) => tel(x).replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
       <div class="nx-hero-media fade-up" style="animation-delay:.3s">
         <div class="nx-hero-photo">
           <img src={H.hero_image} alt={H.hero_badge || BRAND} fetchpriority="high" />
+          {heroPacks.length > 0 && <div class="nx-packs">{heroPacks.map((p, i) => <a href={`/san-pham/${p.slug}`} class={`nx-pack k${i}`}><img src={(p.image || '').replace('.webp', '-sm.webp')} alt={p.name} /><span>{p.name}</span></a>)}</div>}
+          {H.hero_badge && <div class="nx-hero-cap">{H.hero_badge}</div>}
           {H.video && <a href="#tvc" class="nx-play" aria-label="Xem phim"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Xem phim 60 giây</a>}
         </div>
         {phone && <a class="nx-float f1" href={`tel:${tel(phone)}`}><b>🩺 Kỹ thuật miễn phí</b><small>{E.name} · {fmtPhone(phone)}</small></a>}
