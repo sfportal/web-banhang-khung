@@ -554,7 +554,7 @@
     const rows = await api('/tickets');
     $('#topR').innerHTML = '<button class="btn sm" id="newT">+ Ghi nhận yêu cầu</button>';
     const ST = { open: ['Mới', 'b-sun'], processing: ['Đang xử lý', 'b-blue'], resolved: ['Đã xong', 'b-green'] };
-    const TP = { 'tu-van': 'Tư vấn', 'khieu-nai': 'Khiếu nại', 'doi-tra': 'Đổi trả', b2b: 'B2B/đại lý', ctv: 'CTV', khac: 'Khác' };
+    const TP = { 'tu-van': 'Tư vấn', 'bao-gia': 'Báo giá', 'khieu-nai': 'Khiếu nại', 'doi-tra': 'Đổi trả', b2b: 'B2B/đại lý', ctv: 'CTV', khac: 'Khác' };
     el.innerHTML = `<div class="card">${table([
       { h: 'Lúc', f: (t) => dt(t.created_at) }, { h: 'Chủ đề', f: (t) => `<span class="badge ${t.topic === 'khieu-nai' ? 'b-red' : 'b-gray'}">${esc(TP[t.topic] || t.topic)}</span>${t.priority === 'high' ? ' <span class="badge b-red">Gấp</span>' : ''}` },
       { h: 'Khách', f: (t) => `${esc(t.name || '')}<div class="small">${esc(t.phone || '')} ${t.order_code ? '· ' + esc(t.order_code) : ''}</div>` },

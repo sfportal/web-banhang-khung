@@ -14,6 +14,8 @@ if (!p) return Astro.redirect('/san-pham', 302);
 const site = (env.SITE_URL || Astro.url.origin).replace(/\/$/, '');
 const vnd = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
 const full = p.line === 'qua';
+const contact = !(p.effective_price > 0);
+const contactUrl = `/lien-he?chu-de=bao-gia&sp=${encodeURIComponent(`${p.name} ${p.subtitle || ''}`.trim())}`;
 const lot = await first(env, 'SELECT code FROM lots WHERE product_id=? ORDER BY id DESC LIMIT 1', p.id);
 const inCombos = cat.products.filter((x) => x.components?.some((c) => c.sku === p.sku));
 const related = cat.products.filter((x) => x.id !== p.id && (x.line === p.line || x.personas?.some((y) => p.personas?.includes(y)))).slice(0, 4);
@@ -22,9 +24,9 @@ const imgs = [p.image, p.image_bg && p.image_bg !== p.image ? p.image_bg : null]
 const ld = {
   '@context': 'https://schema.org', '@type': 'Product', name: `${p.name} ${p.subtitle || ''}`.trim(), sku: p.sku, image: imgs.map((i) => site + i), description: p.short_desc,
   brand: { '@type': 'Brand', name: BRAND }, category: LINE_LABEL[p.line],
-  offers: { '@type': 'Offer', url: `${site}/san-pham/${p.slug}`, priceCurrency: 'VND', price: p.effective_price, availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+  ...(contact ? {} : { offers: { '@type': 'Offer', url: `${site}/san-pham/${p.slug}`, priceCurrency: 'VND', price: p.effective_price, availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     itemCondition: 'https://schema.org/NewCondition', ...(p.flash ? { priceValidUntil: p.flash.ends_at.slice(0, 10) } : {}),
-    shippingDetails: { '@type': 'OfferShippingDetails', shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'VN' } } },
+    shippingDetails: { '@type': 'OfferShippingDetails', shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'VN' } } } }),
 };
 const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: site + '/' }, { '@type': 'ListItem', position: 2, name: 'Sản phẩm', item: site + '/san-pham' },
@@ -51,14 +53,20 @@ const maxQty = Math.max(1, Math.min(p.stock, 20));
           </div>
         )}
         <div class="price-box">
-          <span class:list={['price', { red: !!p.flash }]}>{vnd(p.effective_price)}</span>
+          {contact ? <span class="price">{CONTENT.price_contact_label || 'Liên hệ'}</span> : <span class:list={['price', { red: !!p.flash }]}>{vnd(p.effective_price)}</span>}
           {p.ref_price && <s class="muted" style="font-size:1.1rem">{vnd(p.ref_price)}</s>}
           {p.save_pct > 0 && <span class="badge red">−{p.save_pct}%</span>}
         </div>
         {p.kind === 'addon' && <div class="note-box">Khoai lang sấy dẻo là món <b>bán kèm</b>: thêm vào cùng bất kỳ sản phẩm nào khác, hoặc chọn <a href="/san-pham/combo-khoe-moi-ngay">Combo khỏe mỗi ngày</a>.</div>}
         {p.kind === 'b2b' && <div class="note-box">Chủ quán trà, cà phê: giá sỉ {vnd(p.wholesale_price || 115000)}/chai từ 1 thùng. <a href="/lien-he?chu-de=b2b">Gửi yêu cầu báo giá</a> hoặc đăng ký làm đại lý.</div>}
+        {contact && <div class="note-box">{CONTENT.price_contact_note || 'Giá sản phẩm này thay đổi theo đợt hàng. Để lại số điện thoại, cửa hàng gọi báo giá.'}</div>}
         <div class="actions" data-buy-anchor>
-          {p.stock > 0 ? (
+          {contact ? (
+            <Fragment>
+              <a class="btn sun" href={contactUrl}>Nhận báo giá <span class="shine"></span></a>
+              {s.shop?.hotline && <a class="btn ghost" href={`tel:${s.shop.hotline}`}>Gọi {s.shop.hotline}</a>}
+            </Fragment>
+          ) : p.stock > 0 ? (
             <Fragment>
               <div class="qty"><button type="button" data-step="-1" aria-label="Giảm">−</button><span id="pq">1</span><button type="button" data-step="1" aria-label="Tăng">+</button></div>
               <button class="btn" data-add={p.sku} data-qty-from="#pq" data-pid={p.id} data-img={full ? p.image : p.image.replace('.webp', '-sm.webp')}>Thêm vào giỏ</button>
@@ -74,10 +82,10 @@ const maxQty = Math.max(1, Math.min(p.stock, 20));
         {(p.tiktok_url || p.shopee_url) && <div class="channels">Cũng có trên: {p.tiktok_url && <a href={p.tiktok_url} target="_blank" rel="noopener" data-channel="tiktok">TikTok Shop</a>}{p.shopee_url && <a href={p.shopee_url} target="_blank" rel="noopener" data-channel="shopee">Shopee</a>}</div>}
 
         <div class="tabs" role="tablist">
-          <button class="on" data-tab="story">Câu chuyện</button>
+          <button class="on" data-tab="story">{CONTENT.pdp_story_tab || 'Câu chuyện'}</button>
           {p.components && <button data-tab="combo">Trong combo có gì</button>}
           <button data-tab="use">Cách dùng</button>
-          <button data-tab="ing">Thành phần & truy xuất</button>
+          <button data-tab="ing">{CONTENT.pdp_ing_tab || 'Thành phần & truy xuất'}</button>
           <button data-tab="ship">Giao hàng</button>
         </div>
         <div class="tab-pane on" data-pane="story">
@@ -94,8 +102,8 @@ const maxQty = Math.max(1, Math.min(p.stock, 20));
         <div class="tab-pane" data-pane="ing">
           <p><b>Thành phần:</b> {p.ingredients}</p>
           <p><b>Quy cách:</b> {p.weight}</p>
-          <p>Mỗi gói có mã QR lô hàng ở mặt trước. {lot && <Fragment>Xem thử lô gần nhất: <a href={`/lo/${lot.code}`}>{lot.code}</a>.</Fragment>}</p>
-          <p class="muted" style="font-size:.88rem">Sản phẩm là thực phẩm, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
+          {(FEATURES.lot_qr || lot) && <p>Mỗi gói có mã QR lô hàng ở mặt trước. {lot && <Fragment>Xem thử lô gần nhất: <a href={`/lo/${lot.code}`}>{lot.code}</a>.</Fragment>}</p>}
+          <p class="muted" style="font-size:.88rem">{CONTENT.pdp_note ?? 'Sản phẩm là thực phẩm, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh.'}</p>
         </div>
         <div class="tab-pane" data-pane="ship">
           <p>Phí giao hàng tính tự động theo địa chỉ, khối lượng (~{(p.weight_g / 1000).toLocaleString('vi-VN')}kg) và kích thước kiện ({p.length_cm}×{p.width_cm}×{p.height_cm}cm) qua các hãng vận chuyển trên Goship.{p.fragile ? ` Sản phẩm thuộc nhóm hàng dễ vỡ: ${BRAND} đóng gói chống sốc và ghi chú cho hãng vận chuyển.` : ''}</p>
@@ -118,7 +126,13 @@ const maxQty = Math.max(1, Math.min(p.stock, 20));
       </section>
     )}
   </div>
-  {p.stock > 0 && (
+  {contact && (
+    <div class="mobile-buy">
+      <div style="flex:1"><div style="font-size:.8rem" class="muted">{p.name}</div><div class="price" style="font-size:1.15rem">{CONTENT.price_contact_label || 'Liên hệ'}</div></div>
+      <a class="btn sm sun" href={contactUrl}>Nhận báo giá</a>
+    </div>
+  )}
+  {!contact && p.stock > 0 && (
     <div class="mobile-buy">
       <div style="flex:1"><div style="font-size:.8rem" class="muted">{p.name}</div><div class:list={['price', { red: !!p.flash }]} style="font-size:1.15rem">{vnd(p.effective_price)}</div></div>
       <button class="btn sm" data-add={p.sku} data-qty-from="#pq" data-pid={p.id} data-img={full ? p.image : p.image.replace('.webp', '-sm.webp')}>Thêm giỏ</button>

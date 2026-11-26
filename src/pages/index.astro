@@ -49,7 +49,7 @@ const words = String(H.title || CLIENT.brand?.tagline || BRAND).split(/\s+/);
         {H.hero_image
           ? <div class="pack p1" data-depth="18"><img src={H.hero_image} alt={BRAND} fetchpriority="high" /></div>
           : heroPacks.map((p, i) => <div class={`pack p${i + 1}`} data-depth={[18, 30, 22][i]}><img src={p.image} alt={`${p.name} ${p.subtitle || ''}`} fetchpriority={i < 2 ? 'high' : 'auto'} /></div>)}
-        {heroPacks[1] && <div class="price-tag">{heroPacks[1].name}<b>{vnd(heroPacks[1].effective_price)}</b></div>}
+        {heroPacks[1]?.effective_price > 0 && <div class="price-tag">{heroPacks[1].name}<b>{vnd(heroPacks[1].effective_price)}</b></div>}
       </div>
     </div>
   </section>

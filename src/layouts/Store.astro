@@ -24,7 +24,8 @@ const org = { '@context': 'https://schema.org', '@type': 'Organization', name: s
 const jsonld = [org, ...(p.jsonld || [])];
 const free = s.shipping?.free_threshold || 0;
 const navAll = [['/san-pham', 'Sản phẩm', 'products'], ['/san-pham?loai=combo', 'Combo & quà', 'combo'], ['/flash-sale', 'Flash Sale', 'flash'], ['/cau-chuyen', 'Câu chuyện', 'story'], ['/truy-xuat', 'Quét QR', 'qr'], ['/ctv', 'Cộng tác viên', 'ctv']];
-const off = { flash: !FEATURES.flash_sale, qr: !FEATURES.lot_qr, ctv: !FEATURES.affiliate };
+// CONTENT.nav_off: ẩn mục menu theo khoá, ví dụ ["combo"] khi khách không bán combo
+const off = { flash: !FEATURES.flash_sale, qr: !FEATURES.lot_qr, ctv: !FEATURES.affiliate, ...Object.fromEntries((CONTENT.nav_off || []).map((k) => [k, true])) };
 const nav = navAll.filter(([, , k]) => !off[k]);
 const topbar = CONTENT.topbar || [];
 const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, flash_ends: flash.sale?.ends_at || null, cookie_days: s.affiliate?.cookie_days || 30, ga4: seo.ga4 || null, lot_qr: FEATURES.lot_qr !== false };
@@ -107,7 +108,7 @@ const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, fla
         </div>
         <div>
           <h4>Mua sắm</h4>
-          <a href="/san-pham">Tất cả sản phẩm</a><a href="/san-pham?loai=combo">Combo & hộp quà</a>{FEATURES.flash_sale && <a href="/flash-sale">Flash Sale</a>}{FEATURES.lot_qr && <a href="/truy-xuat">Tra cứu mã lô QR</a>}
+          <a href="/san-pham">Tất cả sản phẩm</a>{!off.combo && <a href="/san-pham?loai=combo">Combo & hộp quà</a>}{FEATURES.flash_sale && <a href="/flash-sale">Flash Sale</a>}{FEATURES.lot_qr && <a href="/truy-xuat">Tra cứu mã lô QR</a>}
         </div>
         <div>
           <h4>Về {BRAND}</h4>
