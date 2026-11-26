@@ -3,6 +3,9 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.4.1 – 26/11/2026
+- Bật deploy cho khách Nông Xanh Tây Nguyên (bản chạy thử trên workers.dev).
+
 ## 0.4.0 – 26/11/2026
 - Thêm khách Nông Xanh Tây Nguyên (vật tư nông nghiệp): 39 sản phẩm phân bón, thuốc BVTV của Hàn Việt, Map Pacific, Sumitomo, Ngân Anh. Chưa bật deploy, chờ chủ cửa hàng duyệt.
 - Giá "Liên hệ": sản phẩm có `price = 0` trong `products.csv` hiện nhãn Liên hệ thay cho giá, có nút "Nhận báo giá" sang trang Liên hệ (điền sẵn tên sản phẩm), không thêm vào giỏ được, server chặn đặt online. Chủ đề liên hệ mới "Báo giá sản phẩm".
