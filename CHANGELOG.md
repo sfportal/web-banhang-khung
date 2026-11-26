@@ -3,6 +3,10 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.5.3 – 27/11/2026
+- Khung: thêm `content.ctv_cta` để đổi chữ nút cộng tác viên trên thanh menu.
+- Nông Xanh Tây Nguyên: đầu trang mới ảnh vườn cà phê tràn viền, kệ sản phẩm tiêu biểu, nút xem phim, dải số liệu; ảnh vườn thật (Pexels, dùng thương mại miễn phí) cho 5 nhóm cây trồng và trang Về chúng tôi; ảnh bìa phim mới; thương hiệu có ảnh sản phẩm; sản phẩm, giải pháp 2 cột trên điện thoại; dải cộng tác viên sáng màu; tiêu đề không còn chữ mồ côi; bỏ dòng chờ địa chỉ ở chân trang (migration `1002_nx_dia_chi.sql`).
+
 ## 0.5.2 – 27/11/2026
 - Nông Xanh Tây Nguyên: gắn phim TVC 16:9 (khoảng 50 giây, giọng đọc, phụ đề) lên trang chủ, kèm ảnh bìa phim; nút "Xem phim" ở đầu trang dẫn tới phim.
 
