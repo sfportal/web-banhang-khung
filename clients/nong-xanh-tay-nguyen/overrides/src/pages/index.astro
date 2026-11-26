@@ -1,0 +1,274 @@
+---
+// Trang chủ riêng Nông Xanh Tây Nguyên: nội dung trong clients/nong-xanh-tay-nguyen/client.json (content.home, content.personas)
+import { env } from 'cloudflare:workers';
+import Store from '../layouts/Store.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { loadCatalog } from '../lib/catalog.js';
+import { getSettings } from '../lib/db.js';
+import { PERSONAS, FAQS } from '../lib/content.js';
+import { BRAND, CONTENT, FEATURES } from '../client.js';
+
+const [cat, s] = await Promise.all([loadCatalog(env), getSettings(env)]);
+const H = CONTENT.home || {};
+const P = Object.fromEntries(cat.products.map((p) => [p.sku, p]));
+const vnd = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+const combos = cat.products.filter((p) => p.kind === 'combo');
+const featured = (H.featured_skus || []).map((k) => P[k]).filter((p) => p && p.kind !== 'combo').slice(0, 8);
+const cropProducts = Object.fromEntries(PERSONAS.map((x) => [x.id, cat.products.filter((p) => p.kind !== 'combo' && p.personas?.includes(x.id)).slice(0, 4)]));
+const cropCombo = Object.fromEntries(PERSONAS.map((x) => [x.id, combos.find((p) => p.personas?.includes(x.id))]));
+const brandCount = (line) => cat.products.filter((p) => p.line === line).length;
+const tiers = s.affiliate?.tiers || [];
+const shop = s.shop || {};
+const E = H.expert || {};
+const phone = E.phone || shop.hotline || '';
+const zalo = E.zalo || (shop.zalo ? `https://zalo.me/${shop.zalo}` : '');
+const site = env.SITE_URL || Astro.url.origin;
+const faqLd = FAQS.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQS.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : [];
+const words = String(H.title || BRAND).split(/\s+/);
+const tel = (x) => String(x).replace(/\D/g, '');
+const fmtPhone = (x) => tel(x).replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
+---
+<Store active="home" settings={s} jsonld={[...faqLd, { '@context': 'https://schema.org', '@type': 'WebSite', name: BRAND, url: site }]}>
+  <section class="nx-hero">
+    <div class="container">
+      <div class="nx-hero-text">
+        {H.eyebrow && <div class="eyebrow fade-up" style="animation-delay:.1s">{H.eyebrow}</div>}
+        <h1>{words.map((w, i) => <Fragment><span class="split-word"><span style={`animation-delay:${0.15 + i * 0.06}s`}>{w}</span></span>{' '}</Fragment>)}</h1>
+        {H.lead && <p class="lead fade-up" style="animation-delay:.7s">{H.lead}</p>}
+        <div class="ctas fade-up" style="animation-delay:.85s">
+          <a href="#giai-phap" class="btn sun">{H.cta || 'Xem giải pháp'} <span class="shine"></span></a>
+          {zalo && <a href={zalo} target="_blank" rel="noopener" class="btn ghost nx-zalo">Gửi ảnh vườn qua Zalo</a>}
+        </div>
+        {(H.trust || []).length > 0 && (
+          <div class="trust fade-up" style="animation-delay:1s">
+            {H.trust.map((t) => <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>{t}</span>)}
+          </div>
+        )}
+      </div>
+      <div class="nx-hero-media fade-up" style="animation-delay:.3s">
+        <div class="nx-hero-photo">
+          <img src={H.hero_image} alt={H.hero_badge || BRAND} fetchpriority="high" />
+          {H.video && <a href="#tvc" class="nx-play" aria-label="Xem phim"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Xem phim 60 giây</a>}
+        </div>
+        {phone && <a class="nx-float f1" href={`tel:${tel(phone)}`}><b>🩺 Kỹ thuật miễn phí</b><small>{E.name} · {fmtPhone(phone)}</small></a>}
+        <div class="nx-float f2"><b>4 thương hiệu</b><small>chính hãng, giá niêm yết</small></div>
+        {combos.length > 0 && <a class="nx-float f3" href="/san-pham?loai=combo"><b>{combos.length} combo</b><small>theo bệnh, theo mùa</small></a>}
+      </div>
+    </div>
+  </section>
+
+  {(H.promise || []).length > 0 && (
+    <div class="promise" aria-hidden="true"><div class="track">{[0, 1].map(() => H.promise.map((t) => <span>{t}</span>))}</div></div>
+  )}
+
+  {(H.pains || []).length > 0 && (
+    <section class="section nx-pains">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Chuyện thật ngoài vườn</div><h2>{H.pains_title}</h2></div>
+        <div class="nx-pain-grid">
+          {H.pains.map((x, i) => <div class="nx-pain" data-reveal style={`--d:${i * 0.08}s`}><span class="ico">{x.ico}</span><h3>{x.title}</h3><p>{x.text}</p></div>)}
+        </div>
+        <div class="nx-center" style="margin-top:28px" data-reveal><a href="#giai-phap" class="btn white">Nông Xanh giải quyết thế nào? ↓</a></div>
+      </div>
+    </section>
+  )}
+
+  {PERSONAS.length > 0 && (
+    <section class="section" id="giai-phap">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">Giải pháp theo cây trồng</div><h2>Vườn của bạn trồng gì?</h2></div>
+          <p class="lead" style="max-width:44ch">Chọn cây, xem lịch chăm theo mùa, vấn đề hay gặp và bộ sản phẩm Nông Xanh gợi ý.</p>
+        </div>
+        <div class="nx-crop-tabs" role="tablist" data-reveal>
+          {PERSONAS.map((x, i) => <button class:list={['nx-crop-btn', { on: i === 0 }]} role="tab" data-crop={x.id}><span>{x.ico}</span>{x.label}</button>)}
+        </div>
+        {PERSONAS.map((x, i) => (
+          <div class="nx-crop" data-crop-view={x.id} hidden={i !== 0}>
+            <div class="nx-crop-card">
+              <div class:list={['nx-crop-img', { noimg: !x.img }]} style={x.img ? `background-image:url(${x.img})` : ''} data-ico={x.ico}>
+                <div class="nx-crop-quote"><small>{x.who}</small>“{x.quote}”</div>
+              </div>
+              <div class="nx-crop-body">
+                <h3>Bà con {x.label.toLowerCase()} cần</h3>
+                <ul class="nx-ticks">{(x.needs || []).map((n) => <li>{n}</li>)}</ul>
+                {(x.stage || []).length > 0 && <Fragment><h3 style="margin-top:18px">Lịch chăm theo mùa</h3><ol class="nx-stage">{x.stage.map((t) => <li>{t}</li>)}</ol></Fragment>}
+                <div class="nx-crop-cta">
+                  <a class="btn sm" href={`/san-pham?loai=cay-${x.id}`}>Tất cả sản phẩm cho {x.label.toLowerCase()}</a>
+                  {cropCombo[x.id] && <a class="btn sm ghost" href={`/san-pham/${cropCombo[x.id].slug}`}>{cropCombo[x.id].name}</a>}
+                </div>
+              </div>
+            </div>
+            <div class="grid nx-crop-grid">{cropProducts[x.id].map((p, j) => <ProductCard p={p} delay={j * 0.05} />)}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {H.video && (
+    <section class="section nx-tvc" id="tvc">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Phim ngắn</div><h2>{H.video_title}</h2></div>
+        <div class="nx-video" data-reveal="zoom"><video src={H.video} poster={H.video_poster} controls playsinline preload="none"></video></div>
+      </div>
+    </section>
+  )}
+
+  {combos.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">Combo theo bệnh, theo mùa</div><h2>Mua theo bộ, đúng bệnh, lợi hơn</h2></div>
+          <a href="/san-pham?loai=combo" class="btn ghost sm">Xem tất cả combo</a>
+        </div>
+        <div class="combo-grid">
+          {combos.map((p, i) => (
+            <a href={`/san-pham/${p.slug}`} class="combo-card" data-reveal style={`--d:${i * 0.06}s;text-decoration:none`}>
+              <div class="media">
+                {p.save_pct > 0 && <span class="badge red" style="position:absolute;top:14px;left:14px;z-index:1">Tiết kiệm {vnd((p.ref_price || 0) - p.effective_price)}</span>}
+                <img src={p.image} alt={p.name} loading="lazy" />
+              </div>
+              <div class="body">
+                <small class="nx-combo-sub">{p.subtitle}</small>
+                <h3>{p.name}</h3>
+                <ul class="items">{(p.components || []).map((c) => <li>{c.qty > 1 ? `${c.qty} × ` : ''}{c.name}</li>)}</ul>
+                <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+                  <div class="price">{vnd(p.effective_price)}{p.ref_price && <s>{vnd(p.ref_price)}</s>}</div>
+                  <button class="add" data-add={p.sku} data-img={(p.image || '').replace('.webp', '-sm.webp')} aria-label={`Thêm ${p.name}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(H.solutions || []).length > 0 && (
+    <section class="section nx-solutions">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Không chỉ bán vật tư</div><h2>{H.solutions_title}</h2></div>
+        <div class="nx-sol-grid">
+          {H.solutions.map((x, i) => <div class="nx-sol" data-reveal style={`--d:${i * 0.06}s`}><span class="ico">{x.ico}</span><h3>{x.title}</h3><p>{x.text}</p></div>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(H.garden || []).length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">Ảnh thật, vườn thật</div><h2>{H.garden_title}</h2></div>
+          {H.garden_lead && <p class="lead" style="max-width:46ch">{H.garden_lead}</p>}
+        </div>
+        <div class="nx-garden">
+          {H.garden.map((g, i) => <figure data-reveal="zoom" style={`--d:${i * 0.08}s`}><img src={g.img} alt={g.title} loading="lazy" /><figcaption><b>{g.title}</b><span>{g.text}</span></figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" id="san-pham" style="padding-top:0">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div><div class="eyebrow">{H.products_eyebrow || 'Sản phẩm'}</div><h2>{H.products_title || 'Sản phẩm nổi bật'}</h2></div>
+        <a href="/san-pham" class="btn ghost sm">Xem tất cả</a>
+      </div>
+      <div class="grid">{featured.map((p, i) => <ProductCard p={p} delay={i * 0.05} />)}</div>
+    </div>
+  </section>
+
+  {(H.brands || []).length > 0 && (
+    <section class="section nx-brands">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Đối tác thương hiệu</div><h2>{H.brands_title}</h2></div>
+        <div class="nx-brand-grid">
+          {H.brands.map((b, i) => <a class="nx-brand" href={`/san-pham?loai=th-${b.line}`} data-reveal style={`--d:${i * 0.06}s`}><b>{b.name}</b><span>{b.sub}</span><small>{brandCount(b.line)} sản phẩm →</small></a>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(H.testimonials || []).length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Nhà vườn nói gì</div><h2>Cảm nhận của bà con</h2></div>
+        <div class="nx-testi-grid">
+          {H.testimonials.map((t, i) => <figure class="nx-testi" data-reveal style={`--d:${i * 0.06}s`}>{t.img && <img src={t.img} alt={t.name} loading="lazy" />}<blockquote>“{t.text}”</blockquote><figcaption><b>{t.name}</b><span>{t.place}</span></figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {E.name && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="nx-expert" data-reveal>
+          <div>
+            <div class="eyebrow" style="color:#b9d97a">Gặp kỹ thuật viên</div>
+            <h2>{H.cta_title}</h2>
+            <p>{H.cta_text}</p>
+            <div class="nx-expert-who"><b>{E.name}</b><span>{E.role}</span></div>
+            <p class="nx-expert-quote">“{E.text}”</p>
+          </div>
+          <div class="nx-expert-cta">
+            {phone && <a class="btn white" href={`tel:${tel(phone)}`}>📞 Gọi {fmtPhone(phone)}</a>}
+            {zalo && <a class="btn sun" href={zalo} target="_blank" rel="noopener">💬 Nhắn Zalo gửi ảnh <span class="shine"></span></a>}
+            <a class="btn ghost" style="color:#fff" href="/lien-he?chu-de=tu-van">Để lại lời nhắn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {FEATURES.affiliate && tiers.length > 0 && (
+    <section class="section" style="padding-top:0" id="thu-nhap">
+      <div class="container">
+        <div class="ctv-band" data-reveal>
+          <div class="eyebrow">Kiếm thêm thu nhập · Cộng tác viên</div>
+          <h2 style="max-width:22ch">Giới thiệu hàng thật cho bà con, nhận hoa hồng mỗi đơn</h2>
+          <p style="max-width:60ch;font-size:1.1rem">Bạn là đại lý nhỏ, kỹ thuật viên, trưởng thôn hay chỉ là người hay được hàng xóm hỏi “xài thuốc gì”? Đăng ký miễn phí, nhận link và mã riêng. Mỗi đơn qua link của bạn đều có hoa hồng, cộng thêm hoa hồng từ người bạn giới thiệu.</p>
+          <div class="tiers">
+            {tiers.map((t) => <div class="tier"><small>{t.name}</small><b>{t.direct}%</b><div>Gián tiếp 1: <b style="display:inline;font-size:1rem">{t.l1}%</b> · Gián tiếp 2: <b style="display:inline;font-size:1rem">{t.l2}%</b></div><small>{t.min_sales ? `Doanh số từ ${(t.min_sales / 1e6).toLocaleString('vi-VN')} triệu/tháng` : 'Ngay khi đăng ký'}</small></div>)}
+          </div>
+          <div class="nx-earn">Ví dụ: giới thiệu 10 vườn, mỗi vườn mua bao phân 820.000đ mỗi tháng → hoa hồng trực tiếp {vnd(820000 * 10 * (tiers[0]?.direct || 3) / 100)}/tháng, chưa tính hoa hồng gián tiếp.</div>
+          <div style="margin-top:24px;position:relative;z-index:1"><a href="/ctv" class="btn">Đăng ký cộng tác viên miễn phí <span class="shine"></span></a></div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(H.youtube || []).length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-head" data-reveal><div><div class="eyebrow">Video hướng dẫn</div><h2>Xem kỹ thuật ngay tại vườn</h2></div><a class="btn ghost sm" href="https://www.youtube.com/@Chanhdayantoan" target="_blank" rel="noopener">Kênh YouTube Nông Xanh</a></div>
+        <div class="nx-yt-grid">
+          {H.youtube.map((v) => <a class="nx-yt" href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener" data-reveal><img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt={v.title} loading="lazy" /><span class="nx-yt-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><b>{v.title}</b></a>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(H.knowledge || []).length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-head" data-reveal><div><div class="eyebrow">Kiến thức canh tác</div><h2>{H.knowledge_title}</h2></div></div>
+        <div class="nx-kb-grid">
+          {H.knowledge.map((k, i) => <a class="nx-kb" href={k.url} target="_blank" rel="noopener" data-reveal style={`--d:${i * 0.05}s`}><img src={k.img} alt={k.title} loading="lazy" /><b>{k.title}</b><small>Đọc bài →</small></a>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {FAQS.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:30px" data-reveal><div class="eyebrow">Hỏi nhanh, đáp gọn</div><h2>Câu hỏi thường gặp</h2></div>
+        <div class="faq">{FAQS.map(([q, a], i) => <details data-reveal style={`--d:${i * 0.04}s`} open={i === 0}><summary>{q}</summary><p>{a}</p></details>)}</div>
+      </div>
+    </section>
+  )}
+  <script is:inline slot="scripts" set:html={`document.querySelectorAll('[data-crop]').forEach(function(b){b.onclick=function(){document.querySelectorAll('[data-crop]').forEach(function(x){x.classList.toggle('on',x===b)});document.querySelectorAll('[data-crop-view]').forEach(function(v){var on=v.dataset.cropView===b.dataset.crop;v.hidden=!on;if(on)v.querySelectorAll('.card,[data-reveal]').forEach(function(c){c.classList.add('in')})})}});`}></script>
+</Store>

@@ -4,7 +4,7 @@
   "brand": {
     "name": "Nông Xanh Tây Nguyên",
     "legal_name": "Nông Xanh Tây Nguyên",
-    "tagline": "Vật tư nông nghiệp chính hãng cho nhà vườn Tây Nguyên",
+    "tagline": "Tốt từ tâm, nâng tầm nông sản Việt",
     "logo": "/assets/img/logo.png",
     "logo_light": "/assets/img/logo-light.png",
     "favicon": "/assets/img/favicon.png",
@@ -39,78 +39,287 @@
     "thuchi_service": "sepay-thuchi",
     "enabled": true,
     "cron": false,
-    "note": "Bản chạy thử trên workers.dev. Giá theo giá bán lẻ tham khảo tháng 11/2026; địa chỉ, hotline, số đăng ký thuốc BVTV chờ chủ cửa hàng cung cấp. Tắt cron riêng vì tài khoản đã hết suất cron gói Free."
+    "note": "Bản chạy thử trên workers.dev. Giá theo giá bán lẻ tham khảo tháng 11/2026; địa chỉ, số đăng ký thuốc BVTV chờ chủ cửa hàng cung cấp. Tắt cron riêng vì tài khoản đã hết suất cron gói Free."
   },
   "content": {
     "home": {
-      "eyebrow": "Nông Xanh Tây Nguyên · Vật tư nông nghiệp",
-      "title": "Phân bón, thuốc BVTV chính hãng cho vườn Tây Nguyên",
-      "lead": "Phân bón NPK Hàn-Việt, thuốc bảo vệ thực vật Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết rõ ràng, tư vấn đúng bệnh, đúng cây cà phê, hồ tiêu, sầu riêng, rau màu.",
-      "hero_image": "",
+      "eyebrow": "Nông Xanh Tây Nguyên · Kỹ thuật thực chiến tại vườn",
+      "title": "Đúng hàng, đúng bệnh, đúng giá cho vườn Tây Nguyên",
+      "lead": "Phân bón và thuốc bảo vệ thực vật chính hãng Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh. Đội thạc sĩ, kỹ sư của Nông Xanh xem ảnh lá, ảnh rễ qua Zalo và chỉ đúng thuốc, đúng liều, miễn phí.",
+      "hero_image": "/assets/img/vuon/vuon-ky-su.webp",
       "featured_skus": [
+        "COMBO-CHETNHANH",
+        "COMBO-XIMU-SAURIENG",
         "HV-202015-25KG",
         "MP-MATAXYL-100G",
         "SM-DANITOLS-450ML",
+        "NX-VISINH-TRAUVANG",
         "NA-TALAXYL-250G",
-        "HV-202015-1KG",
-        "MP-HERO-100G",
-        "SM-DANTOTSU-5G",
-        "NA-SULFOLAC-1L"
+        "MP-SUPO-500ML"
       ],
       "trust": [
-        "Hàng chính hãng từ nhà sản xuất, nhà phân phối",
-        "Tư vấn kỹ thuật theo từng loại cây",
-        "Giao tận vườn, trả tiền khi nhận hàng"
+        "Hàng chính hãng, có tem nhãn, số đăng ký",
+        "Kỹ thuật miễn phí qua điện thoại, Zalo",
+        "Giao tận vườn, kiểm hàng rồi trả tiền"
       ],
       "promise": [
         "Hàng chính hãng",
         "Giá niêm yết rõ ràng",
-        "Tư vấn đúng bệnh đúng thuốc",
-        "Thanh toán QR hoặc COD"
+        "Thạc sĩ, kỹ sư tư vấn miễn phí",
+        "Combo theo bệnh, theo mùa",
+        "Giao tận vườn, COD",
+        "Cộng tác viên hoa hồng 3–5%"
       ],
       "products_eyebrow": "Nhà vườn chọn nhiều",
       "products_title": "Sản phẩm được tin dùng",
-      "stats": []
+      "stats": [],
+      "cta": "Chọn giải pháp cho vườn",
+      "hero_badge": "Kỹ thuật viên Nông Xanh tại vườn chanh dây",
+      "pains_title": "Nhà vườn Tây Nguyên đang mất tiền ở đâu?",
+      "pains": [
+        {
+          "ico": "⚠️",
+          "title": "Mua phải hàng giả, hàng kém",
+          "text": "Phun mãi không khỏi bệnh, tiền mất mà vườn vẫn xuống."
+        },
+        {
+          "ico": "🎯",
+          "title": "Phun sai bệnh, sai liều",
+          "text": "Không biết nấm hay vi khuẩn, phun thừa vừa tốn vừa hại cây, hại đất."
+        },
+        {
+          "ico": "🌧️",
+          "title": "Mùa mưa trở tay không kịp",
+          "text": "Chết nhanh, xì mủ, thối rễ lan cả vườn chỉ sau một tuần mưa dầm."
+        },
+        {
+          "ico": "📉",
+          "title": "Đất chai, cây suy",
+          "text": "Bón phân hóa học lâu năm, đất bạc màu, rễ yếu, năng suất giảm dần."
+        }
+      ],
+      "solutions_title": "Giải pháp trọn gói từ Nông Xanh",
+      "solutions": [
+        {
+          "ico": "🩺",
+          "title": "Chẩn đoán qua ảnh, miễn phí",
+          "text": "Chụp lá, trái, rễ gửi Zalo 0901 968 567. Kỹ thuật viên trả lời bệnh gì, dùng gì, liều bao nhiêu."
+        },
+        {
+          "ico": "🧪",
+          "title": "Combo theo bệnh, theo mùa",
+          "text": "Gói sẵn bộ thuốc, phân cho từng vấn đề: chết nhanh, xì mủ, rệp sáp, ra hoa, đậu trái."
+        },
+        {
+          "ico": "🌱",
+          "title": "Vi sinh, cải tạo đất",
+          "text": "Vi sinh 10 chủng, Silic Hàn Quốc, nấm rễ cộng sinh giúp đất tơi, rễ khỏe, giảm phân hóa học."
+        },
+        {
+          "ico": "🚜",
+          "title": "Thăm vườn, thực chiến",
+          "text": "Đội thạc sĩ, kỹ sư xuống vườn, trồng thử trên vườn chanh dây của chính Nông Xanh trước khi khuyên bà con."
+        },
+        {
+          "ico": "📦",
+          "title": "Giao tận vườn, giá sỉ cho đại lý",
+          "text": "Bao phân lớn giao xe tải trong khu vực. Đại lý, tổ hợp tác có giá riêng."
+        },
+        {
+          "ico": "💰",
+          "title": "Giới thiệu là có thu nhập",
+          "text": "Làm cộng tác viên miễn phí, nhận hoa hồng 3–5% mỗi đơn, thêm hoa hồng từ người bạn giới thiệu."
+        }
+      ],
+      "garden_title": "Thực tế tại vườn Nông Xanh",
+      "garden_lead": "Nông Xanh không chỉ bán vật tư. Chúng mình tự trồng, tự thử trên vườn chanh dây, rồi mới tư vấn cho bà con.",
+      "garden": [
+        {
+          "img": "/assets/img/vuon/vuon-tham-vuon.webp",
+          "title": "Khách đến thăm vườn",
+          "text": "Vườn chanh 6 tháng tuổi đang cho những lứa trái đầu tiên."
+        },
+        {
+          "img": "/assets/img/vuon/vuon-cay-giong.webp",
+          "title": "Những mầm non đầu tiên",
+          "text": "Cây non ở giai đoạn vườn ươm giống."
+        },
+        {
+          "img": "/assets/img/vuon/vuon-trai-dau.webp",
+          "title": "Những trái đầu tiên",
+          "text": "Sau 6 tháng canh tác, trái đầu tiên sai trĩu."
+        },
+        {
+          "img": "/assets/img/vuon/vuon-ky-su.webp",
+          "title": "Kỹ thuật tại vườn",
+          "text": "Đội kỹ thuật hướng dẫn chăm sóc ngay trên giàn."
+        }
+      ],
+      "brands_title": "Thương hiệu chính hãng tại Nông Xanh",
+      "brands": [
+        {
+          "name": "Hàn-Việt",
+          "sub": "Phân bón NPK công nghệ Hàn Quốc",
+          "line": "han-viet"
+        },
+        {
+          "name": "Map Pacific",
+          "sub": "Thuốc BVTV, phân bón lá Singapore",
+          "line": "map-pacific"
+        },
+        {
+          "name": "Sumitomo",
+          "sub": "Thuốc BVTV công nghệ Nhật Bản",
+          "line": "sumitomo"
+        },
+        {
+          "name": "Ngân Anh",
+          "sub": "Thuốc BVTV, phân bón lá nhập khẩu",
+          "line": "ngan-anh"
+        }
+      ],
+      "video": "",
+      "video_poster": "/assets/img/vuon/vuon-tham-vuon.webp",
+      "video_title": "Câu chuyện của những nhà vườn chọn Nông Xanh",
+      "youtube": [
+        {
+          "id": "YnVZ75tiXuI",
+          "title": "Video kỹ thuật Nông Xanh Tây Nguyên"
+        },
+        {
+          "id": "4GMbrnx9eSM",
+          "title": "Hướng dẫn nhân vi sinh"
+        }
+      ],
+      "knowledge_title": "Kiến thức nhà nông",
+      "knowledge": [
+        {
+          "img": "/assets/img/vuon/bv-saurieng.webp",
+          "title": "Cách chọn sầu riêng Musang King ngon, chín tự nhiên",
+          "url": "https://nongxanh.net/cach-chon-sau-rieng-musang-king-ngon-chin-tu-nhien-va-dung-chuan/"
+        },
+        {
+          "img": "/assets/img/vuon/bv-namre.webp",
+          "title": "Nấm rễ Mycorrhiza: sự cộng sinh hoàn hảo cho cây trồng",
+          "url": "https://nongxanh.net/nam-re-mycorrhiza-su-cong-sinh-hoan-hao-cho-cay-trong/"
+        },
+        {
+          "img": "/assets/img/vuon/bv-kem.webp",
+          "title": "Phát hiện thiếu kẽm và cách khắc phục trên chanh dây",
+          "url": "https://nongxanh.net/phat-hien-thieu-kem-va-bien-phap-khac-phuc-tren-chanh-day/"
+        },
+        {
+          "img": "/assets/img/vuon/bv-visinh.webp",
+          "title": "Những vi sinh vật có lợi với đất",
+          "url": "https://nongxanh.net/nhung-vi-sinh-vat-co-loi-voi-dat/"
+        },
+        {
+          "img": "/assets/img/vuon/bv-chiphi.webp",
+          "title": "Dự toán chi phí, lợi nhuận trồng 1 ha chanh dây",
+          "url": "https://nongxanh.net/du-toan-chi-phi-loi-nhuan-trong-1-ha-chanh-day/"
+        },
+        {
+          "img": "/assets/img/vuon/bv-chanhvang.webp",
+          "title": "Phân loại kích thước chanh dây vàng",
+          "url": "https://nongxanh.net/phan-loai-kich-thuoc-chanh-day-vang/"
+        }
+      ],
+      "testimonials": [],
+      "expert": {
+        "name": "ThS. Hồ Minh Ngọc",
+        "role": "Phụ trách kỹ thuật Nông Xanh Tây Nguyên",
+        "phone": "0901968567",
+        "zalo": "https://zalo.me/0901968567",
+        "text": "Bà con có gì thắc mắc cứ gọi hoặc nhắn Zalo, Nông Xanh hỗ trợ miễn phí. Rất vui được đồng hành để làm ra nông sản an toàn, chất lượng và năng suất cao."
+      },
+      "cta_title": "Vườn đang có vấn đề? Gửi ảnh cho Nông Xanh ngay",
+      "cta_text": "Chụp lá, trái, rễ, thân. Kỹ thuật viên trả lời trong giờ làm việc, không mua cũng tư vấn."
     },
     "story": {
-      "title": "Về Nông Xanh Tây Nguyên",
-      "lead": "Nông Xanh Tây Nguyên là cửa hàng vật tư nông nghiệp dành cho nhà vườn cà phê, hồ tiêu, sầu riêng và rau màu. Chúng tôi chọn những thương hiệu phân bón, thuốc bảo vệ thực vật đã quen thuộc với bà con, bán đúng hàng, đúng giá và hướng dẫn dùng đúng cách.",
-      "image": "/assets/img/og.jpg",
-      "sections": [
+      "title": "Tốt từ tâm, nâng tầm nông sản Việt",
+      "eyebrow": "Về Nông Xanh Tây Nguyên",
+      "lead": "Nông Xanh Tây Nguyên là đội ngũ thạc sĩ, kỹ sư nông nghiệp giàu kinh nghiệm thực chiến. Chúng mình có mặt để bà con mua được vật tư thật, dùng đúng cách, và có người đứng cạnh mình ngoài vườn khi cây gặp chuyện.",
+      "image": "/assets/img/vuon/vuon-tham-vuon.webp",
+      "quote": "Nông nghiệp khó, nhưng không phải là không làm được. Làm từ tâm thì vườn sẽ trả lại.",
+      "chapters": [
         {
-          "icon": "🌱",
-          "title": "Phân bón Hàn-Việt",
-          "text": "NPK phức hợp một hạt một màu sản xuất theo công nghệ Hàn Quốc, đủ công thức bón lót, bón thúc, nuôi trái cho cây công nghiệp và cây ăn trái."
+          "img": "/assets/img/vuon/vuon-cay-giong.webp",
+          "tag": "Bắt đầu",
+          "title": "Từ một vườn ươm nhỏ",
+          "text": "Nông Xanh bắt đầu bằng chính vườn chanh dây của mình: chọn giống, làm đất, ủ vi sinh. Mỗi quy trình phân, thuốc đều được thử ở đây trước khi chia sẻ cho bà con."
         },
         {
-          "icon": "🛡️",
-          "title": "Thuốc BVTV chính hãng",
-          "text": "Map Pacific, Sumitomo, Ngân Anh (Tân Qui): thuốc trừ bệnh, trừ sâu, trừ cỏ, thuốc sinh học và phân bón lá, có trong danh mục được phép sử dụng tại Việt Nam."
+          "img": "/assets/img/vuon/vuon-trai-dau.webp",
+          "tag": "Thực chiến",
+          "title": "Sau 6 tháng, trái đầu tiên",
+          "text": "Những chùm trái đầu tiên sai trĩu là lời giải thích rõ nhất cho cách làm của chúng mình: đất khỏe, rễ khỏe, dùng thuốc đúng lúc, đúng liều."
         },
         {
-          "icon": "🧑‍🌾",
-          "title": "Tư vấn đúng bệnh, đúng cây",
-          "text": "Gửi ảnh lá, trái, rễ qua Zalo, kỹ thuật viên gợi ý thuốc và liều phù hợp, tránh phun thừa, phun sai."
+          "img": "/assets/img/vuon/vuon-ky-su.webp",
+          "tag": "Đồng hành",
+          "title": "Xuống vườn cùng bà con",
+          "text": "Đội kỹ thuật đi từng vườn cà phê, tiêu, sầu riêng, chanh dây. Bà con chỉ cần gửi ảnh qua Zalo hoặc gọi điện, Nông Xanh hỗ trợ miễn phí, không mua hàng vẫn tư vấn."
+        }
+      ],
+      "values": [
+        {
+          "icon": "🤝",
+          "title": "Lấy nhà vườn làm trung tâm",
+          "text": "Tư vấn cái bà con cần, không bán cái bà con không cần. Có khi lời khuyên tốt nhất là không phun."
+        },
+        {
+          "icon": "✅",
+          "title": "Hàng thật, giá rõ",
+          "text": "Chỉ bán thương hiệu chính hãng, có tem nhãn và số đăng ký. Giá niêm yết công khai trên website."
+        },
+        {
+          "icon": "🧑‍🔬",
+          "title": "Kỹ thuật thực chiến",
+          "text": "Thạc sĩ, kỹ sư giàu kinh nghiệm ngoài đồng, thử trên vườn thật trước khi khuyên."
         },
         {
           "icon": "🌍",
           "title": "Canh tác bền vững",
-          "text": "Ưu tiên giải pháp sinh học, dùng thuốc theo nguyên tắc 4 đúng và đảm bảo thời gian cách ly để nông sản an toàn, xuất khẩu được."
+          "text": "Ưu tiên vi sinh, sinh học, dùng thuốc theo 4 đúng, giữ thời gian cách ly để nông sản đủ chuẩn trong nước và xuất khẩu."
         }
-      ]
+      ],
+      "offers": [
+        "Hỗ trợ thực hành sản xuất, tạo ra nông sản chất lượng cao, tạo cảm hứng cho người làm nông.",
+        "Chia sẻ, tư vấn chiến lược và kỹ thuật thực hành thực chiến tại vườn.",
+        "Cung cấp vật tư chất lượng cho quy trình sản xuất đạt yêu cầu trong nước và xuất khẩu."
+      ],
+      "socials": [
+        {
+          "name": "Facebook",
+          "url": "https://www.facebook.com/Nongxanhtaynguyen"
+        },
+        {
+          "name": "TikTok",
+          "url": "https://www.tiktok.com/@nongxanhtaynguyen"
+        },
+        {
+          "name": "YouTube",
+          "url": "https://www.youtube.com/@Chanhdayantoan"
+        },
+        {
+          "name": "Website cũ",
+          "url": "https://nongxanh.net"
+        }
+      ],
+      "sections": []
     },
     "topbar": [
-      "🌿 Phân bón, thuốc BVTV chính hãng: Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh",
+      "🌿 Kỹ thuật miễn phí: gọi, Zalo 0901 968 567 (ThS. Hồ Minh Ngọc)",
       "💳 Chuyển khoản QR hoặc trả tiền khi nhận hàng (COD)",
-      "📞 Bao lớn, mua số lượng: liên hệ để nhận giá theo đợt"
+      "🚚 Miễn phí giao hàng đơn từ 300.000đ"
     ],
-    "footer_about": "Cửa hàng vật tư nông nghiệp tại Tây Nguyên: phân bón Hàn-Việt, thuốc bảo vệ thực vật Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết, tư vấn kỹ thuật, giao tận vườn.",
+    "footer_about": "Phân bón, thuốc bảo vệ thực vật chính hãng và kỹ thuật thực chiến tại vườn cho nhà vườn cà phê, hồ tiêu, sầu riêng, chanh dây. Kỹ thuật: ThS. Hồ Minh Ngọc, 0901 968 567.",
     "disclaimer": "Giá trên website là giá bán lẻ tham khảo, có thể thay đổi theo đợt hàng. Đọc kỹ nhãn trước khi dùng thuốc bảo vệ thực vật.",
     "catalog_title": "Phân bón và thuốc BVTV",
     "catalog_eyebrow": "Nông Xanh Tây Nguyên",
     "catalog_heading": "Tất cả sản phẩm",
     "catalog_description": "Phân bón NPK Hàn-Việt, thuốc trừ bệnh, trừ sâu, trừ cỏ Map Pacific, Sumitomo, Ngân Anh. Giá niêm yết, giao tận vườn.",
-    "catalog_lead": "Chọn theo thương hiệu hoặc theo nhóm sản phẩm. Bao phân 50kg giá thay đổi theo đợt hàng, bấm Liên hệ để nhận báo giá.",
+    "catalog_lead": "Chọn theo thương hiệu, theo công dụng hoặc theo cây trồng. Bao phân 50kg và một số sản phẩm giá thay đổi theo đợt hàng, bấm Liên hệ để nhận báo giá.",
     "catalog_note": "Chưa thấy sản phẩm cần tìm? Gửi tên thuốc hoặc ảnh bệnh cây qua trang <a href=\"/lien-he\">Liên hệ</a>, cửa hàng báo giá trong ngày.",
     "catalog_tag_filters": [
       "Phân bón",
@@ -118,7 +327,9 @@
       "Thuốc trừ bệnh",
       "Thuốc trừ sâu",
       "Thuốc trừ cỏ",
-      "Sinh học"
+      "Thuốc trừ tuyến trùng",
+      "Sinh học",
+      "Nông sản"
     ],
     "hide_empty_filters": true,
     "price_contact_label": "Liên hệ",
@@ -137,37 +348,96 @@
       {
         "id": "ca-phe",
         "ico": "☕",
-        "label": "Vườn cà phê, hồ tiêu",
-        "who": "Anh Hùng, 42 tuổi · Đắk Lắk",
-        "quote": "Đầu mùa mưa là lo chết nhanh, rệp sáp. Cần phân bao lớn giá ổn định.",
+        "label": "Cà phê",
+        "img": "",
+        "who": "Vườn cà phê Đắk Lắk, Gia Lai, Lâm Đồng",
+        "quote": "Mùa khô lo rệp sáp, mùa mưa lo nấm hồng, thối rễ. Phân bón tăng giá, bón sao cho đủ mà không phí?",
         "needs": [
           "NPK bao lớn bón thúc, nuôi trái",
-          "Thuốc phòng chết nhanh, thối rễ",
-          "Trị rệp sáp, rầy xanh"
+          "Trị rệp sáp, rầy xanh, bọ trĩ",
+          "Phòng thối rễ, tuyến trùng"
+        ],
+        "stage": [
+          "Tháng 1–3: tưới nước, ra hoa · bón NPK cân đối",
+          "Tháng 4–7: nuôi trái · bón thúc, trị rệp sáp",
+          "Tháng 8–10: lớn trái, mưa nhiều · phòng nấm, thối rễ",
+          "Tháng 11–12: thu hoạch · rửa vườn gốc đồng"
+        ]
+      },
+      {
+        "id": "ho-tieu",
+        "ico": "🌿",
+        "label": "Hồ tiêu",
+        "img": "",
+        "who": "Vườn tiêu Chư Sê, Đắk Song, Lộc Ninh",
+        "quote": "Đầu mùa mưa là sợ chết nhanh. Một trụ tiêu chết là mất cả chục năm chăm.",
+        "needs": [
+          "Tưới gốc phòng chết nhanh, chết chậm",
+          "Xử lý tuyến trùng, cải tạo đất",
+          "Trị rệp sáp gốc, rầy"
+        ],
+        "stage": [
+          "Đầu mùa mưa: tưới gốc Metalaxyl, Ethaboxam",
+          "Giữa mùa mưa: rải gốc xử lý tuyến trùng",
+          "Nuôi hạt: bón kali, trung vi lượng",
+          "Sau thu hoạch: rửa vườn, bón phục hồi"
         ]
       },
       {
         "id": "sau-rieng",
         "ico": "🌳",
-        "label": "Vườn sầu riêng, cây ăn trái",
-        "who": "Chị Mai, 38 tuổi · Đắk Nông",
-        "quote": "Sầu riêng xì mủ, rụng trái non là mất cả vụ.",
+        "label": "Sầu riêng",
+        "img": "",
+        "who": "Vườn sầu riêng Krông Pắc, Đắk Mil, Bảo Lộc",
+        "quote": "Xì mủ, rụng trái non, sượng cơm, chỉ một đợt là mất cả vụ.",
         "needs": [
-          "Trị xì mủ, nứt thân, thán thư",
-          "Phân bón lá ra hoa, đậu trái",
-          "Kali nuôi trái, lên cơm"
+          "Trị xì mủ, nứt thân, nấm hồng",
+          "Phân bón lá phân hóa mầm hoa, đậu trái",
+          "Kali nuôi trái, chống sượng"
+        ],
+        "stage": [
+          "Sau thu hoạch: tỉa cành, bón phục hồi, quét gốc đồng",
+          "Làm bông: phân hóa mầm hoa bằng PK cao",
+          "Nuôi bông, đậu trái: Bo, Canxi, giữ trái non",
+          "Nuôi trái: kali cao, phòng xì mủ mùa mưa"
+        ]
+      },
+      {
+        "id": "chanh-day",
+        "ico": "🟡",
+        "label": "Chanh dây",
+        "img": "/assets/img/vuon/vuon-trai-dau.webp",
+        "who": "Vườn chanh dây Đắk Lắk, Gia Lai, Sơn La",
+        "quote": "Ngọn vàng, lá mo, rồi virus. Vườn đang sai trái mà xuống một lần là mất trắng.",
+        "needs": [
+          "Kẽm, trung vi lượng chống vàng ngọn",
+          "Vi sinh cải tạo đất, khỏe rễ",
+          "Phòng bệnh vi khuẩn, nấm"
+        ],
+        "stage": [
+          "Vườn ươm: cây giống sạch bệnh, vi sinh khỏe rễ",
+          "1–3 tháng: bón NPK, kẽm nano chống vàng ngọn",
+          "4–6 tháng: ra hoa, đậu trái · Bo, kali",
+          "Thu hoạch: chăm sau thu hoạch, tỉa dây"
         ]
       },
       {
         "id": "rau-mau",
         "ico": "🥬",
         "label": "Rau màu, lúa, bắp",
-        "who": "Chú Tư, 55 tuổi · Lâm Đồng",
-        "quote": "Sâu kháng thuốc nhiều, muốn chuyển dần qua thuốc sinh học.",
+        "img": "",
+        "who": "Rau Đà Lạt, lúa, bắp Tây Nguyên",
+        "quote": "Sâu kháng thuốc nhiều, thương lái lại đòi ít tồn dư. Muốn chuyển dần qua sinh học.",
         "needs": [
-          "Thuốc trừ sâu sinh học",
-          "Trị sâu kháng thuốc",
-          "Phân NPK gói nhỏ dễ dùng"
+          "Thuốc trừ sâu sinh học, an toàn khi thu hoạch",
+          "Trị sâu keo, sâu tơ kháng thuốc",
+          "NPK gói nhỏ dễ chia"
+        ],
+        "stage": [
+          "Làm đất: vôi, vi sinh, bón lót",
+          "Cây con: phòng sâu đất, bệnh vi khuẩn",
+          "Phát triển: luân phiên thuốc sinh học",
+          "Trước thu hoạch: tôn trọng thời gian cách ly"
         ]
       }
     ],
@@ -194,12 +464,20 @@
         "Đọc kỹ nhãn, pha đúng liều, phun đúng lúc, đúng cây và đúng đối tượng ghi trên nhãn. Mang khẩu trang, găng tay khi pha và phun, đảm bảo thời gian cách ly trước thu hoạch."
       ],
       [
-        "Tôi có thể thanh toán bằng cách nào?",
-        "Chuyển khoản qua mã VietQR (tự xác nhận khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
-      ],
-      [
         "Đại lý, hợp tác xã muốn lấy hàng số lượng lớn?",
         "Để lại thông tin ở trang Liên hệ, cửa hàng gửi bảng giá sỉ theo đợt hàng và hỗ trợ giao tận nơi."
+      ],
+      [
+        "Tôi có thể thanh toán bằng cách nào?",
+        "Hai cách: chuyển khoản qua mã VietQR (hệ thống tự xác nhận trong vài giây khi tiền về) hoặc trả tiền mặt khi nhận hàng (COD)."
+      ],
+      [
+        "Phí giao hàng tính thế nào?",
+        "Phí được tính tự động theo địa chỉ, khối lượng và kích thước kiện hàng qua các hãng vận chuyển trên Goship. Chai thuốc được bọc chống tràn, chống vỡ. Đơn từ 300.000đ được miễn phí giao hàng; bao phân lớn giao xe tải trong khu vực, Nông Xanh báo phí trước."
+      ],
+      [
+        "Làm cộng tác viên Nông Xanh có mất phí không?",
+        "Không mất phí. Đăng ký xong bạn có ngay link và mã giới thiệu riêng, hoa hồng 3–5% trên đơn trực tiếp, thêm hoa hồng gián tiếp từ người bạn giới thiệu, rút tiền về ngân hàng ngày 5 và 20 hằng tháng."
       ]
     ],
     "line_labels": {
@@ -207,7 +485,9 @@
       "han-viet": "Hàn Việt",
       "map-pacific": "Map Pacific",
       "sumitomo": "Sumitomo",
-      "ngan-anh": "Ngân Anh"
+      "ngan-anh": "Ngân Anh",
+      "nong-xanh-chon": "Nông Xanh chọn",
+      "nong-san-nong-xanh": "Nông sản từ vườn"
     },
     "kit": {
       "skus": [
@@ -226,17 +506,25 @@
       }
     },
     "perk_genuine": "Chính hãng nhà sản xuất",
-    "nav_off": [
-      "combo"
-    ]
+    "nav_off": [],
+    "nav_labels": {
+      "story": "Về chúng tôi",
+      "ctv": "Kiếm thêm thu nhập",
+      "combo": "Combo"
+    },
+    "story_link": "Về Nông Xanh Tây Nguyên"
   },
   "settings": {
     "shop": {
-      "facebook": "",
+      "facebook": "https://www.facebook.com/Nongxanhtaynguyen",
       "tiktok_shop": "",
       "shopee_shop": "",
       "address": "Tây Nguyên (cập nhật địa chỉ cửa hàng)",
-      "legal_name": "Nông Xanh Tây Nguyên"
+      "legal_name": "Nông Xanh Tây Nguyên",
+      "hotline": "0901968567",
+      "zalo": "0901968567",
+      "tiktok": "https://www.tiktok.com/@nongxanhtaynguyen",
+      "youtube": "https://www.youtube.com/@Chanhdayantoan"
     },
     "affiliate": {
       "tiers": [
@@ -276,11 +564,25 @@
     "shipping": {
       "origin": {
         "name": "Kho Nông Xanh Tây Nguyên",
-        "phone": "",
+        "phone": "0901968567",
         "street": "",
         "city": "Đắk Lắk",
         "district": "",
         "ward": ""
+      },
+      "free_threshold": 300000,
+      "goship_env": "sandbox"
+    },
+    "payment": {
+      "online_enabled": true,
+      "cod_enabled": true,
+      "cod_max": 3000000,
+      "thuchi_base": "",
+      "expire_minutes": 1440,
+      "bank": {
+        "bank": "",
+        "account": "",
+        "holder": ""
       }
     }
   }

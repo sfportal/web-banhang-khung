@@ -1,0 +1,99 @@
+---
+// Trang "Về chúng tôi" riêng Nông Xanh Tây Nguyên: nội dung trong client.json (content.story, content.home.expert)
+import { env } from 'cloudflare:workers';
+import Store from '../layouts/Store.astro';
+import { getSettings } from '../lib/db.js';
+import { PERSONAS } from '../lib/content.js';
+import { BRAND, CONTENT } from '../client.js';
+const s = await getSettings(env);
+const S = CONTENT.story || {};
+const H = CONTENT.home || {};
+const E = H.expert || {};
+const tel = (x) => String(x || '').replace(/\D/g, '');
+const phone = E.phone || s.shop?.hotline;
+const title = S.title || `Về ${BRAND}`;
+---
+<Store title={`Về chúng tôi: ${title} | ${BRAND}`} description={S.lead} active="story" path="/cau-chuyen" settings={s}>
+  <section class="nx-about-hero" style={S.image ? `--bg:url(${S.image})` : ''}>
+    <div class="container">
+      <div class="eyebrow fade-up" style="color:#b9d97a">{S.eyebrow || `Về ${BRAND}`}</div>
+      <h1 class="fade-up" style="animation-delay:.15s">{title}</h1>
+      {S.lead && <p class="lead fade-up" style="animation-delay:.3s">{S.lead}</p>}
+      <div class="ctas fade-up" style="animation-delay:.45s">
+        {phone && <a class="btn sun" href={`tel:${tel(phone)}`}>Gọi kỹ thuật miễn phí <span class="shine"></span></a>}
+        <a class="btn ghost" style="color:#fff" href="#hanh-trinh">Câu chuyện của chúng mình ↓</a>
+      </div>
+    </div>
+  </section>
+
+  {S.quote && <section class="section" style="padding-bottom:0"><div class="container"><blockquote class="nx-bigquote" data-reveal>“{S.quote}”<cite>Đội ngũ {BRAND}</cite></blockquote></div></section>}
+
+  {(S.chapters || []).length > 0 && (
+    <section class="section" id="hanh-trinh">
+      <div class="container nx-chapters">
+        {S.chapters.map((c, i) => (
+          <div class:list={['nx-chapter', { rev: i % 2 }]} data-reveal>
+            <img src={c.img} alt={c.title} loading="lazy" />
+            <div><span class="nx-tag">{String(i + 1).padStart(2, '0')} · {c.tag}</span><h2>{c.title}</h2><p class="lead">{c.text}</p></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {(S.offers || []).length > 0 && (
+    <section class="section nx-pains">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Nông Xanh làm gì cho bà con</div><h2>Ba việc chúng mình làm mỗi ngày</h2></div>
+        <div class="nx-pain-grid three">{S.offers.map((t, i) => <div class="nx-pain" data-reveal style={`--d:${i * 0.08}s`}><span class="ico">{['🌱', '🧑‍🌾', '📦'][i] || '✅'}</span><p style="font-size:1.05rem">{t}</p></div>)}</div>
+      </div>
+    </section>
+  )}
+
+  {(S.values || []).length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Cam kết</div><h2>Giá trị cốt lõi</h2></div>
+        <div class="nx-sol-grid four">{S.values.map((x, i) => <div class="nx-sol" data-reveal style={`--d:${i * 0.06}s`}><span class="ico">{x.icon}</span><h3>{x.title}</h3><p>{x.text}</p></div>)}</div>
+      </div>
+    </section>
+  )}
+
+  {PERSONAS.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="nx-center" data-reveal><div class="eyebrow">Cây trồng đồng hành</div><h2>Chúng mình hiểu vườn của bà con</h2></div>
+        <div class="nx-crop-chips" data-reveal>{PERSONAS.map((x) => <a href={`/san-pham?loai=cay-${x.id}`} style={x.img ? `--bg:url(${x.img})` : ''} data-ico={x.ico}><b>{x.ico} {x.label}</b><span>{x.needs?.[0]}</span></a>)}</div>
+      </div>
+    </section>
+  )}
+
+  {E.name && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="nx-expert" data-reveal>
+          <div>
+            <div class="eyebrow" style="color:#b9d97a">Người đứng sau tư vấn</div>
+            <h2>{E.name}</h2>
+            <div class="nx-expert-who"><span>{E.role}</span></div>
+            <p class="nx-expert-quote">“{E.text}”</p>
+          </div>
+          <div class="nx-expert-cta">
+            {phone && <a class="btn white" href={`tel:${tel(phone)}`}>📞 Gọi {phone}</a>}
+            {E.zalo && <a class="btn sun" href={E.zalo} target="_blank" rel="noopener">💬 Nhắn Zalo <span class="shine"></span></a>}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(S.socials || []).length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container nx-center">
+        <div class="eyebrow">Theo dõi Nông Xanh</div>
+        <div class="nx-socials">{S.socials.map((x) => <a class="btn ghost sm" href={x.url} target="_blank" rel="noopener">{x.name}</a>)}</div>
+        <div style="margin-top:30px"><a class="btn sun" href="/san-pham">Xem sản phẩm <span class="shine"></span></a></div>
+      </div>
+    </section>
+  )}
+</Store>

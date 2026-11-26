@@ -1,0 +1,48 @@
+---
+// Danh mục riêng Nông Xanh Tây Nguyên: lọc theo thương hiệu (line), công dụng (badges), cây trồng (personas)
+import { env } from 'cloudflare:workers';
+import Store from '../../layouts/Store.astro';
+import { BRAND, CONTENT } from '../../client.js';
+import ProductCard from '../../components/ProductCard.astro';
+import { loadCatalog } from '../../lib/catalog.js';
+import { PERSONAS, LINE_LABEL } from '../../lib/content.js';
+
+const cat = await loadCatalog(env);
+const loai = Astro.url.searchParams.get('loai') || '';
+const slug = (t) => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/gi, 'd').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const lines = [...new Set(cat.products.map((p) => p.line).filter((l) => l && l !== 'combo'))];
+const groups = [
+  ['Nhanh', [['', 'Tất cả'], ['combo', 'Combo theo bệnh'], ['ban-chay', 'Bán chạy']]],
+  ['Thương hiệu', lines.map((l) => ['th-' + slug(l), LINE_LABEL[l] || l, (p) => p.line === l])],
+  ['Công dụng', (CONTENT.catalog_tag_filters || []).map((t) => ['cd-' + slug(t), t, (p) => (p.badges || []).includes(t)])],
+  ['Cây trồng', PERSONAS.map((x) => ['cay-' + x.id, `${x.ico} ${x.label}`, (p) => p.personas?.includes(x.id)])],
+];
+const fn = { combo: (p) => ['combo', 'gift'].includes(p.kind), 'ban-chay': (p) => (p.badges || []).includes('Bán chạy') };
+groups.forEach(([, items]) => items.forEach(([k, , f]) => f && (fn[k] = f)));
+// Tương thích link cũ: ?loai=<tên dòng> hoặc ?loai=th-<tên dòng chưa chuẩn hoá>
+const key = fn[loai] ? loai : lines.includes(loai) ? 'th-' + slug(loai) : loai.startsWith('th-') && fn['th-' + slug(decodeURIComponent(loai.slice(3)))] ? 'th-' + slug(decodeURIComponent(loai.slice(3))) : '';
+const match = (p, k) => !k || (fn[k] ? fn[k](p) : true);
+const shown = groups.map(([g, items]) => [g, items.filter(([k]) => !k || cat.products.some((p) => match(p, k)))]).filter(([, items]) => items.length);
+const label = Object.fromEntries(groups.flatMap(([, it]) => it.map(([k, l]) => [k, l])));
+const heading = key ? label[key] : CONTENT.catalog_heading || 'Tất cả sản phẩm';
+const title = key ? `${label[key]} | Phân bón, thuốc BVTV` : CONTENT.catalog_title || `Sản phẩm ${BRAND}`;
+const list = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: cat.products.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${env.SITE_URL || Astro.url.origin}/san-pham/${p.slug}`, name: p.name })) };
+---
+<Store title={`${title} | ${BRAND}`} description={CONTENT.catalog_description || `Sản phẩm của ${BRAND}.`} active={key === 'combo' ? 'combo' : 'products'} path={key ? `/san-pham?loai=${key}` : '/san-pham'} jsonld={[list]}>
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <div class="eyebrow">{CONTENT.catalog_eyebrow || BRAND}</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3.4rem)" id="plh">{heading}</h1>
+      <p class="lead">{CONTENT.catalog_lead}</p>
+      <div class="nx-filters" id="filters">
+        {shown.map(([g, items]) => <div class="nx-fgroup"><span>{g}</span><div class="filters">{items.map(([k, l]) => <button class:list={[{ on: k === key }]} data-f={k} data-l={k ? l : (CONTENT.catalog_heading || 'Tất cả sản phẩm')}>{l}</button>)}</div></div>)}
+      </div>
+      <p class="muted" id="pcount" style="margin:14px 0 0"></p>
+      <div class="grid" id="plist" style="margin-top:18px">
+        {cat.products.map((p, i) => <div data-match={Object.keys(fn).filter((k) => fn[k](p)).join(' ')} style={match(p, key) ? '' : 'display:none'}><ProductCard p={p} delay={(i % 4) * 0.05} /></div>)}
+      </div>
+      {CONTENT.catalog_note && <div class="note-box" style="margin-top:30px" set:html={CONTENT.catalog_note}></div>}
+    </div>
+  </section>
+  <script is:inline slot="scripts" set:html={`(function(){var bs=document.querySelectorAll('#filters button'),cnt=document.getElementById('pcount'),h=document.getElementById('plh');function count(){var n=0;document.querySelectorAll('#plist>[data-match]').forEach(function(el){if(el.style.display!=='none')n++});cnt.textContent=n+' sản phẩm'}bs.forEach(function(b){b.onclick=function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});var f=b.dataset.f;h.textContent=b.dataset.l;document.querySelectorAll('#plist>[data-match]').forEach(function(el){var on=!f||el.dataset.match.split(' ').indexOf(f)>=0;el.style.display=on?'':'none';if(on){var c=el.firstElementChild;c.classList.add('in');c.classList.remove('swap-in');void c.offsetWidth;c.classList.add('swap-in')}});count();history.replaceState(null,'',f?'?loai='+f:location.pathname)}});count()})();`}></script>
+</Store>

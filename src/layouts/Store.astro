@@ -26,7 +26,8 @@ const free = s.shipping?.free_threshold || 0;
 const navAll = [['/san-pham', 'Sản phẩm', 'products'], ['/san-pham?loai=combo', 'Combo & quà', 'combo'], ['/flash-sale', 'Flash Sale', 'flash'], ['/cau-chuyen', 'Câu chuyện', 'story'], ['/truy-xuat', 'Quét QR', 'qr'], ['/ctv', 'Cộng tác viên', 'ctv']];
 // CONTENT.nav_off: ẩn mục menu theo khoá, ví dụ ["combo"] khi khách không bán combo
 const off = { flash: !FEATURES.flash_sale, qr: !FEATURES.lot_qr, ctv: !FEATURES.affiliate, ...Object.fromEntries((CONTENT.nav_off || []).map((k) => [k, true])) };
-const nav = navAll.filter(([, , k]) => !off[k]);
+// CONTENT.nav_labels: đổi tên mục menu theo khoá, ví dụ { "story": "Về chúng tôi" }
+const nav = navAll.filter(([, , k]) => !off[k]).map(([h, l, k]) => [h, CONTENT.nav_labels?.[k] || l, k]);
 const topbar = CONTENT.topbar || [];
 const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, flash_ends: flash.sale?.ends_at || null, cookie_days: s.affiliate?.cookie_days || 30, ga4: seo.ga4 || null, lot_qr: FEATURES.lot_qr !== false };
 ---
