@@ -88,7 +88,7 @@ const boot = { brand: BRAND, kit: CONTENT.kit || null, free_threshold: free, fla
         {nav.map(([href, label, key]) => <a href={href} class:list={[{ active: p.active === key, 'nav-flash': key === 'flash' }]}>{key === 'flash' ? '⚡ ' : ''}{label}</a>)}
       </nav>
       <div class="spacer"></div>
-      {FEATURES.affiliate && <a href="/ctv" class="btn sm ghost ctv-link">Kiếm tiền cùng {BRAND}</a>}
+      {FEATURES.affiliate && <a href="/ctv" class="btn sm ghost ctv-link">{CONTENT.ctv_cta || `Kiếm tiền cùng ${BRAND}`}</a>}
       <a href="/tai-khoan" class="icon-btn acct-link" aria-label="Tài khoản" title="Tài khoản"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
       <button class="icon-btn" aria-label="Giỏ hàng" data-open-cart>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>

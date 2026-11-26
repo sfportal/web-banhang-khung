@@ -46,16 +46,16 @@
       "eyebrow": "Nông Xanh Tây Nguyên · Kỹ thuật thực chiến tại vườn",
       "title": "Đúng hàng, đúng bệnh, đúng giá cho vườn Tây Nguyên",
       "lead": "Phân bón và thuốc bảo vệ thực vật chính hãng Hàn-Việt, Map Pacific, Sumitomo, Ngân Anh. Đội thạc sĩ, kỹ sư của Nông Xanh xem ảnh lá, ảnh rễ qua Zalo và chỉ đúng thuốc, đúng liều, miễn phí.",
-      "hero_image": "/assets/img/vuon/hero-trai.webp",
+      "hero_image": "/assets/img/vuon/hero-caphe.webp",
       "featured_skus": [
-        "COMBO-CHETNHANH",
-        "COMBO-XIMU-SAURIENG",
         "HV-202015-25KG",
         "MP-MATAXYL-100G",
         "SM-DANITOLS-450ML",
         "NX-VISINH-TRAUVANG",
         "NA-TALAXYL-250G",
-        "MP-SUPO-500ML"
+        "MP-SUPO-500ML",
+        "SM-DIPEL-50G",
+        "NA-NUTRIVANT-500G"
       ],
       "trust": [
         "Hàng chính hãng, có tem nhãn, số đăng ký",
@@ -74,7 +74,7 @@
       "products_title": "Sản phẩm được tin dùng",
       "stats": [],
       "cta": "Chọn giải pháp cho vườn",
-      "hero_badge": "Vườn chanh dây Nông Xanh mùa trái đầu",
+      "hero_badge": "Mùa cà phê chín ở Buôn Ma Thuột",
       "pains_title": "Nhà vườn Tây Nguyên đang mất tiền ở đâu?",
       "pains": [
         {
@@ -240,7 +240,7 @@
       "title": "Tốt từ tâm, nâng tầm nông sản Việt",
       "eyebrow": "Về Nông Xanh Tây Nguyên",
       "lead": "Nông Xanh Tây Nguyên là đội ngũ thạc sĩ, kỹ sư nông nghiệp giàu kinh nghiệm thực chiến. Chúng mình có mặt để bà con mua được vật tư thật, dùng đúng cách, và có người đứng cạnh mình ngoài vườn khi cây gặp chuyện.",
-      "image": "/assets/img/vuon/vuon-trai-dau.webp",
+      "image": "/assets/img/vuon/crop-chanhday.webp",
       "quote": "Nông nghiệp khó, nhưng không phải là không làm được. Làm từ tâm thì vườn sẽ trả lại.",
       "chapters": [
         {
@@ -350,7 +350,7 @@
         "id": "ca-phe",
         "ico": "☕",
         "label": "Cà phê",
-        "img": "",
+        "img": "/assets/img/vuon/crop-caphe.webp",
         "who": "Vườn cà phê Đắk Lắk, Gia Lai, Lâm Đồng",
         "quote": "Mùa khô lo rệp sáp, mùa mưa lo nấm hồng, thối rễ. Phân bón tăng giá, bón sao cho đủ mà không phí?",
         "needs": [
@@ -369,7 +369,7 @@
         "id": "ho-tieu",
         "ico": "🌿",
         "label": "Hồ tiêu",
-        "img": "",
+        "img": "/assets/img/vuon/crop-hotieu.webp",
         "who": "Vườn tiêu Chư Sê, Đắk Song, Lộc Ninh",
         "quote": "Đầu mùa mưa là sợ chết nhanh. Một trụ tiêu chết là mất cả chục năm chăm.",
         "needs": [
@@ -388,7 +388,7 @@
         "id": "sau-rieng",
         "ico": "🌳",
         "label": "Sầu riêng",
-        "img": "",
+        "img": "/assets/img/vuon/crop-saurieng.webp",
         "who": "Vườn sầu riêng Krông Pắc, Đắk Mil, Bảo Lộc",
         "quote": "Xì mủ, rụng trái non, sượng cơm, chỉ một đợt là mất cả vụ.",
         "needs": [
@@ -407,7 +407,7 @@
         "id": "chanh-day",
         "ico": "🟡",
         "label": "Chanh dây",
-        "img": "/assets/img/vuon/vuon-trai-dau.webp",
+        "img": "/assets/img/vuon/crop-chanhday.webp",
         "who": "Vườn chanh dây Đắk Lắk, Gia Lai, Sơn La",
         "quote": "Ngọn vàng, lá mo, rồi virus. Vườn đang sai trái mà xuống một lần là mất trắng.",
         "needs": [
@@ -426,7 +426,7 @@
         "id": "rau-mau",
         "ico": "🥬",
         "label": "Rau màu, lúa, bắp",
-        "img": "",
+        "img": "/assets/img/vuon/crop-raumau.webp",
         "who": "Rau Đà Lạt, lúa, bắp Tây Nguyên",
         "quote": "Sâu kháng thuốc nhiều, thương lái lại đòi ít tồn dư. Muốn chuyển dần qua sinh học.",
         "needs": [
@@ -513,14 +513,15 @@
       "ctv": "Kiếm thêm thu nhập",
       "combo": "Combo"
     },
-    "story_link": "Về Nông Xanh Tây Nguyên"
+    "story_link": "Về Nông Xanh Tây Nguyên",
+    "ctv_cta": "Kiếm tiền cùng Nông Xanh"
   },
   "settings": {
     "shop": {
       "facebook": "https://www.facebook.com/Nongxanhtaynguyen",
       "tiktok_shop": "",
       "shopee_shop": "",
-      "address": "Tây Nguyên (cập nhật địa chỉ cửa hàng)",
+      "address": "Tây Nguyên, Việt Nam",
       "legal_name": "Nông Xanh Tây Nguyên",
       "hotline": "0901968567",
       "zalo": "0901968567",
