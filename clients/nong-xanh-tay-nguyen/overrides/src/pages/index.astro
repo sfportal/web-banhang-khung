@@ -51,7 +51,7 @@ const fmtPhone = (x) => tel(x).replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
           <img src={H.hero_image} alt={H.hero_badge || BRAND} fetchpriority="high" />
           {heroPacks.length > 0 && <div class="nx-packs">{heroPacks.map((p, i) => <a href={`/san-pham/${p.slug}`} class={`nx-pack k${i}`}><img src={(p.image || '').replace('.webp', '-sm.webp')} alt={p.name} /><span>{p.name}</span></a>)}</div>}
           {H.hero_badge && <div class="nx-hero-cap">{H.hero_badge}</div>}
-          {H.video && <a href="#tvc" class="nx-play" aria-label="Xem phim"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Xem phim 60 giây</a>}
+          {H.video && <a href="#tvc" class="nx-play" aria-label="Xem phim"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Xem phim 50 giây</a>}
         </div>
         {phone && <a class="nx-float f1" href={`tel:${tel(phone)}`}><b>🩺 Kỹ thuật miễn phí</b><small>{E.name} · {fmtPhone(phone)}</small></a>}
         <div class="nx-float f2"><b>4 thương hiệu</b><small>chính hãng, giá niêm yết</small></div>

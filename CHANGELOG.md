@@ -3,6 +3,9 @@
 Bộ khung dùng chung cho mọi khách. Gộp vào `main` thì GitHub Actions deploy lại các khách có `deploy.enabled = true`. Khi tăng `version` trong `package.json` và thêm mục ở đây, lần deploy đó tự tạo bản phát hành `v<phiên bản>` trên GitHub.
 Quy ước: tính năng mới tăng số giữa (0.1.0 → 0.2.0), sửa lỗi tăng số cuối (0.1.0 → 0.1.1).
 
+## 0.5.2 – 27/11/2026
+- Nông Xanh Tây Nguyên: gắn phim TVC 16:9 (khoảng 50 giây, giọng đọc, phụ đề) lên trang chủ, kèm ảnh bìa phim; nút "Xem phim" ở đầu trang dẫn tới phim.
+
 ## 0.5.1 – 27/11/2026
 - Nông Xanh Tây Nguyên: đổi ảnh đầu trang thành ảnh vườn chanh dây ghép 3 sản phẩm nổi bật, tiêu đề nhấn màu, sắp lại các thẻ nổi cho máy tính và điện thoại; bỏ ảnh cận mặt khỏi trang chủ và trang Về chúng tôi.
 
